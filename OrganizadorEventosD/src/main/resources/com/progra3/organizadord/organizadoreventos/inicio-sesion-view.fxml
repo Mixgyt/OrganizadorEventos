@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="442.0" style="-fx-background-color: #070F2B;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.InicioSesionController">
+   <children>
+      <Label layoutX="100.0" layoutY="14.0" text="INICIO DE SESIÓN" textFill="WHITE">
+         <font>
+            <Font name="Agency FB" size="45.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUsuario" layoutX="101.0" layoutY="106.0" prefHeight="25.0" prefWidth="242.0" />
+      <Label layoutX="101.0" layoutY="85.0" text="Usuario:" textFill="WHITE">
+         <font>
+            <Font name="Agency FB" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtClave" layoutX="100.0" layoutY="162.0" prefHeight="25.0" prefWidth="242.0" />
+      <Label layoutX="100.0" layoutY="141.0" text="Contraseña:" textFill="WHITE">
+         <font>
+            <Font name="Agency FB" size="17.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnIniciarSesion" layoutX="99.0" layoutY="200.0" mnemonicParsing="false" text="INICIAR SESIÓN">
+         <font>
+            <Font name="Agency FB" size="40.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCancelar" layoutX="99.0" layoutY="299.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="245.0" text="CANCELAR">
+         <font>
+            <Font name="Agency FB" size="40.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

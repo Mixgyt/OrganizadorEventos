@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.progra3.organizadord.organizadoreventos.MainController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="442.0" style="-fx-background-color: #070F2B;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.MainController">
+    <children>
+        <Button fx:id="btnInicioSesion" layoutX="107.0" layoutY="96.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="248.0" style="-fx-background-color: #1B1A55;" text="INICIO DE SESIÓN" textFill="WHITE">
+            <font>
+                <Font name="Agency FB" size="33.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnCrearCuenta" layoutX="107.0" layoutY="201.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="248.0" style="-fx-background-color: #1B1A55;" text="CREAR CUENTA" textFill="WHITE">
+            <font>
+                <Font name="Agency FB" size="33.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnSalir" layoutX="107.0" layoutY="296.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="248.0" style="-fx-background-color: #1B1A55;" text="SALIR" textFill="WHITE">
+            <font>
+                <Font name="Agency FB" size="33.0" />
+            </font>
+        </Button>
+        <Label layoutX="52.0" layoutY="24.0" text="ORGANIZADOR DE EVENTOS" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="Agency FB" size="43.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
