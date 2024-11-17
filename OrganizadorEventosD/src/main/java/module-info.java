@@ -7,6 +7,6 @@ module com.progra3.organizadord.organizadoreventos {
 
     opens com.progra3.organizadord.organizadoreventos to javafx.fxml;
     opens com.progra3.organizadord.organizadoreventos.Models to javafx.base;
-    opens com.progra3.organizadord.organizadoreventos.ConexionDB to javafx.base;
+    opens com.progra3.organizadord.organizadoreventos.Conexion to javafx.base;
     exports com.progra3.organizadord.organizadoreventos;
 }

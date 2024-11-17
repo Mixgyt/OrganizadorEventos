@@ -1,11 +1,10 @@
 package com.progra3.organizadord.organizadoreventos.Models;
 
-import com.progra3.organizadord.organizadoreventos.ConexionDB.ConexionDB;
-
+import com.progra3.organizadord.organizadoreventos.Conexion.ConexionDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 
 public class UsuarioModel {
     private Integer idUsuario;
@@ -67,22 +66,23 @@ public class UsuarioModel {
         this.pass = pass;
     }
 
-    public void AgregarUsuario(){
+    public void crearUsuario(){
         try {
-            Connection connection = ConexionDB.connection();
+            Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("INSERT INTO tbl_usuarios(nombre,pass,id_correo) " +
                     "VALUES (?,?,?)");
             statement.setString(1, this.nombre);
             statement.setString(2, this.pass);
             statement.setInt(3, this.idCorreo);
             System.out.println(statement.executeUpdate());
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public boolean UsuarioExistente(){
+
+    public boolean existe(){
         try {
-            Connection connection = ConexionDB.connection();
+            Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_usuarios WHERE " +
                     "nombre = ?");
             statement.setString(1, this.nombre);
@@ -97,9 +97,10 @@ public class UsuarioModel {
             throw new RuntimeException(e);
         }
     }
-    public boolean InicioSesion(){
+
+    public boolean iniciarSesion(){
         try {
-            Connection connection = ConexionDB.connection();
+            Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_usuarios WHERE " +
                     "nombre = ? AND pass = ?");
             statement.setString(1, this.nombre);
@@ -111,7 +112,7 @@ public class UsuarioModel {
             else {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

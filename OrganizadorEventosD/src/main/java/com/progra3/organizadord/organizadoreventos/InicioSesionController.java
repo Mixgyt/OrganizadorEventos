@@ -29,42 +29,38 @@ public class InicioSesionController {
     private TextField txtUsuario;
 
     public void initialize(){
-        btnIniciarSesion.setOnAction(e -> {
-            String usuario = txtUsuario.getText().trim();
-            String clave = txtClave.getText();
-            if (usuario.isEmpty() || clave.isEmpty()){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Uno a varios campos estan vacios.");
+    }
+
+    @FXML
+    private void iniciarSesion(){
+        String usuario = txtUsuario.getText().trim();
+        String clave = txtClave.getText();
+        if (usuario.isEmpty() || clave.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Uno a varios campos estan vacios.");
+            alert.show();
+        }
+        else {
+            UsuarioModel usuarioModel = new UsuarioModel(usuario,clave);
+            if (usuarioModel.iniciarSesion()){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Se ha iniciado sesión correctamente");
                 alert.show();
+
+                txtUsuario.clear();
+                txtClave.clear();
             }
             else {
-                UsuarioModel usuarioModel = new UsuarioModel(txtUsuario.getText(),txtClave.getText());
-                if (usuarioModel.InicioSesion()){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setContentText("Se ha iniciado sesión correctamente");
-                    alert.show();
-
-                    txtUsuario.clear();
-                    txtClave.clear();
-                }
-                else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("El usuario o la contrasña es incorrecta");
-                    alert.show();
-                }
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("El usuario o la contrasña es incorrecta");
+                alert.show();
             }
+        }
+    }
 
-        });
-        btnCancelar.setOnAction(e->{
-            Node node = null;
-            try {
-                node = FXMLLoader.load(getClass().getResource("main-view.fxml"));
-                mainPane.getChildren().clear();
-                mainPane.getChildren().setAll(node);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+    @FXML
+    private void salir(){
+        Main.setRoot("main-view","Inicio");
     }
 }
 

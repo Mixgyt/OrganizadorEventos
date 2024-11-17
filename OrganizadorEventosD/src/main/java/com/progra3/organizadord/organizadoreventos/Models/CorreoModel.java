@@ -1,11 +1,10 @@
 package com.progra3.organizadord.organizadoreventos.Models;
 
-import com.progra3.organizadord.organizadoreventos.ConexionDB.ConexionDB;
+import com.progra3.organizadord.organizadoreventos.Conexion.ConexionDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class CorreoModel {
     private Integer idCorreo;
@@ -39,20 +38,19 @@ public class CorreoModel {
         this.correo = correo;
     }
 
-    public void AgregarCorreo(){
+    public void crearCorreo(){
         try {
-            Connection connection = ConexionDB.connection();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO tbl_correos(correo) " +
-                    "VALUES (?)");
+            Connection connection = ConexionDB.getConnection();
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO tbl_correos(correo) VALUES (?)");
             statement.setString(1, this.correo);
             System.out.println(statement.executeUpdate());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-    public Integer BuscarIdCorreo(){
+    public Integer buscarId(){
         try {
-            Connection connection = ConexionDB.connection();
+            Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_correos WHERE correo = ?");
             statement.setString(1, this.correo);
 
@@ -70,9 +68,10 @@ public class CorreoModel {
             throw new RuntimeException(e);
         }
     }
-    public boolean CorreoExistente(){
+
+    public boolean existe(){
         try {
-            Connection connection = ConexionDB.connection();
+            Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_correos WHERE correo = ?");
             statement.setString(1, this.correo);
 

@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="442.0" style="-fx-background-color: #070F2B;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.CrearUsuarioController">
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="442.0" style="-fx-background-color: #070F2B;" xmlns="http://javafx.com/javafx/21.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.CrearUsuarioController">
    <children>
       <Label layoutX="110.0" layoutY="14.0" text="CREAR USUARIO" textFill="WHITE">
          <font>
@@ -26,12 +25,12 @@
             <Font name="Agency FB" size="17.0" />
          </font>
       </Label>
-      <Button fx:id="btnCrear" layoutX="100.0" layoutY="233.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="242.0" text="CREAR">
+      <Button fx:id="btnCrear" layoutX="100.0" layoutY="233.0" mnemonicParsing="false" onAction="#crearUsuario" prefHeight="75.0" prefWidth="242.0" text="CREAR">
          <font>
             <Font name="Agency FB" size="40.0" />
          </font>
       </Button>
-      <Button fx:id="btnCancelar" layoutX="99.0" layoutY="316.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="245.0" text="CANCELAR">
+      <Button fx:id="btnCancelar" layoutX="99.0" layoutY="316.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="64.0" prefWidth="245.0" text="CANCELAR">
          <font>
             <Font name="Agency FB" size="40.0" />
          </font>
