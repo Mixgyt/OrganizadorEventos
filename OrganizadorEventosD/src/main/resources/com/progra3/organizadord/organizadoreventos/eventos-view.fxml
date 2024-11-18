@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="468.0" prefWidth="1190.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.EventosController">
+   <children>
+      <TableView fx:id="tbEventos" layoutX="14.0" layoutY="183.0" prefHeight="214.0" prefWidth="1032.0">
+        <columns>
+          <TableColumn fx:id="clIdEvento" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="clUsuario" prefWidth="75.0" text="USUARIO" />
+            <TableColumn fx:id="clEvento" prefWidth="75.0" text="EVENTO" />
+            <TableColumn fx:id="clFechaInicio" prefWidth="124.0" text="FECHA INICIO" />
+            <TableColumn fx:id="clFechaFinal" prefWidth="127.0" text="FECHA FINAL" />
+            <TableColumn fx:id="clUbicacion" prefWidth="113.0" text="UBICACION" />
+            <TableColumn fx:id="clDescripcion" prefWidth="126.0" text="DESCRIPCION" />
+            <TableColumn fx:id="clDetalles" prefWidth="157.0" text="DETALLES" />
+            <TableColumn fx:id="clTipoEvento" prefWidth="157.0" text="TIPO EVENTO" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
