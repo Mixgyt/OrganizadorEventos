@@ -1,11 +1,13 @@
 package com.progra3.organizadord.organizadoreventos;
 
 import com.progra3.organizadord.organizadoreventos.Models.UsuarioModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -20,7 +22,10 @@ public class InicioSesionController {
     private Button btnCancelar;
 
     @FXML
-    private Button btnIniciarSesion;
+    private Hyperlink link;
+
+    @FXML
+    private Button btnCrearCuenta;
 
     @FXML
     private TextField txtClave;
@@ -61,6 +66,12 @@ public class InicioSesionController {
     @FXML
     private void salir(){
         Main.setRoot("main-view","Inicio");
+    }
+
+    @FXML
+    void crearUsuario(ActionEvent event) {
+        link.setStyle("-fx-background-color: #3A6B8C");
+        Main.setRoot("crear-usuario-view","Crear usuario");
     }
 }
 
