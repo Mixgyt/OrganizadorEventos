@@ -14,6 +14,24 @@ public class CorreosEventosModel {
     private String idCorreo;
     private String idTipoInvitado;
     private Integer estado;
+    private Integer idAnfitrion;
+
+    public CorreosEventosModel(Integer idCorreosEvento, String idEvento, String idCorreo, String idTipoInvitado, Integer estado, Integer idAnfitrion) {
+        this.idCorreosEvento = idCorreosEvento;
+        this.idEvento = idEvento;
+        this.idCorreo = idCorreo;
+        this.idTipoInvitado = idTipoInvitado;
+        this.estado = estado;
+        this.idAnfitrion = idAnfitrion;
+    }
+
+    public CorreosEventosModel(String idEvento, String idCorreo, String idTipoInvitado, Integer estado, Integer idAnfitrion) {
+        this.idEvento = idEvento;
+        this.idCorreo = idCorreo;
+        this.idTipoInvitado = idTipoInvitado;
+        this.estado = estado;
+        this.idAnfitrion = idAnfitrion;
+    }
 
     public CorreosEventosModel(Integer idCorreosEvento, String idEvento, String idCorreo, String idTipoInvitado, Integer estado) {
         this.idCorreosEvento = idCorreosEvento;
@@ -23,14 +41,15 @@ public class CorreosEventosModel {
         this.estado = estado;
     }
 
-    public CorreosEventosModel(String idEvento, String idCorreo, String idTipoInvitado, Integer estado) {
-        this.idEvento = idEvento;
-        this.idCorreo = idCorreo;
-        this.idTipoInvitado = idTipoInvitado;
-        this.estado = estado;
+    public CorreosEventosModel() {
     }
 
-    public CorreosEventosModel() {
+    public Integer getIdAnfitrion() {
+        return idAnfitrion;
+    }
+
+    public void setIdAnfitrion(Integer idAnfitrion) {
+        this.idAnfitrion = idAnfitrion;
     }
 
     public Integer getIdCorreosEvento() {
@@ -73,18 +92,20 @@ public class CorreosEventosModel {
         this.estado = estado;
     }
 
+    //Muestra los correos de un evento especifico
     public ObservableList<CorreosEventosModel> mostrarCorreosEventoEspecifico(Integer evento){
         try {
             ObservableList<CorreosEventosModel> datoCorreoEvento = FXCollections.observableArrayList();
 
             Connection connection = ConexionDB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.descripcion AS id_evento, \n" +
+            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.nombre AS id_evento, \n" +
                     "c.correo AS id_correo, ti.descripcion AS id_tipo_invitado, estado FROM tbl_correos_evento AS ce \n" +
                     "INNER JOIN tbl_eventos AS e ON ce.id_evento = e.id_evento\n" +
                     "INNER JOIN tbl_correos AS c ON ce.id_correo = c.id_correo \n" +
                     "INNER JOIN tbl_tipo_invitado AS ti ON ce.id_tipo_invitado = ti.id_tipo_invitado " +
-                    "WHERE id_evento = ?");
+                    "WHERE id_evento = ? AND e.id_usuario = ?");
             statement.setInt(1, evento);
+            statement.setInt(2,this.idAnfitrion);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 datoCorreoEvento.add(new CorreosEventosModel(
@@ -101,17 +122,21 @@ public class CorreosEventosModel {
             throw new RuntimeException(e);
         }
     }
+
+    //Retorna una observable con todos los invitados que estan pedientes de confirmación
     public ObservableList<CorreosEventosModel> mostrarInvitadoPendiente(){
         try {
             ObservableList<CorreosEventosModel> datoCorreoEvento = FXCollections.observableArrayList();
 
             Connection connection = ConexionDB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.descripcion AS id_evento, \n" +
+            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.nombre AS id_evento, \n" +
                     "c.correo AS id_correo, ti.descripcion AS id_tipo_invitado, estado FROM tbl_correos_evento AS ce \n" +
                     "INNER JOIN tbl_eventos AS e ON ce.id_evento = e.id_evento\n" +
                     "INNER JOIN tbl_correos AS c ON ce.id_correo = c.id_correo \n" +
                     "INNER JOIN tbl_tipo_invitado AS ti ON ce.id_tipo_invitado = ti.id_tipo_invitado " +
-                    "WHERE estado = 0");
+                    "WHERE estado = 0 AND e.id_usuario = ?");
+            statement.setInt(1,this.idAnfitrion);
+
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 datoCorreoEvento.add(new CorreosEventosModel(
@@ -129,17 +154,19 @@ public class CorreosEventosModel {
         }
     }
 
+    //Retorna un observable con todos los invitados que han confirmado su asistencia al evento
     public ObservableList<CorreosEventosModel> mostrarInvitadoConfirmado(){
         try {
             ObservableList<CorreosEventosModel> datoCorreoEvento = FXCollections.observableArrayList();
 
             Connection connection = ConexionDB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.descripcion AS id_evento, \n" +
+            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.nombre AS id_evento, \n" +
                     "c.correo AS id_correo, ti.descripcion AS id_tipo_invitado, estado FROM tbl_correos_evento AS ce \n" +
                     "INNER JOIN tbl_eventos AS e ON ce.id_evento = e.id_evento\n" +
                     "INNER JOIN tbl_correos AS c ON ce.id_correo = c.id_correo \n" +
                     "INNER JOIN tbl_tipo_invitado AS ti ON ce.id_tipo_invitado = ti.id_tipo_invitado " +
-                    "WHERE estado = 1");
+                    "WHERE estado = 1 AND e.id_usuario = ?");
+            statement.setInt(1,this.idAnfitrion);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 datoCorreoEvento.add(new CorreosEventosModel(
@@ -156,17 +183,20 @@ public class CorreosEventosModel {
             throw new RuntimeException(e);
         }
     }
+
+    //Retorna un observable con todos los invitados que hay rechazado la asistencia a dicho evento
     public ObservableList<CorreosEventosModel> mostrarInvitadoRechazado(){
         try {
             ObservableList<CorreosEventosModel> datoCorreoEvento = FXCollections.observableArrayList();
 
             Connection connection = ConexionDB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.descripcion AS id_evento, \n" +
+            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.nombre AS id_evento, \n" +
                     "c.correo AS id_correo, ti.descripcion AS id_tipo_invitado, estado FROM tbl_correos_evento AS ce \n" +
                     "INNER JOIN tbl_eventos AS e ON ce.id_evento = e.id_evento\n" +
                     "INNER JOIN tbl_correos AS c ON ce.id_correo = c.id_correo \n" +
                     "INNER JOIN tbl_tipo_invitado AS ti ON ce.id_tipo_invitado = ti.id_tipo_invitado " +
-                    "WHERE estado = 2");
+                    "WHERE estado = 2 AND e.id_usuario = ?");
+            statement.setInt(1,this.idAnfitrion);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 datoCorreoEvento.add(new CorreosEventosModel(
@@ -185,16 +215,20 @@ public class CorreosEventosModel {
             throw new RuntimeException(e);
         }
     }
+
+    //Retorna un observable con todos los estados de los invitados
     public ObservableList<CorreosEventosModel> mostrarCorreosEvento(){
         try {
             ObservableList<CorreosEventosModel> datoCorreoEvento = FXCollections.observableArrayList();
 
             Connection connection = ConexionDB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.descripcion AS id_evento, \n" +
+            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.nombre AS id_evento, \n" +
                     "c.correo AS id_correo, ti.descripcion AS id_tipo_invitado, estado FROM tbl_correos_evento AS ce \n" +
                     "INNER JOIN tbl_eventos AS e ON ce.id_evento = e.id_evento\n" +
                     "INNER JOIN tbl_correos AS c ON ce.id_correo = c.id_correo \n" +
-                    "INNER JOIN tbl_tipo_invitado AS ti ON ce.id_tipo_invitado = ti.id_tipo_invitado");
+                    "INNER JOIN tbl_tipo_invitado AS ti ON ce.id_tipo_invitado = ti.id_tipo_invitado " +
+                    "WHERE e.id_usuario = ?");
+            statement.setInt(1,this.idAnfitrion);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 datoCorreoEvento.add(new CorreosEventosModel(
@@ -212,6 +246,7 @@ public class CorreosEventosModel {
         }
     }
 
+    //Metodo para actualizar un registro de la tabla correo Evento
     public void actualizarCorreoEvento(){
         try {
             Connection connection = ConexionDB.getConnection();
@@ -227,6 +262,7 @@ public class CorreosEventosModel {
             throw new RuntimeException(e);
         }
     }
+    //Permite eliminar un registro de la tabla Correo Evento
     public void eliminarCoreoEvento(){
         try {
             Connection connection = ConexionDB.getConnection();

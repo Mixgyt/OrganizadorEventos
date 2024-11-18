@@ -19,7 +19,6 @@ public class EventosModel {
     private String usuarioCadena;
     private String tipoEventoCadena;
 
-
     public EventosModel() {
     }
 
@@ -123,6 +122,7 @@ public class EventosModel {
         this.tipoEventoCadena = tipoEventoCadena;
     }
 
+    //retorna los eventos que incluyan el dia de hoy en adelante
     public ObservableList<EventosModel> getEventos(){
         ObservableList<EventosModel> eventos = FXCollections.observableArrayList();
         Connection connection = ConexionDB.getConnection();
@@ -143,7 +143,7 @@ public class EventosModel {
                 EventosModel eventosModel = new EventosModel();
                 eventosModel.setIdEvento(resultSet.getInt("id_evento"));
                 eventosModel.setUsuarioCadena(resultSet.getString("usuario"));
-                eventosModel.setTipoEventoCadena(resultSet.getString("evento"));
+                eventosModel.setNombre(resultSet.getString("evento"));
                 eventosModel.setFechaInicial(resultSet.getString("fecha_inicio"));
                 eventosModel.setFechaFinal(resultSet.getString("fecha_final"));
                 eventosModel.setUbicacion(resultSet.getString("ubicacion"));

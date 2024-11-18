@@ -1,7 +1,7 @@
 package com.progra3.organizadord.organizadoreventos;
 
-import com.progra3.organizadord.organizadoreventos.Models.CorreoModel;
-import com.progra3.organizadord.organizadoreventos.Models.UsuarioModel;
+import com.progra3.organizadord.organizadoreventos.models.CorreoModel;
+import com.progra3.organizadord.organizadoreventos.models.UsuarioModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
