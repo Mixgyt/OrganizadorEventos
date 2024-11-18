@@ -2,9 +2,11 @@ package com.progra3.organizadord.organizadoreventos;
 
 import com.progra3.organizadord.organizadoreventos.Models.CorreoModel;
 import com.progra3.organizadord.organizadoreventos.Models.UsuarioModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -24,6 +26,10 @@ public class CrearUsuarioController {
 
     @FXML
     private TextField txtUsuario;
+
+    @FXML
+    private Hyperlink link;
+
 
     @FXML
     private AnchorPane mainPane;
@@ -70,6 +76,12 @@ public class CrearUsuarioController {
     @FXML
     private void cancelar(){
         Main.setRoot("main-view","Inicio");
+    }
+
+    @FXML
+    void regresarLogin(ActionEvent event) {
+        link.setStyle("-fx-background-color: #9290C3");
+        Main.setRoot("inicio-sesion-view","Inicio de sesion");
     }
 }
 

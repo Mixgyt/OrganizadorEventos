@@ -1,45 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="442.0" style="-fx-background-color: #070F2B;" xmlns="http://javafx.com/javafx/21.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.CrearUsuarioController">
+<AnchorPane fx:id="mainPane" prefHeight="665.0" prefWidth="707.0" style="-fx-background-color: #001F3F; -fx-background-position: center;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.CrearUsuarioController">
    <children>
-      <Label layoutX="110.0" layoutY="14.0" text="CREAR USUARIO" textFill="WHITE">
-         <font>
-            <Font name="Agency FB" size="45.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtCorreo" layoutX="102.0" layoutY="90.0" prefHeight="25.0" prefWidth="242.0" />
-      <Label layoutX="101.0" layoutY="69.0" text="Correo:" textFill="WHITE">
-         <font>
-            <Font name="Agency FB" size="17.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtClave" layoutX="103.0" layoutY="200.0" prefHeight="25.0" prefWidth="242.0" />
-      <Label layoutX="102.0" layoutY="179.0" text="Contraseña:" textFill="WHITE">
-         <font>
-            <Font name="Agency FB" size="17.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnCrear" layoutX="100.0" layoutY="233.0" mnemonicParsing="false" onAction="#crearUsuario" prefHeight="75.0" prefWidth="242.0" text="CREAR">
-         <font>
-            <Font name="Agency FB" size="40.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnCancelar" layoutX="99.0" layoutY="316.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="64.0" prefWidth="245.0" text="CANCELAR">
-         <font>
-            <Font name="Agency FB" size="40.0" />
-         </font>
-      </Button>
-      <TextField fx:id="txtUsuario" layoutX="103.0" layoutY="146.0" prefHeight="25.0" prefWidth="242.0" />
-      <Label layoutX="102.0" layoutY="125.0" text="Nombre de usuario:" textFill="WHITE">
-         <font>
-            <Font name="Agency FB" size="17.0" />
-         </font>
-      </Label>
+      <Pane layoutX="167.0" layoutY="108.0" prefHeight="418.0" prefWidth="373.0" style="-fx-background-color: #6A9AB0; -fx-background-position: center; -fx-background-radius: 10; -fx-margin: auto;">
+         <children>
+            <Label layoutX="69.0" layoutY="27.0" text="REGISTRO" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Bold" size="45.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtUsuario" layoutX="66.0" layoutY="208.0" prefHeight="25.0" prefWidth="242.0" promptText="Ingrese su usuario...">
+               <font>
+                  <Font name="SansSerif Regular" size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="66.0" layoutY="187.0" prefHeight="20.0" prefWidth="77.0" text="Usuario" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Regular" size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtClave" layoutX="65.0" layoutY="267.0" prefHeight="26.0" prefWidth="242.0" promptText="Ingrese su contraseña">
+               <font>
+                  <Font name="SansSerif Regular" size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="65.0" layoutY="246.0" text="Contraseña" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Regular" size="17.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnIniciarSesion" layoutX="66.0" layoutY="339.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="242.0" style="-fx-background-color: #3A6D8C; -fx-border-color: black; -fx-border-width: 2; -fx-background-radius: 10; -fx-border-radius: 10;" text="REGISTRAR" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Regular" size="20.0" />
+               </font>
+            </Button>
+            <TextField fx:id="txtCorreo" layoutX="65.0" layoutY="153.0" prefHeight="25.0" prefWidth="242.0" promptText="Ingrese su correo...">
+               <font>
+                  <Font name="SansSerif Regular" size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="65.0" layoutY="132.0" prefHeight="20.0" prefWidth="77.0" text="Correo" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Regular" size="17.0" />
+               </font>
+            </Label>
+            <Hyperlink fx:id="link" layoutX="66.0" layoutY="299.0" onAction="#regresarLogin" text="Ya tengo una cuenta!!" textFill="#3a6d8c">
+               <font>
+                  <Font name="SansSerif Regular" size="14.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

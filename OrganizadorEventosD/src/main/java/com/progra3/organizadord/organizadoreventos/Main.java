@@ -15,7 +15,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("eventos-view.fxml"));
+
         Pane root = fxmlLoader.load();
         mainScene = new Scene(root);
 
