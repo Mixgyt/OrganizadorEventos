@@ -1,6 +1,7 @@
 package com.progra3.organizadord.organizadoreventos.models;
 
 import com.progra3.organizadord.organizadoreventos.Conexion.ConexionDB;
+import com.progra3.organizadord.organizadoreventos.Conexion.UserSession;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -122,8 +123,45 @@ public class EventosModel {
         this.tipoEventoCadena = tipoEventoCadena;
     }
 
+    //Se filtra el dueño del evento en la propia consulta para mostrar los eventos propios del usuario
+    public static ObservableList<EventosModel> getEventos(){
+        ObservableList<EventosModel> eventos = FXCollections.observableArrayList();
+        Connection connection = ConexionDB.getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT id_evento, usuarios.nombre" +
+                    " AS usuario, eventos.nombre" +
+                    " AS evento, TO_CHAR(fecha_inicio,'DD-MM-YYYY HH12:MI AM')" +
+                    " AS fecha_inicio,TO_CHAR(fecha_final,'DD-MM-YYYY HH12:MI AM')" +
+                    " AS fecha_final, ubicacion, eventos.descripcion, detalles, tipo_evento.descripcion" +
+                    " AS tipo_evento" +
+                    " FROM public.tbl_eventos AS eventos" +
+                    " INNER JOIN tbl_usuarios AS usuarios ON eventos.id_usuario = usuarios.id_usuario" +
+                    " INNER JOIN tbl_tipo_evento AS tipo_evento ON eventos.id_tipo_evento = tipo_evento.id_tipo_evento" +
+                    " WHERE eventos.id_usuario = "+ UserSession.getUsuario().getIdUsuario());
+
+            while (resultSet.next()){
+                EventosModel eventosModel = new EventosModel();
+                eventosModel.setIdEvento(resultSet.getInt("id_evento"));
+                eventosModel.setUsuarioCadena(resultSet.getString("usuario"));
+                eventosModel.setNombre(resultSet.getString("evento"));
+                eventosModel.setFechaInicial(resultSet.getString("fecha_inicio"));
+                eventosModel.setFechaFinal(resultSet.getString("fecha_final"));
+                eventosModel.setUbicacion(resultSet.getString("ubicacion"));
+                eventosModel.setDescripcion(resultSet.getString("descripcion"));
+                eventosModel.setDetalles(resultSet.getString("detalles"));
+                eventosModel.setTipoEventoCadena(resultSet.getString("tipo_evento"));
+
+                eventos.add(eventosModel);
+            }
+            return eventos;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     //retorna los eventos que incluyan el dia de hoy en adelante
-    public ObservableList<EventosModel> getEventos(){
+    public static ObservableList<EventosModel> getEventosProximos(){
         ObservableList<EventosModel> eventos = FXCollections.observableArrayList();
         Connection connection = ConexionDB.getConnection();
         try {

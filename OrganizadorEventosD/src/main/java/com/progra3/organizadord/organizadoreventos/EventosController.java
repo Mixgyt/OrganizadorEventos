@@ -54,7 +54,7 @@ public class EventosController {
         this.clDetalles.setCellValueFactory(new PropertyValueFactory<>("detalles"));
         this.clTipoEvento.setCellValueFactory(new PropertyValueFactory<>("tipoEventoCadena"));
 
-        EventosModel eventosModel = new EventosModel();
-        this.tbEventos.setItems(eventosModel.getEventos());
+
+        this.tbEventos.setItems(EventosModel.getEventos());
     }
 }

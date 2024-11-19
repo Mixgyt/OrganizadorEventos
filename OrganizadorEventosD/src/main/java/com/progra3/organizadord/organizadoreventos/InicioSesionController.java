@@ -1,5 +1,6 @@
 package com.progra3.organizadord.organizadoreventos;
 
+import com.progra3.organizadord.organizadoreventos.Conexion.UserSession;
 import com.progra3.organizadord.organizadoreventos.models.UsuarioModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,11 +55,11 @@ public class InicioSesionController {
 
                 txtUsuario.clear();
                 txtClave.clear();
-                Main.setRoot("dashboar-view", "Organizador de Eventos", 1100, 850);
+                Main.setRoot("dashboard-view", "Organizador de Eventos", 1100, 850);
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("El usuario o la contrasña es incorrecta");
+                alert.setContentText("El usuario o la contraseña es incorrecta");
                 alert.show();
             }
         }

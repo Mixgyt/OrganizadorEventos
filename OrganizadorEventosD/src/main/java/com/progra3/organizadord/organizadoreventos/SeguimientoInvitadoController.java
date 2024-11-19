@@ -1,5 +1,6 @@
 package com.progra3.organizadord.organizadoreventos;
 
+import com.progra3.organizadord.organizadoreventos.Conexion.UserSession;
 import com.progra3.organizadord.organizadoreventos.models.CorreosEventosModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -84,23 +85,23 @@ public class SeguimientoInvitadoController {
     }
     public void cargarTablaTodo(){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
-        correosEventosModel.setIdAnfitrion(2);
+        correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
         tbInv.setItems(correosEventosModel.mostrarCorreosEvento());
     }
 
     public void cargarConfirmado(){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
-        correosEventosModel.setIdAnfitrion(2);
+        correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
         tbInv.setItems(correosEventosModel.mostrarInvitadosPorEstado(1));
     }
     public void cargarPendiente(){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
-        correosEventosModel.setIdAnfitrion(2);
+        correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
         tbInv.setItems(correosEventosModel.mostrarInvitadosPorEstado(0));
     }
     public void cargarRechazado(){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
-        correosEventosModel.setIdAnfitrion(2);
+        correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
         tbInv.setItems(correosEventosModel.mostrarInvitadosPorEstado(2));
     }
 }

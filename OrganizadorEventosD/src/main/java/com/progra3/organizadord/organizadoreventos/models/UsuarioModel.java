@@ -1,6 +1,8 @@
 package com.progra3.organizadord.organizadoreventos.models;
 
 import com.progra3.organizadord.organizadoreventos.Conexion.ConexionDB;
+import com.progra3.organizadord.organizadoreventos.Conexion.UserSession;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -107,6 +109,12 @@ public class UsuarioModel {
             statement.setString(2, this.pass);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
+                //Usuario obtenido para guardar su sesion
+                UsuarioModel usuarioModel = new UsuarioModel();
+                usuarioModel.setIdUsuario(resultSet.getInt(1));
+                usuarioModel.setNombre(resultSet.getString(2));
+                usuarioModel.setIdCorreo(resultSet.getInt(4));
+                UserSession.setUsuario(usuarioModel);
                 return true;
             }
             else {

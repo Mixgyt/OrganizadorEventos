@@ -6,11 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class DashboarController {
+public class DashboardController {
 
     @FXML
     private BorderPane Pane;
@@ -34,15 +33,13 @@ public class DashboarController {
     private Hyperlink lnkUsuario;
 
     @FXML
-    public void initialize() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("seguimiento-invitado-view.fxml"));
-        Pane.setCenter(loader.load());
+    public void initialize(){
+        Pane.setCenter(Main.getView("seguimiento-invitado-view"));
     }
 
     @FXML
-    void onCorreo(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("eventos-view.fxml"));
-        Pane.setCenter(loader.load());
+    void onCorreo(){
+        Pane.setCenter(Main.getView("eventos-view"));
     }
 
     @FXML
@@ -52,7 +49,7 @@ public class DashboarController {
 
     @FXML
     void onInicio(ActionEvent event) {
-
+        Pane.setCenter(Main.getView("seguimiento-invitado-view"));
     }
 
     @FXML

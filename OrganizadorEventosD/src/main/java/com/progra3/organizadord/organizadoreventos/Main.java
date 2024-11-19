@@ -2,6 +2,7 @@ package com.progra3.organizadord.organizadoreventos;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -74,6 +75,17 @@ public class Main extends Application {
             dialogStage.show();
         }
         catch (IOException e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Node getView(String fxml){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml+".fxml"));
+            return fxmlLoader.load();
+        }
+        catch (Exception e){
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
