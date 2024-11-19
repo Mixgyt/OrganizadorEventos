@@ -37,7 +37,7 @@
                   <Font name="SansSerif Regular" size="17.0" />
                </font>
             </Label>
-            <Button fx:id="btnIniciarSesion" layoutX="66.0" layoutY="312.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="37.0" prefWidth="242.0" style="-fx-background-color: #3A6D8C; -fx-border-color: black; -fx-border-width: 2; -fx-background-radius: 10; -fx-border-radius: 10;" text="INICIAR SESIÓN " textFill="WHITE">
+            <Button fx:id="btnIniciarSesion" layoutX="66.0" layoutY="312.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="37.0" prefWidth="242.0" styleClass="button-normal" text="INICIAR SESIÓN " textFill="WHITE">
                <font>
                   <Font name="SansSerif Regular" size="20.0" />
                </font>

@@ -18,16 +18,16 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("inicio-sesion-view.fxml"));
-
         Pane root = fxmlLoader.load();
         mainScene = new Scene(root);
+        mainScene.getStylesheets().add(Main.class.getResource("styles.css").toExternalForm());
 
         primaryStage.setTitle("Inicio");
         primaryStage.setScene(mainScene);
 
         mainStage = primaryStage;
         mainStage.show();
-    }
+        }
 
     public static void setRoot(String fxml){
         setRoot(fxml,fxml);
@@ -49,6 +49,7 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
             mainScene.setRoot(fxmlLoader.load());
+            mainScene.getStylesheets().add(Main.class.getResource("styles.css").toExternalForm());
             mainStage.setTitle(title);
             mainStage.setWidth(width);
             mainStage.setHeight(height);

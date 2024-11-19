@@ -30,12 +30,12 @@
                 <Font name="SansSerif Bold" size="35.0" />
             </font>
         </Label>
-        <Button fx:id="btnEnviarRecordatorio" layoutX="793.0" layoutY="337.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="188.0" style="-fx-background-color: #6A9AB0;" text="Enviar Recordatorio">
+        <Button fx:id="btnEnviarRecordatorio" layoutX="793.0" layoutY="337.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="188.0" text="Enviar Recordatorio" styleClass="button-claro">
             <font>
                 <Font name="SansSerif Regular" size="18.0" />
             </font>
         </Button>
-      <Button fx:id="btnActualizar" layoutX="793.0" layoutY="271.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="188.0" style="-fx-background-color: #77B1CC;" text="Actualizar">
+      <Button fx:id="btnActualizar" layoutX="793.0" layoutY="271.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="188.0" text="Actualizar" styleClass="button-claro">
          <font>
             <Font name="SansSerif Regular" size="18.0" />
          </font>
