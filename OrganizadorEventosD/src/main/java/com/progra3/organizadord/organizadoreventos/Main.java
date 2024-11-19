@@ -3,6 +3,7 @@ package com.progra3.organizadord.organizadoreventos;
 import com.progra3.organizadord.organizadoreventos.Models.EstadosModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -16,16 +17,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("inicio-sesion-view.fxml"));
         Pane root = fxmlLoader.load();
         mainScene = new Scene(root);
+        mainScene.getStylesheets().add(Main.class.getResource("styles.css").toExternalForm());
 
         primaryStage.setTitle("Inicio");
         primaryStage.setScene(mainScene);
 
         mainStage = primaryStage;
         mainStage.show();
-    }
+        }
 
     public static void setRoot(String fxml){
         setRoot(fxml,fxml);
@@ -38,6 +41,21 @@ public class Main extends Application {
             mainStage.setTitle(title);
         }
         catch (IOException e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+    //setRoot pero para abrirlo con un tamaño en especifico
+    public static void setRoot(String fxml, String title, Integer width, Integer height) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
+            mainScene.setRoot(fxmlLoader.load());
+            mainScene.getStylesheets().add(Main.class.getResource("styles.css").toExternalForm());
+            mainStage.setTitle(title);
+            mainStage.setWidth(width);
+            mainStage.setHeight(height);
+            mainStage.centerOnScreen();
+        } catch (IOException e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
@@ -59,6 +77,17 @@ public class Main extends Application {
             dialogStage.show();
         }
         catch (IOException e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Node getView(String fxml){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml+".fxml"));
+            return fxmlLoader.load();
+        }
+        catch (Exception e){
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }

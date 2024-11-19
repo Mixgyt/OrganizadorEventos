@@ -1,4 +1,4 @@
-package com.progra3.organizadord.organizadoreventos.Models;
+package com.progra3.organizadord.organizadoreventos.models;
 
 import com.progra3.organizadord.organizadoreventos.Conexion.ConexionDB;
 

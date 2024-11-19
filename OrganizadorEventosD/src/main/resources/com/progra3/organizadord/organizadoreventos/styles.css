@@ -1,0 +1,48 @@
+/*css mas que todo es para aplicar el hover*/
+.root {
+    -fx-font-family: 'SansSerif';
+    -fx-background-color: #f0f0f0;
+}
+
+.button-oscuro {
+    -fx-background-color: #001F3F;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+.button-claro{
+    -fx-background-color: #6A9AB0;
+    -fx-text-fill: #EDEDED;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+.button-normal{
+    -fx-background-color:  #3A6D8C;
+    -fx-text-fill: #EDEDED;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+.hyperlink {
+    -fx-text-fill: #EDEDED;
+    -fx-underline: false;
+}
+
+.button-oscuro:hover {
+    -fx-background-color: #77B1CC;
+}
+
+.button-claro:hover{
+    -fx-background-color: #77B1CC;
+}
+.button-normal:hover{
+    -fx-background-color: #77B1CC;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #77B1CC;
+    -fx-underline: true;
+}
+
