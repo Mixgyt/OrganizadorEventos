@@ -91,16 +91,16 @@ public class SeguimientoInvitadoController {
     public void cargarConfirmado(){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
         correosEventosModel.setIdAnfitrion(2);
-        tbInv.setItems(correosEventosModel.mostrarInvitadoConfirmado());
+        tbInv.setItems(correosEventosModel.mostrarInvitadosPorEstado(1));
     }
     public void cargarPendiente(){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
         correosEventosModel.setIdAnfitrion(2);
-        tbInv.setItems(correosEventosModel.mostrarInvitadoPendiente());
+        tbInv.setItems(correosEventosModel.mostrarInvitadosPorEstado(0));
     }
     public void cargarRechazado(){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
         correosEventosModel.setIdAnfitrion(2);
-        tbInv.setItems(correosEventosModel.mostrarInvitadoRechazado());
+        tbInv.setItems(correosEventosModel.mostrarInvitadosPorEstado(2));
     }
 }

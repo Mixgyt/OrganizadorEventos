@@ -43,6 +43,20 @@ public class Main extends Application {
             throw new RuntimeException(e);
         }
     }
+    //setRoot pero para abrirlo con un tamaño en especifico
+    public static void setRoot(String fxml, String title, Integer width, Integer height) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
+            mainScene.setRoot(fxmlLoader.load());
+            mainStage.setTitle(title);
+            mainStage.setWidth(width);
+            mainStage.setHeight(height);
+            mainStage.centerOnScreen();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void showDialog(String fxml) {
         showDialog(fxml, fxml);

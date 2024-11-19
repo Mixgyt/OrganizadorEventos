@@ -54,6 +54,7 @@ public class InicioSesionController {
 
                 txtUsuario.clear();
                 txtClave.clear();
+                Main.setRoot("dashboar-view", "Organizador de Eventos", 1100, 850);
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
