@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="468.0" prefWidth="1190.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.EventosController">
+<AnchorPane prefHeight="468.0" prefWidth="1190.0" xmlns="http://javafx.com/javafx/21.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.EventosController">
    <children>
       <TableView fx:id="tbEventos" layoutX="14.0" layoutY="183.0" prefHeight="214.0" prefWidth="1032.0">
         <columns>
-          <TableColumn fx:id="clIdEvento" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="clUsuario" prefWidth="75.0" text="USUARIO" />
-            <TableColumn fx:id="clEvento" prefWidth="75.0" text="EVENTO" />
-            <TableColumn fx:id="clFechaInicio" prefWidth="124.0" text="FECHA INICIO" />
-            <TableColumn fx:id="clFechaFinal" prefWidth="127.0" text="FECHA FINAL" />
-            <TableColumn fx:id="clUbicacion" prefWidth="113.0" text="UBICACION" />
-            <TableColumn fx:id="clDescripcion" prefWidth="126.0" text="DESCRIPCION" />
-            <TableColumn fx:id="clDetalles" prefWidth="157.0" text="DETALLES" />
-            <TableColumn fx:id="clTipoEvento" prefWidth="157.0" text="TIPO EVENTO" />
+            <TableColumn fx:id="clEvento" prefWidth="188.0" text="EVENTO" />
+            <TableColumn fx:id="clFechaInicio" prefWidth="134.0" text="FECHA INICIO" />
+            <TableColumn fx:id="clFechaFinal" prefWidth="142.0" text="FECHA FINAL" />
+            <TableColumn fx:id="clTipoEvento" prefWidth="116.0" text="TIPO EVENTO" />
+            <TableColumn fx:id="clDetalles" prefWidth="116.0" text="DETALLES" />
         </columns>
       </TableView>
+      <Button fx:id="btnCrearEvento" layoutX="888.0" layoutY="135.0" mnemonicParsing="false" onAction="#crearEvento" prefHeight="38.0" prefWidth="158.0" text="Crear Nuevo Evento" />
+      <TextField fx:id="txtBusqueda" layoutX="14.0" layoutY="135.0" prefHeight="38.0" prefWidth="319.0" promptText="Buscar por nombre del evento">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </TextField>
+      <Button fx:id="btnBuscar" layoutX="343.0" layoutY="135.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="87.0" text="Buscar">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -8,12 +8,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+//Este es el model de la tabla pivote Correos_Evento
 public class CorreosEventosModel {
     private Integer idCorreosEvento;
     private String idEvento;
     private String idCorreo;
     private String idTipoInvitado;
-    private Integer estado;
+    private EstadosModel estado;
     private Integer idAnfitrion;
 
     public CorreosEventosModel(Integer idCorreosEvento, String idEvento, String idCorreo, String idTipoInvitado, Integer estado, Integer idAnfitrion) {
@@ -21,7 +22,7 @@ public class CorreosEventosModel {
         this.idEvento = idEvento;
         this.idCorreo = idCorreo;
         this.idTipoInvitado = idTipoInvitado;
-        this.estado = estado;
+        this.estado = EstadosModel.valueOfValor(estado);
         this.idAnfitrion = idAnfitrion;
     }
 
@@ -29,7 +30,7 @@ public class CorreosEventosModel {
         this.idEvento = idEvento;
         this.idCorreo = idCorreo;
         this.idTipoInvitado = idTipoInvitado;
-        this.estado = estado;
+        this.estado = EstadosModel.valueOfValor(estado);
         this.idAnfitrion = idAnfitrion;
     }
 
@@ -38,7 +39,7 @@ public class CorreosEventosModel {
         this.idEvento = idEvento;
         this.idCorreo = idCorreo;
         this.idTipoInvitado = idTipoInvitado;
-        this.estado = estado;
+        this.estado = EstadosModel.valueOfValor(estado);
     }
 
     public CorreosEventosModel() {
@@ -84,12 +85,12 @@ public class CorreosEventosModel {
         this.idTipoInvitado = idTipoInvitado;
     }
 
-    public Integer getEstado() {
+    public EstadosModel getEstado() {
         return estado;
     }
 
     public void setEstado(Integer estado) {
-        this.estado = estado;
+        this.estado = EstadosModel.valueOfValor(estado);
     }
 
     //Muestra los correos de un evento especifico
@@ -191,11 +192,11 @@ public class CorreosEventosModel {
             Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("UPDATE tbl_correos_evento SET " +
                     "id_evento = ?, id_correo = ?, id_tipo_invitado = ?, estado = ?, WHERE id_correos_evento = ?");
-            statement.setInt(1, Integer.parseInt(this.idEvento));
-            statement.setInt(2, Integer.parseInt(this.idCorreo));
-            statement.setInt(3, Integer.parseInt(this.idTipoInvitado));
-            statement.setInt(4, this.estado);
-            statement.setInt(5, this.idCorreosEvento);
+            statement.setInt(1, Integer.parseInt(this.getIdEvento()));
+            statement.setInt(2, Integer.parseInt(this.getIdCorreo()));
+            statement.setInt(3, Integer.parseInt(this.getIdTipoInvitado()));
+            statement.setInt(4, this.getEstado().valor);
+            statement.setInt(5, this.getIdCorreosEvento());
             System.out.println("Actualizaciones = " + statement.executeUpdate());
         } catch (Exception e) {
             throw new RuntimeException(e);

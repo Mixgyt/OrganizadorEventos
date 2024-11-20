@@ -35,6 +35,17 @@ public class EventosModel {
         this.idTipoEvento = idTipoEvento;
     }
 
+    public EventosModel(int idUsuario, String nombre, String fechaInicial, String fechaFinal, String ubicacion, String descripcion, String detalles, int idTipoEvento) {
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
+        this.ubicacion = ubicacion;
+        this.descripcion = descripcion;
+        this.detalles = detalles;
+        this.idTipoEvento = idTipoEvento;
+    }
+
     public String getFechaInicial() {
         return fechaInicial;
     }
@@ -200,13 +211,15 @@ public class EventosModel {
     public int guardarEvento(){
         Connection connection = ConexionDB.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO bl_eventos" +
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO tbl_eventos" +
                     "(id_usuario, nombre, fecha_inicio, fecha_final, ubicacion, descripcion, detalles, id_tipo_evento)" +
                     " VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
             preparedStatement.setInt(1,this.idUsuario);
             preparedStatement.setString(2,this.nombre);
-            preparedStatement.setString(3,this.fechaInicial);
-            preparedStatement.setString(4,this.fechaFinal);
+            Timestamp fechaInicio = Timestamp.valueOf(this.fechaInicial.replace("T"," "));
+            preparedStatement.setTimestamp(3,fechaInicio);
+            Timestamp fechaFinal = Timestamp.valueOf(this.fechaFinal.replace("T"," "));
+            preparedStatement.setTimestamp(4,fechaFinal);
             preparedStatement.setString(5,this.ubicacion);
             preparedStatement.setString(6,this.descripcion);
             preparedStatement.setString(7,this.detalles);

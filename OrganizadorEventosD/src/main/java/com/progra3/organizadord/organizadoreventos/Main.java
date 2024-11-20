@@ -1,19 +1,23 @@
 package com.progra3.organizadord.organizadoreventos;
 
-import com.progra3.organizadord.organizadoreventos.Models.EstadosModel;
+import com.progra3.organizadord.organizadoreventos.models.EstadosModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 public class Main extends Application {
     private static Stage mainStage;
     private static Scene mainScene;
+    private static Stage mainDialog;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -28,7 +32,9 @@ public class Main extends Application {
 
         mainStage = primaryStage;
         mainStage.show();
-        }
+        LocalDateTime dtp = LocalDateTime.now();
+        System.out.println(dtp.toString());
+    }
 
     public static void setRoot(String fxml){
         setRoot(fxml,fxml);
@@ -69,12 +75,12 @@ public class Main extends Application {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml+".fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle(title);
-            dialogStage.setScene(scene);
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(mainStage);
-            dialogStage.show();
+            mainDialog = new Stage();
+            mainDialog.setTitle(title);
+            mainDialog.setScene(scene);
+            mainDialog.initModality(Modality.WINDOW_MODAL);
+            mainDialog.initOwner(mainStage);
+            mainDialog.showAndWait();
         }
         catch (IOException e){
             System.out.println(e.getMessage());
@@ -93,7 +99,11 @@ public class Main extends Application {
         }
     }
 
-    public static void close(){
+    public static void closeDialog(){
+        mainDialog.close();
+    }
+
+    public static void exit(){
         mainStage.close();
     }
 

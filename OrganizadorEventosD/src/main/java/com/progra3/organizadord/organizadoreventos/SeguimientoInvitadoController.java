@@ -2,6 +2,7 @@ package com.progra3.organizadord.organizadoreventos;
 
 import com.progra3.organizadord.organizadoreventos.Conexion.UserSession;
 import com.progra3.organizadord.organizadoreventos.models.CorreosEventosModel;
+import com.progra3.organizadord.organizadoreventos.models.EstadosModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +17,7 @@ public class SeguimientoInvitadoController {
     private Button btnActualizar;
 
     @FXML
-    private TableColumn<CorreosEventosModel, Integer> clE;
+    private TableColumn<CorreosEventosModel, EstadosModel> clE;
 
     @FXML
     private TableColumn<CorreosEventosModel, String> clidC;

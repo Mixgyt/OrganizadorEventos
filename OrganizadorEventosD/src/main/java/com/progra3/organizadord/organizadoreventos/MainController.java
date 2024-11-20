@@ -53,7 +53,6 @@ public class MainController {
 
     @FXML
     private void salir(){
-        btnSalir.setStyle("-fx-background-color: #1B1A55");
-        Main.close();
+
     }
 }

@@ -34,7 +34,7 @@ public class TipoEventoModel {
         this.descripcion = descripcion;
     }
 
-    public ObservableList<TipoEventoModel> getTiposEvento(){
+    public static ObservableList<TipoEventoModel> getTiposEvento(){
         ObservableList<TipoEventoModel> tiposEvento = FXCollections.observableArrayList();
         Connection connection = ConexionDB.getConnection();
         try {
