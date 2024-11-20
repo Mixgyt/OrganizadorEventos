@@ -1,23 +1,24 @@
 package com.progra3.organizadord.organizadoreventos;
 
-import com.progra3.organizadord.organizadoreventos.models.EstadosModel;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
+import java.util.ArrayList;
 
 
 public class Main extends Application {
+    private static ArrayList<Stage> windows = new ArrayList<>();
     private static Stage mainStage;
     private static Scene mainScene;
-    private static Stage mainDialog;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -31,9 +32,8 @@ public class Main extends Application {
         primaryStage.setScene(mainScene);
 
         mainStage = primaryStage;
+        windows.add(mainStage);
         mainStage.show();
-        LocalDateTime dtp = LocalDateTime.now();
-        System.out.println(dtp.toString());
     }
 
     public static void setRoot(String fxml){
@@ -75,12 +75,15 @@ public class Main extends Application {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml+".fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            mainDialog = new Stage();
-            mainDialog.setTitle(title);
-            mainDialog.setScene(scene);
-            mainDialog.initModality(Modality.WINDOW_MODAL);
-            mainDialog.initOwner(mainStage);
-            mainDialog.showAndWait();
+            Stage newStage = new Stage();
+            newStage.setTitle(title);
+            newStage.setScene(scene);
+            newStage.initModality(Modality.WINDOW_MODAL);
+            newStage.initOwner(windows.getLast());
+            windows.add(newStage);
+            mainStage = newStage;
+            mainStage.setOnCloseRequest(Main::onCloseAction);
+            mainStage.showAndWait();
         }
         catch (IOException e){
             System.out.println(e.getMessage());
@@ -99,12 +102,17 @@ public class Main extends Application {
         }
     }
 
-    public static void closeDialog(){
-        mainDialog.close();
+    public static void close(){
+        mainStage.close();
+        windows.remove(mainStage);
+        mainStage = windows.getLast();
     }
 
-    public static void exit(){
-        mainStage.close();
+    private static void onCloseAction(WindowEvent event){
+        windows.remove(mainStage);
+        if(!windows.isEmpty()){
+            mainStage = windows.getLast();
+        }
     }
 
     public static void main(String[] args) {

@@ -164,7 +164,7 @@
    <bottom>
       <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="488.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnCancelar" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" style="-fx-background-color: white; -fx-border-color: #727272; -fx-border-radius: 5; -fx-background-radius: 5;" text="Cacelar" textFill="#727272">
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onCancelar" prefHeight="27.0" prefWidth="84.0" style="-fx-background-color: white; -fx-border-color: #727272; -fx-border-radius: 5; -fx-background-radius: 5;" text="Cacelar" textFill="#727272">
                <font>
                   <Font name="SansSerif Regular" size="15.0" />
                </font>

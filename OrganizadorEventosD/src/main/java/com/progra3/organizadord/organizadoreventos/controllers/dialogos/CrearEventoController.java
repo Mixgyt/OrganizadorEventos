@@ -128,7 +128,7 @@ public class CrearEventoController
                 idTipoEvento
         );
         nuevoEvento.guardarEvento();
-        Main.closeDialog();
+        Main.close();
     }
 
     private String[] getFechas(){
@@ -194,5 +194,10 @@ public class CrearEventoController
         boolean textFields = txtNombreEvento.getText().isEmpty() || txtUbicacionEvento.getText().isEmpty() || txtDescripcionEvento.getText().isEmpty();
         boolean comboBox = cmbTipoEvento.getSelectionModel().isEmpty();
         return textFields || comboBox;
+    }
+
+    @FXML
+    private void onCancelar(){
+        Main.close();
     }
 }
