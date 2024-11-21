@@ -18,6 +18,13 @@
     -fx-border-radius: 10px;
 }
 
+.button-eliminar{
+    -fx-background-color: #D9534F;
+    -fx-text-fill: #EDEDED;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
 .button-normal{
     -fx-background-color:  #3A6D8C;
     -fx-text-fill: #EDEDED;

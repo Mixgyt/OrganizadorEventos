@@ -72,7 +72,7 @@ public class TipoEventoModel {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE tbl_tipo_evento" +
                     " SET descripcion=? " +
-                    " WHERE id_tipo_evenyo =" +idTipoEvento);
+                    " WHERE id_tipo_evento =" +idTipoEvento);
             preparedStatement.setString(1,this.descripcion);
 
             return preparedStatement.executeUpdate();

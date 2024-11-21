@@ -54,7 +54,7 @@ public class DashboardController {
 
     @FXML
     void onTipoEvento(ActionEvent event) {
-
+        Pane.setCenter(Main.getView("tipo-evento-view"));
     }
 
     @FXML

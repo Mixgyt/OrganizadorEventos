@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="1074.0" style="-fx-background-color: #001F3F;" styleClass="button-normal" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.UsuarioController">
+   <children>
+      <Label layoutX="357.0" layoutY="51.0" text="Registros de Usuarios" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Bold" size="35.0" />
+         </font>
+      </Label>
+      <TableView layoutX="85.0" layoutY="146.0" prefHeight="615.0" prefWidth="388.0">
+        <columns>
+          <TableColumn prefWidth="41.0" text="ID" />
+          <TableColumn prefWidth="184.0" text="Nombre" />
+            <TableColumn prefWidth="78.0" text="Editar" />
+            <TableColumn prefWidth="84.0" text="Eliminar" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txtUsuario" layoutX="655.0" layoutY="222.0" prefHeight="26.0" prefWidth="304.0" promptText="Ingrese su usuario...">
+         <font>
+            <Font name="SansSerif Regular" size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="655.0" layoutY="201.0" prefHeight="20.0" prefWidth="77.0" text="Usuario" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Regular" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtClave" layoutX="654.0" layoutY="281.0" prefHeight="26.0" prefWidth="304.0" promptText="Ingrese su contraseña">
+         <font>
+            <Font name="SansSerif Regular" size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="654.0" layoutY="260.0" text="Contraseña" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Regular" size="17.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnIniciarSesion" layoutX="686.0" layoutY="357.0" mnemonicParsing="false" onAction="#crearUsuario" prefHeight="37.0" prefWidth="242.0" styleClass="button-normal" text="REGISTRAR" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Regular" size="20.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtCorreo" layoutX="654.0" layoutY="167.0" prefHeight="26.0" prefWidth="304.0" promptText="Ingrese su correo...">
+         <font>
+            <Font name="SansSerif Regular" size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="654.0" layoutY="146.0" prefHeight="20.0" prefWidth="77.0" text="Correo" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Regular" size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
