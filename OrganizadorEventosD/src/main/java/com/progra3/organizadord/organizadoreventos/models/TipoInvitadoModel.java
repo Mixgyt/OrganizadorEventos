@@ -34,7 +34,7 @@ public class TipoInvitadoModel {
         this.descripcion = descripcion;
     }
 
-    public ObservableList<TipoInvitadoModel> getTiposInvitado(){
+    public static ObservableList<TipoInvitadoModel> getTiposInvitado(){
         ObservableList<TipoInvitadoModel> tiposInvitado = FXCollections.observableArrayList();
         Connection connection = ConexionDB.getConnection();
         try {
@@ -71,7 +71,7 @@ public class TipoInvitadoModel {
         Connection connection = ConexionDB.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE tbl_tipo_invitado" +
-                    " SET descripcion=?" +idTipoInvitado);
+                    " SET descripcion=? WHERE id_tipo_invitado = "+idTipoInvitado);
             preparedStatement.setString(1,this.descripcion);
 
             return preparedStatement.executeUpdate();

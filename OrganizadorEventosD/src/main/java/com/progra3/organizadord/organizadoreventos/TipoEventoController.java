@@ -123,20 +123,33 @@ public class TipoEventoController {
     public void agregarTipoEvento(){
         TipoEventoModel tipoEventoModel = new TipoEventoModel();
         tipoEventoModel.setDescripcion(txtDescripcion.getText());
-        tipoEventoModel.guardarTipoEvento();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Se agrego un nuevo de tipo evento a la base de datos");
-        alert.show();
+        if(tipoEventoModel.guardarTipoEvento()   > 0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Se agrego un nuevo de tipo evento a la base de datos");
+            alert.show();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Error al guardar el tipo de evento");
+            alert.show();
+        }
     }
 
     public void actualizarTipoEvento(){
         TipoEventoModel tipoEventoModel = new TipoEventoModel();
         tipoEventoModel.setDescripcion(txtDescripcion.getText());
         tipoEventoModel.setIdTipoEvento(Integer.parseInt(lbId.getText()));
-        tipoEventoModel.actualizarTipoEvento(tipoEventoModel.getIdTipoEvento());
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Se ha actualizado de tipo evento en la base de datos");
-        alert.show();
+        if(tipoEventoModel.actualizarTipoEvento(tipoEventoModel.getIdTipoEvento()) > 0){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Se ha actualizado de tipo evento en la base de datos");
+            alert.show();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Error al actualizar el tipo de evento");
+            alert.show();
+        }
+
     }
 
     public void limpiar(){

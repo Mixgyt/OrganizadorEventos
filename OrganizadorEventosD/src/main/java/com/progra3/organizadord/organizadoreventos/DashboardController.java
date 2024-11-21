@@ -59,7 +59,7 @@ public class DashboardController {
 
     @FXML
     void onTipoUsuario(ActionEvent event) {
-
+        Pane.setCenter(Main.getView("tipo-invitado-view"));
     }
 
     @FXML
