@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1074.0" style="-fx-background-color: #001F3F;" styleClass="button-normal" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.UsuarioController">
+<AnchorPane prefHeight="800.0" prefWidth="1074.0" style="-fx-background-color: #001F3F;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.UsuarioController">
    <children>
       <Label layoutX="357.0" layoutY="51.0" text="Registros de Usuarios" textFill="WHITE">
          <font>
@@ -23,7 +23,7 @@
             <TableColumn fx:id="clEliminar" prefWidth="84.0" text="Eliminar" />
         </columns>
       </TableView>
-      <TextField fx:id="txtUsuario" layoutX="642.0" layoutY="166.0" prefHeight="26.0" prefWidth="326.0" promptText="Ingrese su usuario...">
+      <TextField fx:id="txtUsuario" layoutX="645.0" layoutY="243.0" prefHeight="26.0" prefWidth="326.0" promptText="Ingrese su usuario...">
          <font>
             <Font name="SansSerif Regular" size="14.0" />
          </font>
@@ -33,19 +33,29 @@
             <Font name="SansSerif Regular" size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="txtClave" layoutX="642.0" layoutY="226.0" prefHeight="26.0" prefWidth="326.0" promptText="Ingrese su contraseña">
+      <TextField fx:id="txtClave" layoutX="645.0" layoutY="300.0" prefHeight="26.0" prefWidth="326.0" promptText="Ingrese su contraseña">
          <font>
             <Font name="SansSerif Regular" size="14.0" />
          </font>
       </TextField>
-      <Label layoutX="645.0" layoutY="206.0" text="Contraseña" textFill="WHITE">
+      <Label layoutX="648.0" layoutY="280.0" text="Contraseña" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="17.0" />
          </font>
       </Label>
-      <Button fx:id="btnInsertar" layoutX="824.0" layoutY="320.0" mnemonicParsing="false" onAction="#Insertar" prefHeight="41.0" prefWidth="143.0" styleClass="button-claro" text="Agregar" />
-      <Button fx:id="btnLimpiar" layoutX="649.0" layoutY="320.0" mnemonicParsing="false" onAction="#Limpiar" prefHeight="41.0" prefWidth="143.0" styleClass="button-eliminar" text="Limpiar" />
-      <Label layoutX="650.0" layoutY="143.0" prefHeight="20.0" prefWidth="77.0" text="Usuario" textFill="WHITE">
+      <Button fx:id="btnInsertar" layoutX="818.0" layoutY="380.0" mnemonicParsing="false" onAction="#Insertar" prefHeight="41.0" prefWidth="143.0" styleClass="button-claro" text="Agregar" />
+      <Button fx:id="btnLimpiar" layoutX="649.0" layoutY="381.0" mnemonicParsing="false" onAction="#Limpiar" prefHeight="41.0" prefWidth="143.0" styleClass="button-eliminar" text="Limpiar" />
+      <Label layoutX="653.0" layoutY="220.0" prefHeight="20.0" prefWidth="77.0" text="Usuario" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Regular" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtCorreo" layoutX="645.0" layoutY="179.0" prefHeight="26.0" prefWidth="326.0" promptText="Ingrese su correo...">
+         <font>
+            <Font name="SansSerif Regular" size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="653.0" layoutY="156.0" prefHeight="20.0" prefWidth="77.0" text="Correo" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="17.0" />
          </font>

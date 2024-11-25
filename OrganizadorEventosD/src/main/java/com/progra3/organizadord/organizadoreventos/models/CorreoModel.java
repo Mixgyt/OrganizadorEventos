@@ -38,7 +38,7 @@ public class CorreoModel {
         this.correo = correo;
     }
 
-    public void crearCorreo(){
+    public void crearCorreo() {
         try {
             Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("INSERT INTO tbl_correos(correo) VALUES (?)");
@@ -48,7 +48,8 @@ public class CorreoModel {
             throw new RuntimeException(e);
         }
     }
-    public Integer buscarId(){
+
+    public Integer buscarId() {
         try {
             Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_correos WHERE correo = ?");
@@ -56,11 +57,21 @@ public class CorreoModel {
 
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 System.out.println(resultSet.getInt("id_correo"));
                 return resultSet.getInt("id_correo");
-            }
-            else {
+            } else {
+                Connection connection1 = ConexionDB.getConnection();
+                PreparedStatement statement1 = connection1.prepareStatement("INSERT INTO tbl_correos(correo) VALUES (?)");
+                statement1.setString(1, this.correo);
+                statement1.executeUpdate();
+
+                PreparedStatement statement2 = connection.prepareStatement("SELECT*FROM tbl_correos WHERE correo = ?");
+                statement.setString(1, this.correo);
+                ResultSet resultSet1 = statement2.executeQuery();
+                if (resultSet1.next()) {
+                    return resultSet1.getInt("id_correo");
+                }
                 return 0;
             }
 

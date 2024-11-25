@@ -1,5 +1,6 @@
 package com.progra3.organizadord.organizadoreventos;
 
+import com.progra3.organizadord.organizadoreventos.models.CorreoModel;
 import com.progra3.organizadord.organizadoreventos.models.UsuarioModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +35,9 @@ public class UsuarioController {
 
     @FXML
     private TextField txtClave;
+
+    @FXML
+    private TextField txtCorreo;
 
     @FXML
     private TextField txtUsuario;
@@ -116,6 +120,39 @@ public class UsuarioController {
 
     public void agregar(){
         System.out.println("Agrega");
+        String correo = txtCorreo.getText().toLowerCase().replace(" ", "");
+        String usuario = txtUsuario.getText().trim();
+        String clave = txtClave.getText();
+        CorreoModel correoModel = new CorreoModel(correo);
+
+        if (correo.isEmpty() || usuario.isEmpty() || clave.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Uno o varios campos estan vacios.");
+            alert.show();
+        }
+        else {
+            if (!correoModel.existe()){
+                correoModel.crearCorreo();
+                UsuarioModel usuarioModel = new UsuarioModel(usuario, correoModel.buscarId(),clave);
+                if (usuarioModel.existe()){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("El usuario ingresado ya existe, ingrese otro nombre de usuario");
+                    alert.show();
+                }
+                else {
+                    usuarioModel.crearUsuario();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Se ha registrado el usuario con exito");
+                    alert.show();
+                    Main.setRoot("inicio-sesion-view","Inicio de Sesion");
+                }
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("El correo ingresado ya esta registrado");
+                alert.show();
+            }
+        }
     }
 
     public void actualizar(){

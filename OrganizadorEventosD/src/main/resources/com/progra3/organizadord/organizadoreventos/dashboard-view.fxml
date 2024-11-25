@@ -10,7 +10,7 @@
 
 <BorderPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #001F3F;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.DashboardController">
    <top>
-      <ToolBar prefHeight="73.0" prefWidth="900.0" style="-fx-background-color: #3A6D8C; -fx-padding: 10;" BorderPane.alignment="CENTER">
+      <ToolBar minHeight="-Infinity" prefHeight="73.0" prefWidth="900.0" style="-fx-background-color: #3A6D8C; -fx-padding: 10;" BorderPane.alignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
