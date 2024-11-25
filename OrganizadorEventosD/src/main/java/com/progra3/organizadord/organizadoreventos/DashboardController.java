@@ -39,12 +39,12 @@ public class DashboardController {
 
     @FXML
     void onCorreo(){
-        Pane.setCenter(Main.getView("eventos-view"));
+
     }
 
     @FXML
     void onEvento(ActionEvent event) {
-
+        Pane.setCenter(Main.getView("eventos-view"));
     }
 
     @FXML

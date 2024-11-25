@@ -1,5 +1,7 @@
 package com.progra3.organizadord.organizadoreventos;
 
+import com.progra3.organizadord.organizadoreventos.controllers.dialogos.DetalleEventoController;
+import com.progra3.organizadord.organizadoreventos.models.EventosModel;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -75,6 +77,29 @@ public class Main extends Application {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml+".fxml"));
             Scene scene = new Scene(fxmlLoader.load());
+            Stage newStage = new Stage();
+            newStage.setTitle(title);
+            newStage.setScene(scene);
+            newStage.initModality(Modality.WINDOW_MODAL);
+            newStage.initOwner(windows.getLast());
+            windows.add(newStage);
+            mainStage = newStage;
+            mainStage.setOnCloseRequest(Main::onCloseAction);
+            mainStage.showAndWait();
+        }
+        catch (IOException e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void showDialogDetalle(String fxml, String title, EventosModel evento) {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml+".fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            DetalleEventoController dt = fxmlLoader.getController();
+            dt.cargarEvento(evento);
+            dt.cargarTabla(evento);
             Stage newStage = new Stage();
             newStage.setTitle(title);
             newStage.setScene(scene);
