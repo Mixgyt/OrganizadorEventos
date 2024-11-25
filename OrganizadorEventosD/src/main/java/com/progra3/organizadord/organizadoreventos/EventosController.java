@@ -1,11 +1,18 @@
 package com.progra3.organizadord.organizadoreventos;
 
+import com.progra3.organizadord.organizadoreventos.controllers.dialogos.DetalleEventoController;
 import com.progra3.organizadord.organizadoreventos.models.EventosModel;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class EventosController {
 
@@ -50,6 +57,7 @@ public class EventosController {
                     btnDetalles.setOnAction(x->{
                         //Abrir ventana de dialogo
                         System.out.println("Ventana");
+                        Main.showDialogDetalle("dialogos/detalle-evento-view", "Detalles de Evento", tbEventos.getItems().get(getIndex()));
                     });
                     setGraphic(btnDetalles);
                     return;

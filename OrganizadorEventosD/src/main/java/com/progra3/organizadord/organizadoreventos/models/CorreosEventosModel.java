@@ -186,6 +186,36 @@ public class CorreosEventosModel {
         }
     }
 
+    public static ObservableList<CorreosEventosModel> mostrarInvitadosEvento(Integer idEvento) {
+        try {
+            ObservableList<CorreosEventosModel> invitados = FXCollections.observableArrayList();
+
+            Connection connection = ConexionDB.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.nombre AS evento, " +
+                    "c.correo AS correo, ti.descripcion AS tipo_invitado, ce.estado AS estado " +
+                    "FROM tbl_correos_evento AS ce " +
+                    "INNER JOIN tbl_eventos AS e ON ce.id_evento = e.id_evento " +
+                    "INNER JOIN tbl_correos AS c ON ce.id_correo = c.id_correo " +
+                    "INNER JOIN tbl_tipo_invitado AS ti ON ce.id_tipo_invitado = ti.id_tipo_invitado " +
+                    "WHERE ce.id_evento = ?");
+            statement.setInt(1, idEvento);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                invitados.add(new CorreosEventosModel(
+                        resultSet.getInt("id_correos_evento"),
+                        resultSet.getString("evento"),
+                        resultSet.getString("correo"),
+                        resultSet.getString("tipo_invitado"),
+                        resultSet.getInt("estado")
+                ));
+            }
+
+            return invitados;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     //Metodo para actualizar un registro de la tabla correo Evento
     public void actualizarCorreoEvento(){
         try {
