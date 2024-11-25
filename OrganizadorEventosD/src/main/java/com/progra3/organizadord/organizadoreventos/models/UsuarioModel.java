@@ -70,7 +70,7 @@ public class UsuarioModel {
     public void crearUsuario(){
         try {
             Connection connection = ConexionDB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO tbl_usuarios(nombre,pass, correo) " +
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO tbl_usuarios(nombre,pass, id_correo) " +
                     "VALUES (?,?,?)");
             statement.setString(1, this.nombre);
             statement.setString(2, this.pass);

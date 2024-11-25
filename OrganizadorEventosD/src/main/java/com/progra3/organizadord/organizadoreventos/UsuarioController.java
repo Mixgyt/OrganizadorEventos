@@ -144,7 +144,7 @@ public class UsuarioController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setContentText("Se ha registrado el usuario con exito");
                     alert.show();
-                    Main.setRoot("inicio-sesion-view","Inicio de Sesion");
+
                 }
             }
             else {
