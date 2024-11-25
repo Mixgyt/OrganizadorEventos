@@ -51,7 +51,7 @@ public class CrearUsuarioController {
         else {
             if (!correoModel.existe()){
                 correoModel.crearCorreo();
-                UsuarioModel usuarioModel = new UsuarioModel(usuario, correoModel.buscarId(),clave);
+                UsuarioModel usuarioModel = new UsuarioModel(usuario, correoModel.buscarCorreo(),clave);
                 if (usuarioModel.existe()){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("El usuario ingresado ya existe, ingrese otro nombre de usuario");

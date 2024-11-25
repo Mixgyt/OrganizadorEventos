@@ -30,7 +30,7 @@
                         <Insets top="5.0" />
                      </HBox.margin>
                   </Hyperlink>
-                  <Hyperlink fx:id="lnkCorreo" onAction="#onCorreo" prefHeight="28.0" prefWidth="78.0" text="Correo" textFill="#ededed">
+                  <Hyperlink fx:id="lnkCorreo" lineSpacing="15.0" onAction="#onCorreo" prefHeight="28.0" prefWidth="78.0" text="Correo" textFill="#ededed">
                      <font>
                         <Font name="SansSerif Regular" size="16.0" />
                      </font>
@@ -64,10 +64,16 @@
                   </Hyperlink>
                </children>
                <padding>
-                  <Insets left="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
                </padding>
             </HBox>
          </items>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
       </ToolBar>
    </top>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 </BorderPane>
