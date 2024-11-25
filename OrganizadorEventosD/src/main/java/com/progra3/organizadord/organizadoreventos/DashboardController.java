@@ -64,7 +64,7 @@ public class DashboardController {
 
     @FXML
     void onUsuario(ActionEvent event) {
-
+        Pane.setCenter(Main.getView("usuario-view"));
     }
 
 }

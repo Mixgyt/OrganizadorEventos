@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="800.0" prefWidth="1074.0" style="-fx-background-color: #001F3F;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.TipoInvitadoController">
    <children>
       <Label layoutX="357.0" layoutY="35.0" text="Registro tipo invitado" textFill="WHITE">
@@ -19,7 +18,7 @@
       <TableView fx:id="tbTipoInvitado" layoutX="63.0" layoutY="133.0" prefHeight="526.0" prefWidth="471.0">
          <columns>
             <TableColumn fx:id="clId" prefWidth="51.0" text="ID" />
-            <TableColumn fx:id="clDescripcion" prefWidth="277.0" text="Descripcion Evento" />
+            <TableColumn fx:id="clDescripcion" prefWidth="277.0" text="Tipo de Evento" />
             <TableColumn fx:id="clEditar" prefWidth="68.0" text="Editar" />
             <TableColumn fx:id="clEliminar" prefWidth="73.0" text="Eliminar" />
          </columns>

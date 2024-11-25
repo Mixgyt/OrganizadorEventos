@@ -2,11 +2,10 @@ package com.progra3.organizadord.organizadoreventos.models;
 
 import com.progra3.organizadord.organizadoreventos.Conexion.ConexionDB;
 import com.progra3.organizadord.organizadoreventos.Conexion.UserSession;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UsuarioModel {
     private Integer idUsuario;
@@ -71,12 +70,56 @@ public class UsuarioModel {
     public void crearUsuario(){
         try {
             Connection connection = ConexionDB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO tbl_usuarios(nombre,pass,id_correo) " +
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO tbl_usuarios(nombre,pass, correo) " +
                     "VALUES (?,?,?)");
             statement.setString(1, this.nombre);
             statement.setString(2, this.pass);
             statement.setInt(3, this.idCorreo);
             System.out.println(statement.executeUpdate());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int actualizarUsuario(int id){
+        try {
+            Connection connection = ConexionDB.getConnection();
+            PreparedStatement statement = connection.prepareStatement("UPDATE tbl_usuarios SET nombre=?, pass=? WHERE id_usuario = ?;");
+            statement.setString(1, this.nombre);
+            statement.setString(2, this.pass);
+            statement.setInt(3, id);
+            return statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int eliminarUsuario(int id){
+        Connection connection = ConexionDB.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM tbl_usuarios WHERE id_usuario = ?;");
+            statement.setInt(1, id);
+            return statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static ObservableList<UsuarioModel> getusuario(){
+        Connection connection = ConexionDB.getConnection();
+        ObservableList<UsuarioModel> usuarios = FXCollections.observableArrayList();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM tbl_usuarios");
+            while(rs.next()){
+                UsuarioModel usuario = new UsuarioModel();
+                usuario.setIdUsuario(rs.getInt("id_usuario"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setPass(rs.getString("pass"));
+                usuario.setIdCorreo(rs.getInt("id_correo"));
+                usuarios.add(usuario);
+            }
+            return usuarios;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
