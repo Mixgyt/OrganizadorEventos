@@ -3,7 +3,7 @@ package com.progra3.organizadord.organizadoreventos;
 import com.progra3.organizadord.organizadoreventos.controllers.dialogos.DetalleEventoController;
 import com.progra3.organizadord.organizadoreventos.models.EventosModel;
 import com.progra3.organizadord.organizadoreventos.models.TipoEventoModel;
-import jakarta.ejb.Local;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
