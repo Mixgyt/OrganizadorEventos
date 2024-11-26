@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="550.0" style="-fx-background-color: #6A9AB0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.controllers.dialogos.CrearEventoController">
+   <center>
+      <VBox prefHeight="598.0" prefWidth="438.0" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="54.0" prefWidth="438.0" spacing="5.0">
+               <children>
+                  <Label text="Nombre Evento" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Regular" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtNombreEvento" prefHeight="30.0" prefWidth="438.0" promptText="Ingresa el nombre del evento">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </VBox>
+            <HBox prefHeight="68.0" prefWidth="438.0">
+               <children>
+                  <VBox prefHeight="81.0" prefWidth="438.0" spacing="5.0">
+                     <children>
+                        <Label prefHeight="16.0" prefWidth="82.0" text="Fecha Inicio" textFill="#ededed">
+                           <font>
+                              <Font name="SansSerif Regular" size="14.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="dtpFechaInicio" prefHeight="40.0" prefWidth="211.0" promptText="Fecha Inicio" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="423.0" spacing="5.0">
+                     <children>
+                        <Label text="Hora Inicio" textFill="#ededed">
+                           <font>
+                              <Font name="SansSerif Regular" size="14.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <ComboBox fx:id="cmbHoraInicio" prefHeight="40.0" prefWidth="76.0" visibleRowCount="12" />
+                              <ComboBox fx:id="cmbMinutosInicio" prefHeight="40.0" prefWidth="74.0" visibleRowCount="12" />
+                              <ComboBox fx:id="cmbFranjaHorariaInicio" prefHeight="40.0" prefWidth="77.0" visibleRowCount="2" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="98.0" prefHeight="67.0" prefWidth="438.0">
+               <children>
+                  <VBox prefHeight="81.0" prefWidth="438.0" spacing="5.0">
+                     <children>
+                        <Label prefHeight="16.0" prefWidth="141.0" text="Fecha de Finalización" textFill="#ededed">
+                           <font>
+                              <Font name="SansSerif Regular" size="14.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="dtpFechaFinal" prefHeight="40.0" prefWidth="211.0" promptText="Fecha Inicio" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="423.0" spacing="5.0">
+                     <children>
+                        <Label text="Hora de Finalización" textFill="#ededed">
+                           <font>
+                              <Font name="SansSerif Regular" size="14.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <ComboBox fx:id="cmbHoraFinal" prefHeight="40.0" prefWidth="76.0" />
+                              <ComboBox fx:id="cmbMinutosFinal" prefHeight="40.0" prefWidth="70.0" />
+                              <ComboBox fx:id="cmbFranjaHorariaFinal" prefHeight="40.0" prefWidth="73.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox prefHeight="53.0" prefWidth="438.0" spacing="5.0">
+               <children>
+                  <Label text="Ubicacion del evento" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Regular" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtUbicacionEvento" prefHeight="30.0" prefWidth="438.0" promptText="Ubicacion donde se realizara">
+                     <font>
+                        <Font name="SansSerif Regular" size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox prefHeight="53.0" prefWidth="438.0" spacing="5.0">
+               <children>
+                  <Label text="¿Que se realizara en el evento?" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Regular" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtDescripcionEvento" prefHeight="30.0" prefWidth="438.0" promptText="Que se realizara en el evento">
+                     <font>
+                        <Font name="SansSerif Regular" size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox prefHeight="55.0" prefWidth="438.0" spacing="5.0">
+               <children>
+                  <Label text="Detalles extra sobre el evento" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Regular" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtDetallesEvento" prefHeight="30.0" prefWidth="438.0" promptText="Detalles a tomar en cuenta en el evento (Opcional)">
+                     <font>
+                        <Font name="SansSerif Regular" size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="438.0" spacing="5.0">
+               <children>
+                  <Label text="Tipo de evento" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Regular" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cmbTipoEvento" prefHeight="32.0" prefWidth="275.0" promptText="Seleccionar el tipo de evento" />
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets left="50.0" right="50.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <top>
+      <Label text="Crear Evento" textFill="WHITE" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+         <font>
+            <Font name="SansSerif Bold" size="29.0" />
+         </font>
+      </Label>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="488.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onCancelar" prefHeight="27.0" prefWidth="84.0" style="-fx-background-color: white; -fx-border-color: #727272; -fx-border-radius: 5; -fx-background-radius: 5;" text="Cacelar" textFill="#727272">
+               <font>
+                  <Font name="SansSerif Regular" size="15.0" />
+               </font>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="72.0" prefWidth="23.0" visible="false" />
+            <Button fx:id="btnCrearEvento" layoutX="199.0" layoutY="27.0" mnemonicParsing="false" onAction="#crearEvento" prefHeight="38.0" prefWidth="236.0" style="-fx-background-color: #6A9AB0;" text="Crear Evento" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Regular" size="17.0" />
+               </font>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets left="25.0" right="25.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+</BorderPane>

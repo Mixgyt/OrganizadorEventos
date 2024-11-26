@@ -1,11 +1,11 @@
-package com.progra3.organizadord.organizadoreventos.Models;
+package com.progra3.organizadord.organizadoreventos.models;
 
-import com.progra3.organizadord.organizadoreventos.ConexionDB.ConexionDB;
+import com.progra3.organizadord.organizadoreventos.Conexion.ConexionDB;
+import com.progra3.organizadord.organizadoreventos.Conexion.UserSession;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class UsuarioModel {
     private Integer idUsuario;
@@ -67,22 +67,67 @@ public class UsuarioModel {
         this.pass = pass;
     }
 
-    public void AgregarUsuario(){
+    public void crearUsuario(){
         try {
-            Connection connection = ConexionDB.connection();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO tbl_usuarios(nombre,pass,id_correo) " +
+            Connection connection = ConexionDB.getConnection();
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO tbl_usuarios(nombre,pass, id_correo) " +
                     "VALUES (?,?,?)");
             statement.setString(1, this.nombre);
             statement.setString(2, this.pass);
             statement.setInt(3, this.idCorreo);
             System.out.println(statement.executeUpdate());
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public boolean UsuarioExistente(){
+
+    public int actualizarUsuario(int id){
         try {
-            Connection connection = ConexionDB.connection();
+            Connection connection = ConexionDB.getConnection();
+            PreparedStatement statement = connection.prepareStatement("UPDATE tbl_usuarios SET nombre=?, pass=? WHERE id_usuario = ?;");
+            statement.setString(1, this.nombre);
+            statement.setString(2, this.pass);
+            statement.setInt(3, id);
+            return statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int eliminarUsuario(int id){
+        Connection connection = ConexionDB.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM tbl_usuarios WHERE id_usuario = ?;");
+            statement.setInt(1, id);
+            return statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static ObservableList<UsuarioModel> getusuario(){
+        Connection connection = ConexionDB.getConnection();
+        ObservableList<UsuarioModel> usuarios = FXCollections.observableArrayList();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM tbl_usuarios");
+            while(rs.next()){
+                UsuarioModel usuario = new UsuarioModel();
+                usuario.setIdUsuario(rs.getInt("id_usuario"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setPass(rs.getString("pass"));
+                usuario.setIdCorreo(rs.getInt("id_correo"));
+                usuarios.add(usuario);
+            }
+            return usuarios;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean existe(){
+        try {
+            Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_usuarios WHERE " +
                     "nombre = ?");
             statement.setString(1, this.nombre);
@@ -97,21 +142,28 @@ public class UsuarioModel {
             throw new RuntimeException(e);
         }
     }
-    public boolean InicioSesion(){
+
+    public boolean iniciarSesion(){
         try {
-            Connection connection = ConexionDB.connection();
+            Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_usuarios WHERE " +
                     "nombre = ? AND pass = ?");
             statement.setString(1, this.nombre);
             statement.setString(2, this.pass);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
+                //Usuario obtenido para guardar su sesion
+                UsuarioModel usuarioModel = new UsuarioModel();
+                usuarioModel.setIdUsuario(resultSet.getInt(1));
+                usuarioModel.setNombre(resultSet.getString(2));
+                usuarioModel.setIdCorreo(resultSet.getInt(4));
+                UserSession.setUsuario(usuarioModel);
                 return true;
             }
             else {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

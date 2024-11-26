@@ -5,19 +5,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="442.0" style="-fx-background-color: #070F2B;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.MainController">
+<AnchorPane prefHeight="400.0" prefWidth="442.0" style="-fx-background-color: #070F2B;" xmlns="http://javafx.com/javafx/21.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.MainController">
     <children>
-        <Button fx:id="btnInicioSesion" layoutX="107.0" layoutY="96.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="248.0" style="-fx-background-color: #1B1A55;" text="INICIO DE SESIÓN" textFill="WHITE">
+        <Button fx:id="btnInicioSesion" layoutX="107.0" layoutY="96.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="70.0" prefWidth="248.0" style="-fx-background-color: #1B1A55;" text="INICIO DE SESIÓN" textFill="WHITE">
             <font>
                 <Font name="Agency FB" size="33.0" />
             </font>
         </Button>
-        <Button fx:id="btnCrearCuenta" layoutX="107.0" layoutY="201.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="248.0" style="-fx-background-color: #1B1A55;" text="CREAR CUENTA" textFill="WHITE">
+        <Button fx:id="btnCrearCuenta" layoutX="107.0" layoutY="201.0" mnemonicParsing="false" onAction="#crearUsuario" prefHeight="70.0" prefWidth="248.0" style="-fx-background-color: #1B1A55;" text="CREAR CUENTA" textFill="WHITE">
             <font>
                 <Font name="Agency FB" size="33.0" />
             </font>
         </Button>
-        <Button fx:id="btnSalir" layoutX="107.0" layoutY="296.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="248.0" style="-fx-background-color: #1B1A55;" text="SALIR" textFill="WHITE">
+        <Button fx:id="btnSalir" layoutX="107.0" layoutY="296.0" mnemonicParsing="false" onAction="#salir" prefHeight="70.0" prefWidth="248.0" style="-fx-background-color: #1B1A55;" text="SALIR" textFill="WHITE">
             <font>
                 <Font name="Agency FB" size="33.0" />
             </font>

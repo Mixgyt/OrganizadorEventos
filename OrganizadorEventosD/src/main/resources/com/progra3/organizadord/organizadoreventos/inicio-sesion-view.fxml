@@ -1,40 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="442.0" style="-fx-background-color: #070F2B;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.InicioSesionController">
+<AnchorPane fx:id="mainPane" prefHeight="665.0" prefWidth="707.0" style="-fx-background-color: #001F3F; -fx-background-position: center;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.InicioSesionController">
    <children>
-      <Label layoutX="100.0" layoutY="14.0" text="INICIO DE SESIÓN" textFill="WHITE">
-         <font>
-            <Font name="Agency FB" size="45.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtUsuario" layoutX="101.0" layoutY="106.0" prefHeight="25.0" prefWidth="242.0" />
-      <Label layoutX="101.0" layoutY="85.0" text="Usuario:" textFill="WHITE">
-         <font>
-            <Font name="Agency FB" size="17.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtClave" layoutX="100.0" layoutY="162.0" prefHeight="25.0" prefWidth="242.0" />
-      <Label layoutX="100.0" layoutY="141.0" text="Contraseña:" textFill="WHITE">
-         <font>
-            <Font name="Agency FB" size="17.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnIniciarSesion" layoutX="99.0" layoutY="200.0" mnemonicParsing="false" text="INICIAR SESIÓN">
-         <font>
-            <Font name="Agency FB" size="40.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnCancelar" layoutX="99.0" layoutY="299.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="245.0" text="CANCELAR">
-         <font>
-            <Font name="Agency FB" size="40.0" />
-         </font>
-      </Button>
+      <Pane layoutX="167.0" layoutY="108.0" prefHeight="418.0" prefWidth="373.0" style="-fx-background-color: #6A9AB0; -fx-background-position: center; -fx-background-radius: 10; -fx-margin: auto;">
+         <children>
+            <Label layoutX="116.0" layoutY="37.0" text="LOGIN" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Bold" size="45.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtUsuario" layoutX="66.0" layoutY="181.0" prefHeight="25.0" prefWidth="242.0" promptText="Ingrese su usuario...">
+               <font>
+                  <Font name="SansSerif Regular" size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="66.0" layoutY="160.0" prefHeight="20.0" prefWidth="77.0" text="Usuario" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Regular" size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtClave" layoutX="65.0" layoutY="240.0" prefHeight="26.0" prefWidth="242.0" promptText="Ingrese su contraseña">
+               <font>
+                  <Font name="SansSerif Regular" size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="65.0" layoutY="219.0" text="Contraseña" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Regular" size="17.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnIniciarSesion" layoutX="66.0" layoutY="312.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="37.0" prefWidth="242.0" styleClass="button-normal" text="INICIAR SESIÓN " textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Regular" size="20.0" />
+               </font>
+            </Button>
+            <Hyperlink fx:id="link" layoutX="66.0" layoutY="275.0" onAction="#crearUsuario" text="Crear un usuario" textFill="#3a6d8c">
+               <font>
+                  <Font name="SansSerif Regular" size="14.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

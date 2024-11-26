@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="650.0" prefWidth="550.0" style="-fx-background-color: #6A9AB0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.controllers.dialogos.DetalleEventoController">
+   <children>
+      <Label layoutX="175.0" layoutY="26.0" text="Detalle Evento" textFill="WHITE">
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+         <font>
+            <Font name="SansSerif Bold" size="29.0" />
+         </font>
+      </Label>
+      <VBox layoutX="28.0" layoutY="105.0" prefHeight="252.0" prefWidth="495.0">
+         <children>
+            <HBox prefHeight="38.0" prefWidth="495.0" spacing="10.0">
+               <children>
+                  <Label text="Nombre del evento:" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNombre" text="---" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="39.0" prefWidth="495.0" spacing="10.0">
+               <children>
+                  <Label text="Fecha de Inicio: " textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbFechaInicio" text="---" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="495.0" spacing="10.0">
+               <children>
+                  <Label text="Fecha de Finalizacion: " textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbFechaFinalizacion" text="---" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="42.0" prefWidth="495.0" spacing="10.0">
+               <children>
+                  <Label text="Ubicacion: " textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbUbicacion" text="---" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="42.0" prefWidth="495.0" spacing="10.0">
+               <children>
+                  <Label text="Informacion" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbInformacion" text="---" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="46.0" prefWidth="495.0" spacing="10.0">
+               <children>
+                  <Label text="Detalles extra:" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbDetalle" text="---" textFill="#ededed">
+                     <font>
+                        <Font name="SansSerif Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <TableView fx:id="tbInvitados" layoutX="84.0" layoutY="376.0" prefHeight="252.0" prefWidth="379.0">
+        <columns>
+            <TableColumn fx:id="clCorreos" prefWidth="266.0" text="Correos" />
+            <TableColumn fx:id="clEstado" prefWidth="112.0" text="Estado" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -20,8 +20,6 @@ public class MainController {
     @FXML
     private Button btnSalir;
 
-    @FXML
-    private AnchorPane mainPane;
     public void initialize(){
 
         btnInicioSesion.setOnMouseEntered(mouseEvent -> {
@@ -39,28 +37,22 @@ public class MainController {
         btnCrearCuenta.setOnMouseExited(mouseEvent -> {
             btnCrearCuenta.setStyle("-fx-background-color: #1B1A55");
         });
-        btnSalir.setOnMouseExited(mouseEvent -> {
-            btnSalir.setStyle("-fx-background-color: #1B1A55");
-        });
-        btnInicioSesion.setOnAction(actionEvent -> {
-            btnInicioSesion.setStyle("-fx-background-color: #9290C3");
-            try {
-                Node node = FXMLLoader.load(getClass().getResource("inicio-sesion-view.fxml"));
-                mainPane.getChildren().clear();
-                mainPane.getChildren().setAll(node);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        btnCrearCuenta.setOnAction(actionEvent -> {
-            btnCrearCuenta.setStyle("-fx-background-color: #9290C3");
-            try {
-                Node node = FXMLLoader.load(getClass().getResource("crear-usuario-view.fxml"));
-                mainPane.getChildren().clear();
-                mainPane.getChildren().setAll(node);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+    }
+
+    @FXML
+    private void crearUsuario(){
+        btnCrearCuenta.setStyle("-fx-background-color: #9290C3");
+        Main.setRoot("crear-usuario-view","Crear usuario");
+    }
+
+    @FXML
+    private void iniciarSesion(){
+        btnInicioSesion.setStyle("-fx-background-color: #9290C3");
+        Main.setRoot("inicio-sesion-view","Inicio de sesion");
+    }
+
+    @FXML
+    private void salir(){
+
     }
 }

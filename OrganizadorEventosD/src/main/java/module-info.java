@@ -4,9 +4,13 @@ module com.progra3.organizadord.organizadoreventos {
     requires jakarta.mail;
     requires java.sql;
 
-
-    opens com.progra3.organizadord.organizadoreventos to javafx.fxml;
-    opens com.progra3.organizadord.organizadoreventos.Models to javafx.base;
-    opens com.progra3.organizadord.organizadoreventos.ConexionDB to javafx.base;
     exports com.progra3.organizadord.organizadoreventos;
+    exports com.progra3.organizadord.organizadoreventos.models;
+    exports com.progra3.organizadord.organizadoreventos.controllers.dialogos;
+
+    opens com.progra3.organizadord.organizadoreventos.controllers.dialogos to javafx.fxml;
+    opens com.progra3.organizadord.organizadoreventos to javafx.fxml;
+    opens com.progra3.organizadord.organizadoreventos.models to javafx.fxml;
+    exports com.progra3.organizadord.organizadoreventos.Conexion;
+    opens com.progra3.organizadord.organizadoreventos.Conexion to javafx.fxml;
 }
