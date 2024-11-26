@@ -3,6 +3,7 @@ package com.progra3.organizadord.organizadoreventos;
 import com.progra3.organizadord.organizadoreventos.Conexion.UserSession;
 import com.progra3.organizadord.organizadoreventos.models.CorreosEventosModel;
 import com.progra3.organizadord.organizadoreventos.models.EstadosModel;
+import com.progra3.organizadord.organizadoreventos.models.EventosModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,8 +34,12 @@ public class SeguimientoInvitadoController {
 
     @FXML
     private TableView<CorreosEventosModel> tbInv;
+
     @FXML
     private ComboBox<String> cmbInvitados;
+
+    @FXML
+    private ComboBox<EventosModel> cmbVerEventos;
 
     public void initialize(){
         clidCE.setCellValueFactory(new PropertyValueFactory<>("idCorreosEvento"));
@@ -43,6 +48,7 @@ public class SeguimientoInvitadoController {
         clidTI.setCellValueFactory(new PropertyValueFactory<>("idTipoInvitado"));
         clE.setCellValueFactory(new PropertyValueFactory<>("estado"));
 
+        cargarEventos();
         cargarTablaTodo();
 
         ObservableList<String> datoInvitadosMostrar = FXCollections.observableArrayList();
@@ -68,7 +74,7 @@ public class SeguimientoInvitadoController {
             }
         });
 
-        btnActualizar.setOnAction(e->{
+        cmbVerEventos.setOnAction(e->{
             if (cmbInvitados.getSelectionModel().getSelectedIndex() == 0){
                 cargarTablaTodo();
             }
@@ -81,28 +87,36 @@ public class SeguimientoInvitadoController {
             else if (cmbInvitados.getSelectionModel().getSelectedIndex() == 3) {
                 cargarRechazado();
             }
+
+
         });
 
     }
+
+    public void cargarEventos(){
+        cmbVerEventos.setItems(EventosModel.getEventos());
+        cmbVerEventos.setValue(EventosModel.getEventos().get(0));
+    }
+
     public void cargarTablaTodo(){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
         correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
-        tbInv.setItems(correosEventosModel.mostrarCorreosEvento());
+        tbInv.setItems(correosEventosModel.mostrarCorreosEvento(cmbVerEventos.getValue().getIdEvento()));
     }
 
     public void cargarConfirmado(){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
         correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
-        tbInv.setItems(correosEventosModel.mostrarInvitadosPorEstado(1));
+        tbInv.setItems(correosEventosModel.mostrarInvitadosPorEstado(1, cmbVerEventos.getValue().getIdEvento()));
     }
     public void cargarPendiente(){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
         correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
-        tbInv.setItems(correosEventosModel.mostrarInvitadosPorEstado(0));
+        tbInv.setItems(correosEventosModel.mostrarInvitadosPorEstado(0, cmbVerEventos.getValue().getIdEvento()));
     }
     public void cargarRechazado(){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
         correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
-        tbInv.setItems(correosEventosModel.mostrarInvitadosPorEstado(2));
+        tbInv.setItems(correosEventosModel.mostrarInvitadosPorEstado(2, cmbVerEventos.getValue().getIdEvento()));
     }
 }
