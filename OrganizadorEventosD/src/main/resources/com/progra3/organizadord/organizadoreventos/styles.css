@@ -24,6 +24,9 @@
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
 }
+.button-eliminar:hover {
+    -fx-background-color: #E57373; /* Un tono más claro de rojo */
+}
 
 .button-normal{
     -fx-background-color:  #3A6D8C;
@@ -53,3 +56,44 @@
     -fx-underline: true;
 }
 
+.table-view{
+    -fx-base:  #ededed;
+    -fx-control-inner-background:  #ededed;
+    -fx-background-color:  #ededed;
+    -fx-alignment: center;
+    -fx-border-color:  #001F3F;
+    -fx-border-width: 1px;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 12pt;
+    -fx-text-fill: black;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+    -fx-font-weight: normal;
+}
+
+.table-view .button {
+    -fx-alignment: center;
+    -fx-background-color: #77B1CC;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-margin: 0 auto;
+}
+
+.table-view .button:hover{
+    -fx-background-color: #001F3F;
+
+}
+
+.table-column{
+    -fx-font-size: 14px;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
