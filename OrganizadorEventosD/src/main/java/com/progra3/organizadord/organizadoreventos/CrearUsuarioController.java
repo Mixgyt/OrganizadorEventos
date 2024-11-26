@@ -4,10 +4,8 @@ import com.progra3.organizadord.organizadoreventos.models.CorreoModel;
 import com.progra3.organizadord.organizadoreventos.models.UsuarioModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class CrearUsuarioController {
@@ -19,8 +17,13 @@ public class CrearUsuarioController {
     private Button btnCrear;
 
     @FXML
-    private TextField txtClave;
+    private Button btnShow;
 
+    @FXML
+    private PasswordField txtClave;
+
+    @FXML
+    private TextField txtClaveText;
     @FXML
     private TextField txtCorreo;
 
@@ -30,11 +33,35 @@ public class CrearUsuarioController {
     @FXML
     private Hyperlink link;
 
-
     @FXML
     private AnchorPane mainPane;
+
     public void initialize(){
+        txtClaveText.setVisible(false);
+        btnShow.setOnAction(event -> {
+            if (btnShow.getText().equals("X")){
+                btnShow.setText("O");
+                txtClave.setVisible(true);
+                txtClaveText.setVisible(false);
+            }
+            else {
+                btnShow.setText("X");
+                txtClave.setVisible(false);
+                txtClaveText.setVisible(true);
+            }
+        });
     }
+
+    @FXML
+    void EscribirPWD(KeyEvent event) {
+        txtClaveText.setText(txtClave.getText());
+    }
+
+    @FXML
+    void EscribirTXT(KeyEvent event) {
+        txtClave.setText(txtClaveText.getText());
+    }
+
 
     @FXML
     private void crearUsuario(){

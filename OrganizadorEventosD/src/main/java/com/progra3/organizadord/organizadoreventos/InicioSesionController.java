@@ -1,12 +1,11 @@
 package com.progra3.organizadord.organizadoreventos;
 
 import com.progra3.organizadord.organizadoreventos.models.UsuarioModel;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 
@@ -25,12 +24,41 @@ public class InicioSesionController {
     private Button btnCrearCuenta;
 
     @FXML
-    private TextField txtClave;
+    private Button btnShow;
+
+    @FXML
+    private TextField txtClaveText;
+
+    @FXML
+    private PasswordField txtClave;
 
     @FXML
     private TextField txtUsuario;
 
     public void initialize(){
+        txtClaveText.setVisible(false);
+        btnShow.setOnAction(event -> {
+            if (btnShow.getText().equals("X")){
+                btnShow.setText("O");
+                txtClave.setVisible(true);
+                txtClaveText.setVisible(false);
+            }
+            else {
+                btnShow.setText("X");
+                txtClave.setVisible(false);
+                txtClaveText.setVisible(true);
+            }
+        });
+    }
+
+    @FXML
+    void EscribirPWD(KeyEvent event) {
+        txtClaveText.setText(txtClave.getText());
+    }
+
+    @FXML
+    void EscribirTXT(KeyEvent event) {
+        txtClave.setText(txtClaveText.getText());
     }
 
     @FXML

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -27,11 +28,6 @@
                   <Font name="SansSerif Regular" size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="txtClave" layoutX="65.0" layoutY="240.0" prefHeight="26.0" prefWidth="242.0" promptText="Ingrese su contraseña">
-               <font>
-                  <Font name="SansSerif Regular" size="14.0" />
-               </font>
-            </TextField>
             <Label layoutX="65.0" layoutY="219.0" text="Contraseña" textFill="WHITE">
                <font>
                   <Font name="SansSerif Regular" size="17.0" />
@@ -47,6 +43,17 @@
                   <Font name="SansSerif Regular" size="14.0" />
                </font>
             </Hyperlink>
+            <PasswordField fx:id="txtClave" layoutX="66.0" layoutY="241.0" onKeyTyped="#EscribirPWD" prefHeight="26.0" prefWidth="208.0" promptText="Ingrese su contraseña">
+               <font>
+                  <Font name="SansSerif Regular" size="14.0" />
+               </font>
+            </PasswordField>
+            <Button fx:id="btnShow" layoutX="285.0" layoutY="241.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="34.0" text="O" />
+            <TextField fx:id="txtClaveText" layoutX="66.0" layoutY="241.0" onKeyTyped="#EscribirTXT" prefHeight="26.0" prefWidth="208.0" promptText="Ingrese su contraseña...">
+               <font>
+                  <Font name="SansSerif Regular" size="14.0" />
+               </font>
+            </TextField>
          </children>
       </Pane>
    </children>
