@@ -49,6 +49,7 @@ public class CorreoModel {
         }
     }
 
+
     public Integer buscarId() {
         try {
             Connection connection = ConexionDB.getConnection();
@@ -73,6 +74,27 @@ public class CorreoModel {
                     return resultSet1.getInt("id_correo");
                 }
                 return 0;
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public static String buscarCorreo(int id) {
+        try {
+            Connection connection = ConexionDB.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_correos WHERE id_correo = ?");
+            statement.setInt(1, id);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                System.out.println(resultSet.getInt("id_correo"));
+                return resultSet.getString("correo");
+            } else {
+                return null;
             }
 
         } catch (Exception e) {

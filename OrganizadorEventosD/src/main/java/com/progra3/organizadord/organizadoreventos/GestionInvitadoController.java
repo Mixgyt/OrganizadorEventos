@@ -184,10 +184,17 @@ public class GestionInvitadoController {
         cmbTipoInvitado.getSelectionModel().select(-1);
         txtCorreo.clear();
     }
+
     public void cargarTablaTodo(){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
         correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
         tbInvitados.setItems(correosEventosModel.mostrarCorreosEvento());
+    }
+
+    public void cargarTablaTodo(int evento){
+        CorreosEventosModel correosEventosModel = new CorreosEventosModel();
+        correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
+        tbInvitados.setItems(correosEventosModel.mostrarCorreosEventoEspecifico(evento));
     }
     public void cargarTablaPorEvento(int evento){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();

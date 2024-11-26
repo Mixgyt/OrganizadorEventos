@@ -91,6 +91,7 @@ public class TipoInvitadoModel {
         }
     }
 
+
     public boolean tipoInvitadoExistente(){
         Connection connection = ConexionDB.getConnection();
         try {
@@ -121,6 +122,7 @@ public class TipoInvitadoModel {
             throw new RuntimeException(e);
         }
     }
+
 
     @Override
     public String toString() {

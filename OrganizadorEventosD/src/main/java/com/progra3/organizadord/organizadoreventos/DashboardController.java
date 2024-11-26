@@ -70,9 +70,11 @@ public class DashboardController {
         Pane.setCenter(Main.getView("usuario-view"));
     }
 
+
     @FXML
     void onInvitado(ActionEvent event) {
         Pane.setCenter(Main.getView("gestion-invitado-view"));
     }
+
 
 }

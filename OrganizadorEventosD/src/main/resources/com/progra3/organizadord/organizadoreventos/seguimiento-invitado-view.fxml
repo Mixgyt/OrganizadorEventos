@@ -10,17 +10,17 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1074.0" style="-fx-background-color: #001F3F;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.SeguimientoInvitadoController">
     <children>
-        <TableView fx:id="tbInv" layoutX="34.0" layoutY="169.0" prefHeight="509.0" prefWidth="672.0" style="-fx-base: #ededed; -fx-control-inner-background: #ededed; -fx-background-color: #ededed; -fx-alignment: center; -fx-border-color: #001F3F; -fx-border-width: 1px; -fx-border-radius: 7px; -fx-background-radius: 7px;">
+        <TableView fx:id="tbInv" layoutX="34.0" layoutY="209.0" prefHeight="509.0" prefWidth="691.0">
             <columns>
                 <TableColumn fx:id="clidCE" prefWidth="62.0" style="-fx-font-size: 14px;" text="ID" />
                 <TableColumn fx:id="clidE" prefWidth="203.0" style="-fx-font-size: 14px;" text="Evento" />
                 <TableColumn fx:id="clidC" prefWidth="184.0" style="-fx-font-size: 13px;" text="Correo del invitado" />
                 <TableColumn fx:id="clidTI" prefWidth="124.0" style="-fx-font-size: 14px;" text="Tipo Invitado" />
-                <TableColumn fx:id="clE" prefWidth="96.0" style="-fx-font-size: 14px;" text="Estado" />
+                <TableColumn fx:id="clE" prefWidth="117.0" style="-fx-font-size: 14px;" text="Estado" />
             </columns>
         </TableView>
-        <ComboBox fx:id="cmbInvitados" layoutX="748.0" layoutY="215.0" prefHeight="25.0" prefWidth="277.0" style="-fx-background-color: #ededed;" />
-        <Label layoutX="752.0" layoutY="179.0" text="Ver Estado De Invitados" textFill="WHITE">
+        <ComboBox fx:id="cmbInvitados" layoutX="747.0" layoutY="328.0" prefHeight="25.0" prefWidth="277.0" style="-fx-background-color: #ededed;" />
+        <Label layoutX="751.0" layoutY="292.0" text="Ver Estado De Invitados" textFill="WHITE">
             <font>
                 <Font name="SansSerif Regular" size="25.0" />
             </font>
@@ -30,15 +30,16 @@
                 <Font name="SansSerif Bold" size="35.0" />
             </font>
         </Label>
-        <Button fx:id="btnEnviarRecordatorio" layoutX="793.0" layoutY="337.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="188.0" text="Enviar Recordatorio" styleClass="button-claro">
+        <Button fx:id="btnEnviarRecordatorio" layoutX="792.0" layoutY="457.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="188.0" styleClass="button-claro" text="Enviar Recordatorio">
             <font>
                 <Font name="SansSerif Regular" size="18.0" />
             </font>
         </Button>
-      <Button fx:id="btnActualizar" layoutX="793.0" layoutY="271.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="188.0" text="Actualizar" styleClass="button-claro">
-         <font>
-            <Font name="SansSerif Regular" size="18.0" />
-         </font>
-      </Button>
+        <ComboBox fx:id="cmbVerEventos" layoutX="748.0" layoutY="247.0" prefHeight="25.0" prefWidth="277.0" style="-fx-background-color: #ededed;" />
+        <Label layoutX="786.0" layoutY="209.0" text="Ver por eventos" textFill="WHITE">
+            <font>
+                <Font name="SansSerif Regular" size="25.0" />
+            </font>
+        </Label>
     </children>
 </AnchorPane>

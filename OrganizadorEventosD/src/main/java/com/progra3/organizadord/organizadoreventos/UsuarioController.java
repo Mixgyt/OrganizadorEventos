@@ -59,6 +59,8 @@ public class UsuarioController {
                     btnEditar.setOnAction(e ->{
                         UsuarioModel eventoTemp = tbUsuario.getItems().get(getIndex());
                         txtUsuario.setText(eventoTemp.getNombre());
+                        txtCorreo.setText(CorreoModel.buscarCorreo(eventoTemp.getIdCorreo()));
+                        txtCorreo.setDisable(true);
                         txtClave.setText(eventoTemp.getPass());
                         lbId.setText(String.valueOf(eventoTemp.getIdUsuario()));
                         btnInsertar.setText("Actualizar");
@@ -133,7 +135,9 @@ public class UsuarioController {
         else {
             if (!correoModel.existe()){
                 correoModel.crearCorreo();
+
                 UsuarioModel usuarioModel = new UsuarioModel(usuario, correoModel.buscarId(),clave);
+
                 if (usuarioModel.existe()){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("El usuario ingresado ya existe, ingrese otro nombre de usuario");
@@ -157,6 +161,18 @@ public class UsuarioController {
 
     public void actualizar(){
        System.out.println("Actualizar");
+
+       UsuarioModel usuarioModel = new UsuarioModel();
+       usuarioModel.setNombre(txtUsuario.getText());
+       usuarioModel.setPass(txtClave.getText());
+       usuarioModel.setIdUsuario(Integer.parseInt(lbId.getText()));
+       if(usuarioModel.actualizarUsuario(usuarioModel.getIdUsuario()) > 0){
+           Alert alert = new Alert(Alert.AlertType.INFORMATION);
+           alert.setContentText("Se ha actualizado el usuario con exito");
+           alert.show();
+           limpiar();
+           cargarUsuario();
+       }
     }
 
     public boolean validarCamposVacios(){
@@ -178,6 +194,10 @@ public class UsuarioController {
         txtUsuario.setText("");
         txtClave.setText("");
         lbId.setText("");
+
+        txtCorreo.setText("");
+        txtCorreo.setDisable(false);
+
         btnInsertar.setText("Agregar");
         btnLimpiar.setText("Limpiar");
     }

@@ -203,6 +203,7 @@ public class EventosModel {
             throw new RuntimeException(e);
         }
     }
+
     //retorna los eventos que incluyan el dia de hoy en adelante
     public static ObservableList<EventosModel> getEventosProximos(){
         ObservableList<EventosModel> eventos = FXCollections.observableArrayList();
@@ -293,8 +294,10 @@ public class EventosModel {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     public String toString() {
         return nombre;
+
     }
 }
