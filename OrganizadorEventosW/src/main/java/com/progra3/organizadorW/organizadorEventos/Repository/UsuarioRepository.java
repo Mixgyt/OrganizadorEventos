@@ -1,8 +1,8 @@
 package com.progra3.organizadorW.organizadorEventos.Repository;
 
 import com.progra3.organizadorW.organizadorEventos.Models.UsuarioModel;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UsuarioRepository extends CrudRepository<UsuarioModel,Integer> {
+public interface UsuarioRepository extends JpaRepository<UsuarioModel,Integer> {
     UsuarioModel findByNombre(String nombre);
 }
