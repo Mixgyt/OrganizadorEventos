@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class EventosModel {
     private int idEvento;
@@ -171,6 +172,121 @@ public class EventosModel {
         }
     }
 
+    //filtra eventos del usuario en un rango de fechas
+    public static ObservableList<EventosModel> getEventosRango(LocalDate fechaInicial, LocalDate fechaFinal){
+        Connection connection = ConexionDB.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_evento, usuarios.nombre" +
+                    " AS usuario, eventos.nombre" +
+                    " AS evento, TO_CHAR(fecha_inicio,'DD-MM-YYYY HH12:MI AM')" +
+                    " AS fecha_inicio,TO_CHAR(fecha_final,'DD-MM-YYYY HH12:MI AM')" +
+                    " AS fecha_final, ubicacion, eventos.descripcion, detalles, tipo_evento.descripcion" +
+                    " AS tipo_evento" +
+                    " FROM public.tbl_eventos AS eventos" +
+                    " INNER JOIN tbl_usuarios AS usuarios ON eventos.id_usuario = usuarios.id_usuario" +
+                    " INNER JOIN tbl_tipo_evento AS tipo_evento ON eventos.id_tipo_evento = tipo_evento.id_tipo_evento" +
+                    " WHERE eventos.fecha_inicio BETWEEN ? AND ? AND eventos.id_usuario =? " +
+                    " ORDER BY eventos.fecha_inicio ASC;");
+
+            preparedStatement.setDate(1,Date.valueOf(fechaInicial));
+            preparedStatement.setDate(2,Date.valueOf(fechaFinal));
+            preparedStatement.setInt(3,UserSession.getUsuario().getIdUsuario());
+
+            ResultSet resultSet = null;
+
+            return obtencionDeDatos(resultSet = preparedStatement.executeQuery());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    //filtra eventos del usuario de un solo tipo en un rango de fechas
+    public static ObservableList<EventosModel> getEventosRangoTipo(LocalDate fechaInicial, LocalDate fechaFinal, int idTipoEvento){
+        Connection connection = ConexionDB.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_evento, usuarios.nombre" +
+                    " AS usuario, eventos.nombre" +
+                    " AS evento, TO_CHAR(fecha_inicio,'DD-MM-YYYY HH12:MI AM')" +
+                    " AS fecha_inicio,TO_CHAR(fecha_final,'DD-MM-YYYY HH12:MI AM')" +
+                    " AS fecha_final, ubicacion, eventos.descripcion, detalles, tipo_evento.descripcion" +
+                    " AS tipo_evento" +
+                    " FROM public.tbl_eventos AS eventos" +
+                    " INNER JOIN tbl_usuarios AS usuarios ON eventos.id_usuario = usuarios.id_usuario" +
+                    " INNER JOIN tbl_tipo_evento AS tipo_evento ON eventos.id_tipo_evento = tipo_evento.id_tipo_evento" +
+                    " WHERE eventos.fecha_inicio BETWEEN ? AND ? AND eventos.id_usuario =? AND eventos.id_tipo_evento = ?" +
+                    " ORDER BY eventos.fecha_inicio ASC;");
+
+            preparedStatement.setDate(1,Date.valueOf(fechaInicial));
+            preparedStatement.setDate(2,Date.valueOf(fechaFinal));
+            preparedStatement.setInt(3,UserSession.getUsuario().getIdUsuario());
+            preparedStatement.setInt(4,idTipoEvento);
+
+            ResultSet resultSet = null;
+
+            return obtencionDeDatos(resultSet = preparedStatement.executeQuery());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //devuelve el observaleList a retornar para el resulset proporcionado
+    private static ObservableList<EventosModel> obtencionDeDatos(ResultSet resultSet){
+        ObservableList<EventosModel> eventos = FXCollections.observableArrayList();
+        try {
+            while (resultSet.next()){
+                EventosModel eventosModel = new EventosModel();
+                eventosModel.setIdEvento(resultSet.getInt("id_evento"));
+                eventosModel.setUsuarioCadena(resultSet.getString("usuario"));
+                eventosModel.setNombre(resultSet.getString("evento"));
+                eventosModel.setFechaInicial(resultSet.getString("fecha_inicio"));
+                eventosModel.setFechaFinal(resultSet.getString("fecha_final"));
+                eventosModel.setUbicacion(resultSet.getString("ubicacion"));
+                eventosModel.setDescripcion(resultSet.getString("descripcion"));
+                eventosModel.setDetalles(resultSet.getString("detalles"));
+                eventosModel.setTipoEventoCadena(resultSet.getString("tipo_evento"));
+
+                eventos.add(eventosModel);
+            }
+            return eventos;
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean EventoExistente(){
+        Connection connection = ConexionDB.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_eventos WHERE nombre = ? AND id_usuario = ?");
+            statement.setString(1, this.nombre);
+            statement.setInt(2, UserSession.getUsuario().getIdUsuario());
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Integer buscarId(){
+        Connection connection = ConexionDB.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_eventos WHERE nombre = ? AND id_usuario = ?");
+            statement.setString(1, this.nombre);
+            statement.setInt(2, UserSession.getUsuario().getIdUsuario());
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                return resultSet.getInt("id_evento");
+            }
+            return 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     //retorna los eventos que incluyan el dia de hoy en adelante
     public static ObservableList<EventosModel> getEventosProximos(){
         ObservableList<EventosModel> eventos = FXCollections.observableArrayList();
@@ -264,6 +380,7 @@ public class EventosModel {
 
     @Override
     public String toString() {
-        return descripcion;
+        return nombre;
+
     }
 }

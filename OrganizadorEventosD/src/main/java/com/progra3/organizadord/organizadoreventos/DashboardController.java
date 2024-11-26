@@ -30,6 +30,9 @@ public class DashboardController {
     private Hyperlink lnkTipoUsuario;
 
     @FXML
+    private Hyperlink lnkInvitado;
+
+    @FXML
     private Hyperlink lnkUsuario;
 
     @FXML
@@ -66,5 +69,12 @@ public class DashboardController {
     void onUsuario(ActionEvent event) {
         Pane.setCenter(Main.getView("usuario-view"));
     }
+
+
+    @FXML
+    void onInvitado(ActionEvent event) {
+        Pane.setCenter(Main.getView("gestion-invitado-view"));
+    }
+
 
 }

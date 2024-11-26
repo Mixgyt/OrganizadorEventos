@@ -91,6 +91,39 @@ public class TipoInvitadoModel {
         }
     }
 
+
+    public boolean tipoInvitadoExistente(){
+        Connection connection = ConexionDB.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_tipo_invitado WHERE descripcion = ?");
+            statement.setString(1,this.descripcion);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Integer buscarId(){
+        Connection connection = ConexionDB.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_tipo_invitado WHERE descripcion = ?");
+            statement.setString(1,this.descripcion);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                return resultSet.getInt("id_tipo_invitado");
+            }
+            return 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     @Override
     public String toString() {
         return descripcion;

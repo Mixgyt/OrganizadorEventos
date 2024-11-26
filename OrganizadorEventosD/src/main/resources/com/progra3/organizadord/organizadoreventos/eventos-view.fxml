@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -10,7 +13,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1074.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.EventosController">
    <children>
-      <TableView fx:id="tbEventos" layoutX="184.0" layoutY="332.0" prefHeight="214.0" prefWidth="696.0">
+      <TableView fx:id="tbEventos" layoutX="48.0" layoutY="371.0" prefHeight="214.0" prefWidth="696.0">
         <columns>
             <TableColumn fx:id="clEvento" prefWidth="188.0" text="EVENTO" />
             <TableColumn fx:id="clFechaInicio" prefWidth="134.0" text="FECHA INICIO" />
@@ -19,13 +22,13 @@
             <TableColumn fx:id="clDetalles" prefWidth="116.0" text="DETALLES" />
         </columns>
       </TableView>
-      <Button fx:id="btnCrearEvento" layoutX="722.0" layoutY="191.0" mnemonicParsing="false" onAction="#crearEvento" prefHeight="38.0" prefWidth="158.0" styleClass="button-claro" text="Crear Nuevo Evento" />
-      <TextField fx:id="txtBusqueda" layoutX="184.0" layoutY="191.0" prefHeight="38.0" prefWidth="319.0" promptText="Buscar por nombre del evento">
+      <Button fx:id="btnCrearEvento" layoutX="694.0" layoutY="200.0" mnemonicParsing="false" onAction="#crearEvento" prefHeight="38.0" prefWidth="158.0" styleClass="button-claro" text="Crear Nuevo Evento" />
+      <TextField fx:id="txtBusqueda" layoutX="104.0" layoutY="151.0" prefHeight="38.0" prefWidth="319.0" promptText="Buscar por nombre del evento">
          <font>
             <Font size="13.0" />
          </font>
       </TextField>
-      <Button fx:id="btnBuscar" layoutX="532.0" layoutY="191.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="87.0" styleClass="button-normal" text="Buscar">
+      <Button fx:id="btnBuscar" layoutX="524.0" layoutY="151.0" mnemonicParsing="false" onAction="#eventosBuscar" prefHeight="38.0" prefWidth="87.0" styleClass="button-normal" text="Buscar">
          <font>
             <Font size="13.0" />
          </font>
@@ -35,5 +38,16 @@
             <Font name="SansSerif Bold" size="35.0" />
          </font>
       </Label>
+      <Separator layoutX="7.0" layoutY="331.0" prefHeight="7.0" prefWidth="979.0" />
+      <DatePicker fx:id="dpFechaInicial" editable="false" layoutX="101.0" layoutY="244.0" prefHeight="25.0" prefWidth="149.0" />
+      <DatePicker fx:id="dpFechaFinal" editable="false" layoutX="273.0" layoutY="244.0" prefHeight="25.0" prefWidth="149.0" />
+      <Label layoutX="143.0" layoutY="210.0" text="Fecha Inicial" />
+      <Label layoutX="310.0" layoutY="210.0" text="Fecha Final" />
+      <ComboBox fx:id="cbTipoEvento" layoutX="493.0" layoutY="222.0" prefHeight="32.0" prefWidth="150.0" promptText="Tipo de Evento" />
+      <Button fx:id="btnLimpiar" layoutX="525.0" layoutY="269.0" mnemonicParsing="false" onAction="#eventoLimpiar" prefHeight="38.0" prefWidth="87.0" styleClass="button-normal" text="Limpiar">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
