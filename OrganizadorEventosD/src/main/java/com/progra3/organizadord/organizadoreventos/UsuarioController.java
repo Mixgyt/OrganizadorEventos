@@ -135,7 +135,9 @@ public class UsuarioController {
         else {
             if (!correoModel.existe()){
                 correoModel.crearCorreo();
-                UsuarioModel usuarioModel = new UsuarioModel(usuario, correoModel.buscarCorreo(),clave);
+
+                UsuarioModel usuarioModel = new UsuarioModel(usuario, correoModel.buscarId(),clave);
+
                 if (usuarioModel.existe()){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("El usuario ingresado ya existe, ingrese otro nombre de usuario");
@@ -159,6 +161,7 @@ public class UsuarioController {
 
     public void actualizar(){
        System.out.println("Actualizar");
+
        UsuarioModel usuarioModel = new UsuarioModel();
        usuarioModel.setNombre(txtUsuario.getText());
        usuarioModel.setPass(txtClave.getText());
@@ -191,8 +194,10 @@ public class UsuarioController {
         txtUsuario.setText("");
         txtClave.setText("");
         lbId.setText("");
+
         txtCorreo.setText("");
         txtCorreo.setDisable(false);
+
         btnInsertar.setText("Agregar");
         btnLimpiar.setText("Limpiar");
     }

@@ -49,7 +49,8 @@ public class CorreoModel {
         }
     }
 
-    public Integer buscarCorreo() {
+
+    public Integer buscarId() {
         try {
             Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_correos WHERE correo = ?");
@@ -79,6 +80,7 @@ public class CorreoModel {
             throw new RuntimeException(e);
         }
     }
+
 
     public static String buscarCorreo(int id) {
         try {
