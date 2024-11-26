@@ -3,6 +3,7 @@ module com.progra3.organizadord.organizadoreventos {
     requires javafx.fxml;
     requires jakarta.mail;
     requires java.sql;
+    requires com.opencsv;
 
     exports com.progra3.organizadord.organizadoreventos;
     exports com.progra3.organizadord.organizadoreventos.models;

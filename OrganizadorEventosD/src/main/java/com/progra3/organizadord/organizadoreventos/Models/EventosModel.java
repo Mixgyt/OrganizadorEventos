@@ -171,6 +171,38 @@ public class EventosModel {
         }
     }
 
+    public boolean EventoExistente(){
+        Connection connection = ConexionDB.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_eventos WHERE nombre = ? AND id_usuario = ?");
+            statement.setString(1, this.nombre);
+            statement.setInt(2, UserSession.getUsuario().getIdUsuario());
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Integer buscarId(){
+        Connection connection = ConexionDB.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_eventos WHERE nombre = ? AND id_usuario = ?");
+            statement.setString(1, this.nombre);
+            statement.setInt(2, UserSession.getUsuario().getIdUsuario());
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                return resultSet.getInt("id_evento");
+            }
+            return 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     //retorna los eventos que incluyan el dia de hoy en adelante
     public static ObservableList<EventosModel> getEventosProximos(){
         ObservableList<EventosModel> eventos = FXCollections.observableArrayList();
