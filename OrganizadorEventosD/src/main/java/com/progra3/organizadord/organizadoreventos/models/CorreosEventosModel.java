@@ -168,38 +168,6 @@ public class CorreosEventosModel {
         }
     }
 
-    //Retorna una observable con los invitados según el evento
-    public ObservableList<CorreosEventosModel> mostrarInvitadosPorEvento(int idEvento){
-        try {
-            ObservableList<CorreosEventosModel> datoCorreoEvento = FXCollections.observableArrayList();
-
-            Connection connection = ConexionDB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.nombre AS id_evento, \n" +
-                    "c.correo AS id_correo, ti.descripcion AS id_tipo_invitado, estado FROM tbl_correos_evento AS ce \n" +
-                    "INNER JOIN tbl_eventos AS e ON ce.id_evento = e.id_evento\n" +
-                    "INNER JOIN tbl_correos AS c ON ce.id_correo = c.id_correo \n" +
-                    "INNER JOIN tbl_tipo_invitado AS ti ON ce.id_tipo_invitado = ti.id_tipo_invitado " +
-                    "WHERE ce.id_evento = ? AND e.id_usuario = ?");
-            statement.setInt(1, idEvento);
-            statement.setInt(2, this.idAnfitrion);
-
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
-                datoCorreoEvento.add(new CorreosEventosModel(
-                        resultSet.getInt("id_correos_evento"),
-                        resultSet.getString("id_evento"),
-                        resultSet.getString("id_correo"),
-                        resultSet.getString("id_tipo_invitado"),
-                        resultSet.getInt("estado")
-                ));
-            }
-
-            return datoCorreoEvento;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     //Retorna un observable con todos los estados de los invitados
     public ObservableList<CorreosEventosModel> mostrarCorreosEvento(){
         try {
@@ -297,7 +265,7 @@ public class CorreosEventosModel {
         try {
             Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("UPDATE tbl_correos_evento SET " +
-                    "id_evento = ?, id_correo = ?, id_tipo_invitado = ?, estado = ?, WHERE id_correos_evento = ?");
+                    "id_evento = ?, id_correo = ?, id_tipo_invitado = ?, estado = ? WHERE id_correos_evento = ?");
             statement.setInt(1, Integer.parseInt(this.getIdEvento()));
             statement.setInt(2, Integer.parseInt(this.getIdCorreo()));
             statement.setInt(3, Integer.parseInt(this.getIdTipoInvitado()));
@@ -305,6 +273,7 @@ public class CorreosEventosModel {
             statement.setInt(5, this.getIdCorreosEvento());
             System.out.println("Actualizaciones = " + statement.executeUpdate());
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -314,11 +283,9 @@ public class CorreosEventosModel {
     public void eliminarCoreoEvento(){
         try {
             Connection connection = ConexionDB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM tbl_correos_evento WHERE id_correos_evento = ?");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM tbl_correos_evento WHERE id_correo = ?");
 
             statement.setInt(1, Integer.parseInt(this.idCorreo));
-
-            statement.setInt(1, this.idCorreosEvento);
             System.out.println("Eliminaciones = " + statement.executeUpdate());
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -336,6 +303,23 @@ public class CorreosEventosModel {
             statement.setInt(4,this.getEstado().valor);
 
             System.out.printf("" + statement.executeUpdate());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean invitadoExistente(){
+        try {
+            Connection connection = ConexionDB.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_correos_evento WHERE id_correo = ? AND id_evento = ?");
+            statement.setInt(1,Integer.parseInt(this.idCorreo));
+            statement.setInt(2,Integer.parseInt(this.idEvento));
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

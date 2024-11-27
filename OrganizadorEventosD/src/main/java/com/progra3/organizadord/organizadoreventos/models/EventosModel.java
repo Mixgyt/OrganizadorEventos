@@ -254,7 +254,7 @@ public class EventosModel {
         }
     }
 
-    public boolean EventoExistente(){
+    public boolean eventoExistente(){
         Connection connection = ConexionDB.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_eventos WHERE nombre = ? AND id_usuario = ?");
