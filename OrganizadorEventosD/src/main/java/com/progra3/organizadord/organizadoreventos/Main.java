@@ -25,7 +25,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("inicio-sesion-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("dialogos/calendario.fxml"));
         Pane root = fxmlLoader.load();
         mainScene = new Scene(root);
         mainScene.getStylesheets().add(Main.class.getResource("styles.css").toExternalForm());
