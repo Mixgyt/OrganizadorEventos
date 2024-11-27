@@ -73,10 +73,6 @@ public class InicioSesionController {
         else {
             UsuarioModel usuarioModel = new UsuarioModel(usuario,clave);
             if (usuarioModel.iniciarSesion()){
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText("Se ha iniciado sesión correctamente");
-                alert.show();
-
                 txtUsuario.clear();
                 txtClave.clear();
                 Main.setRoot("dashboard-view", "Organizador de Eventos", 1100, 720);

@@ -79,6 +79,11 @@
             <artifactId>view</artifactId>
             <version>11.12.7</version>
         </dependency>
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
     </dependencies>
 
     <build>
