@@ -13,7 +13,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Iniciar Sesion</h2>
+					<h2 class="heading-section">Registrarse</h2>
 				</div>
 			</div>
 			<div class="row justify-content-center">
@@ -22,28 +22,35 @@
 		      	<div class="icon d-flex align-items-center justify-content-center">
 		      		<span class="fa fa-user-o"></span>
 		      	</div>
-		      	<h3 class="text-center mb-4">Iniciar Sesión</h3>
-						<form th:action="@{/login}" method="post" class="login-form">
+		      	<h3 class="text-center mb-4">Crear Usuario</h3>
+						<form th:action="@{/register}" method="post" class="login-form">
 		      		<div class="form-group">
 						<label for="nombre">Nombre de usuario</label>
 		      			<input type="text" name="nombre" id="nombre" class="form-control rounded-left" placeholder="Nombre de usuario" required>
 		      		</div>
-	            <div class="form-group">
-					<label for="pass">Contraseña</label>
-					<input type="password" name="pass" id="pass" class="form-control rounded-left" placeholder="Contraseña" required>
-	            </div>
+							<div class="form-group">
+								<label for="password">Contraseña</label>
+								<input type="password" name="password" id="password" class="form-control rounded-left" placeholder="Contraseña" required>
+							</div>
+							<div class="form-group">
+								<label for="re-password">Contraseña</label>
+								<input type="password" name="re-password" id="re-password" class="form-control rounded-left" placeholder="Ingresa nuevamente tu contraseña" required>
+							</div>
 							<div th:if="${error == true}" class="error-message">"Error de usuario o contraseña"</div>
 	            <div class="form-group">
 	            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Iniciar Sesión</button>
 	            </div>
-	            <!--<div class="form-group d-md-flex">
+	            <div class="form-group d-md-flex">
 	            	<div class="w-50">
-	            		<label class="checkbox-wrap checkbox-primary">Remember Me
-									  <input type="checkbox" checked>
-									  <span class="checkmark"></span>
-									</label>
-								</div>
-	            </div>-->
+						<!--<label class="checkbox-wrap checkbox-primary">Remember Me
+                                      <input type="checkbox" checked>
+                                      <span class="checkmark"></span>
+                                    </label>-->
+					</div>
+					<div class="w-50 text-md-right">
+						<a th:href="@{/auth/login}">Ya poseeo un usuario</a>
+					</div>
+                </div>
 	          </form>
 	        </div>
 				</div>

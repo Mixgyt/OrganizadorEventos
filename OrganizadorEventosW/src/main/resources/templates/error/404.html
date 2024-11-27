@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -19,7 +19,7 @@
         </div>
         <h2>Ooops, No ha sido encontrada la pagina web</h2>
         <p>Es posible que la página que estás buscando haya sido eliminada, haya cambiado de nombre o no esté disponible temporalmente.</p>
-        <a href="#">Back To Homepage</a>
+        <a th:href="@{/usuario/home}">Regresar a inicio</a>
     </div>
 </div>
 </body>
