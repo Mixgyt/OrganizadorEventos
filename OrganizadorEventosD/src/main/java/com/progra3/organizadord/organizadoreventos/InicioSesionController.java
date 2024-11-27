@@ -79,7 +79,7 @@ public class InicioSesionController {
 
                 txtUsuario.clear();
                 txtClave.clear();
-                Main.setRoot("dashboard-view", "Organizador de Eventos", 1100, 850);
+                Main.setRoot("dashboard-view", "Organizador de Eventos", 1100, 720);
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

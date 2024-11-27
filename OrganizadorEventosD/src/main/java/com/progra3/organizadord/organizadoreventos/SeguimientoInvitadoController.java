@@ -15,7 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class SeguimientoInvitadoController {
     @FXML
-    private Button btnActualizar;
+    private Button btnEnviarRecordatorio;
 
     @FXML
     private TableColumn<CorreosEventosModel, EstadosModel> clE;
