@@ -18,6 +18,10 @@ public class CalendarFX {
     private LocalDate fechaFinal;
     private String ubicacion;
 
+
+    private int idTipoEvento;
+    private String nombreTipoEvento;
+
     public CalendarFX() {
     }
 
@@ -26,6 +30,22 @@ public class CalendarFX {
         this.fechaIncio = fechaIncio;
         this.fechaFinal = fechaFinal;
         this.ubicacion = ubiacion;
+    }
+
+    public int getIdTipoEvento() {
+        return idTipoEvento;
+    }
+
+    public void setIdTipoEvento(int idTipoEvento) {
+        this.idTipoEvento = idTipoEvento;
+    }
+
+    public String getNombreTipoEvento() {
+        return nombreTipoEvento;
+    }
+
+    public void setNombreTipoEvento(String nombreTipoEvento) {
+        this.nombreTipoEvento = nombreTipoEvento;
     }
 
     public String getNombre() {
@@ -60,7 +80,7 @@ public class CalendarFX {
         this.ubicacion = ubicacion;
     }
 
-    public static List<CalendarFX> obtenerEventos(){
+    public static List<CalendarFX> obtenerEventos(int idTipoEvento){
         List<CalendarFX> eventos = new ArrayList<>();
         Connection connection = ConexionDB.getConnection();
         try {
@@ -74,7 +94,7 @@ public class CalendarFX {
                     " FROM public.tbl_eventos AS eventos" +
                     " INNER JOIN tbl_usuarios AS usuarios ON eventos.id_usuario = usuarios.id_usuario" +
                     " INNER JOIN tbl_tipo_evento AS tipo_evento ON eventos.id_tipo_evento = tipo_evento.id_tipo_evento" +
-                    " WHERE eventos.id_usuario = "+ 1);
+                    " WHERE eventos.id_usuario = "+ 1 +" AND eventos.id_tipo_evento = "+idTipoEvento);
 
             while (resultSet.next()){
                 CalendarFX calendarFX = new CalendarFX();
@@ -85,6 +105,26 @@ public class CalendarFX {
                 eventos.add(calendarFX);
             }
             return eventos;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static List<CalendarFX> obtenerTipoEventos(){
+        List<CalendarFX> listaEventos = new ArrayList<>();
+        Connection connection = ConexionDB.getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT id_tipo_evento, descripcion" +
+                    " FROM tbl_tipo_evento;");
+
+            while (resultSet.next()){
+                CalendarFX calendarFXTipoEvento = new CalendarFX();
+                calendarFXTipoEvento.setIdTipoEvento(resultSet.getInt("id_tipo_evento"));
+                calendarFXTipoEvento.setNombreTipoEvento(resultSet.getString("descripcion"));
+                listaEventos.add(calendarFXTipoEvento);
+            }
+            return listaEventos;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
