@@ -5,6 +5,7 @@ module com.progra3.organizadord.organizadoreventos {
     requires com.opencsv;
     requires com.calendarfx.view;
     requires jakarta.ejb;
+    requires java.desktop;
 
     exports com.progra3.organizadord.organizadoreventos;
     exports com.progra3.organizadord.organizadoreventos.models;
