@@ -152,12 +152,7 @@ public class GestionInvitadoController {
             cmbVerEvento.getSelectionModel().select(0);
             cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
             cmbVerEvento.setOnAction(e->{
-                if (cmbVerEvento.getSelectionModel().getSelectedIndex() == 0){
-                    cargarTablaTodo();
-                }
-                else {
-                    cargarTablaPorEvento(cmbVerEvento.getSelectionModel().getSelectedItem().getIdEvento());
-                }
+                cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
             });
 
             btnAgregarInvitado.setOnAction(e->{
@@ -170,25 +165,38 @@ public class GestionInvitadoController {
                         CorreoModel correoModel = new CorreoModel(correo);
                         //Valida si el correo existe, en caso de que no exista la cree
                         if (correoModel.existe()){
-                            CorreosEventosModel correosEventosModel = new CorreosEventosModel(
-                                    String.valueOf(cmbEvento.getSelectionModel().getSelectedItem().getIdEvento()),
-                                    String.valueOf(correoModel.buscarId()),
-                                    String.valueOf(cmbTipoInvitado.getSelectionModel().getSelectedItem().getIdTipoInvitado()),
-                                    EstadosModel.valueOfValor(0)
-                            );
+                            CorreosEventosModel validarInvitado = new CorreosEventosModel();
+                            validarInvitado.setIdCorreo(String.valueOf(correoModel.buscarId()));
+                            validarInvitado.setIdEvento(String.valueOf(cmbEvento.getSelectionModel().getSelectedItem().getIdEvento()));
+                            if (!validarInvitado.invitadoExistente()){
+                                CorreosEventosModel correosEventosModel = new CorreosEventosModel(
+                                        String.valueOf(cmbEvento.getSelectionModel().getSelectedItem().getIdEvento()),
+                                        String.valueOf(correoModel.buscarId()),
+                                        String.valueOf(cmbTipoInvitado.getSelectionModel().getSelectedItem().getIdTipoInvitado()),
+                                        EstadosModel.valueOfValor(0)
+                                );
 
-                            if (btnAgregarInvitado.getText().equals("Actualizar")){
-                                correosEventosModel.setIdCorreosEvento(idCorreoEvento);
-                                correosEventosModel.actualizarCorreoEvento();
-                                limpiar();
-                                cargarTablaTodo();
-                                idCorreoEvento = 0;
+                                if (btnAgregarInvitado.getText().equals("Actualizar")){
+                                    correosEventosModel.setIdCorreosEvento(idCorreoEvento);
+                                    correosEventosModel.actualizarCorreoEvento();
+                                    limpiar();
+                                    cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
+                                    idCorreoEvento = 0;
+                                }
+                                else {
+
+                                    correosEventosModel.insertarCorreoEvento();
+                                    limpiar();
+                                    cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
+                                }
                             }
-                            else {
-                                correosEventosModel.insertarCorreoEvento();
-                                limpiar();
-                                cargarTablaTodo();
+                            else{
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Mensaje");
+                                alert.setContentText("EL invitado ya se encuentra en la base de datos.");
+                                alert.show();
                             }
+
 
                         }
                         else{
@@ -297,12 +305,6 @@ public class GestionInvitadoController {
         cmbTipoInvitado.getSelectionModel().select(-1);
         txtCorreo.clear();
     }
-
-    public void cargarTablaTodo(){
-        CorreosEventosModel correosEventosModel = new CorreosEventosModel();
-        correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
-        tbInvitados.setItems(correosEventosModel.mostrarCorreosEvento());
-    }
     public void cargarTablaPorEvento(int evento){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
         correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
@@ -346,7 +348,7 @@ public class GestionInvitadoController {
 
                                 invitadosImportados++;
 
-                                cargarTablaTodo();
+                                cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
                             }
 
                         }
@@ -369,7 +371,7 @@ public class GestionInvitadoController {
 
                                 invitadosImportados++;
 
-                                cargarTablaTodo();
+                                cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
                             }
                         }
                     }
