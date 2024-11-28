@@ -7,6 +7,7 @@ module com.progra3.organizadord.organizadoreventos {
     requires jakarta.ejb;
     requires org.slf4j;
     requires jbcrypt;
+    requires java.desktop;
 
     exports com.progra3.organizadord.organizadoreventos;
     exports com.progra3.organizadord.organizadoreventos.models;
