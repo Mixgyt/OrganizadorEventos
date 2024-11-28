@@ -164,13 +164,13 @@
    <bottom>
       <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="488.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onCancelar" prefHeight="27.0" prefWidth="84.0" style="-fx-background-color: white; -fx-border-color: #727272; -fx-border-radius: 5; -fx-background-radius: 5;" text="Cacelar" textFill="#727272">
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onCancelar" prefHeight="27.0" prefWidth="84.0" style="-fx-background-color: #D9534F;" text="Cacelar" textFill="WHITE">
                <font>
                   <Font name="SansSerif Regular" size="15.0" />
                </font>
             </Button>
             <Separator orientation="VERTICAL" prefHeight="72.0" prefWidth="23.0" visible="false" />
-            <Button fx:id="btnCrearEvento" layoutX="199.0" layoutY="27.0" mnemonicParsing="false" onAction="#crearEvento" prefHeight="38.0" prefWidth="236.0" style="-fx-background-color: #6A9AB0;" text="Crear Evento" textFill="WHITE">
+            <Button fx:id="btnCrearEvento" layoutX="199.0" layoutY="27.0" mnemonicParsing="false" onAction="#crearEvento" prefHeight="38.0" prefWidth="236.0" style="-fx-background-color: #001F3F;" text="Crear Evento" textFill="WHITE">
                <font>
                   <Font name="SansSerif Regular" size="17.0" />
                </font>
