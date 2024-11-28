@@ -26,39 +26,42 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+
 public class CalendarioController {
 
     @FXML
     private VBox contenedor;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         //bucle que agrega los eventos al CalendarFx
         CalendarView calendarView = new CalendarView();
-        ArrayList<CalendarSource> tipoEventos= new ArrayList<CalendarSource>();
+        ArrayList<CalendarSource> tipoEventos = new ArrayList<CalendarSource>();
 
         List<CalendarFX> tipos = CalendarFX.obtenerTipoEventos();
-        for (int i =0; i<tipos.size();i++){
+        for (int i = 0; i < tipos.size(); i++) {
             CalendarSource calendarSource = new CalendarSource(tipos.get(i).getNombreTipoEvento());
 
             List<CalendarFX> eventos = CalendarFX.obtenerEventos(tipos.get(i).getIdTipoEvento());
-            for (CalendarFX itemEvento: eventos){
+            for (CalendarFX itemEvento : eventos) {
                 Calendar calendar = new Calendar(itemEvento.getNombre());
-                        Entry<String> evento = new Entry<>(itemEvento.getNombre());
-                        //agregando intervalo de fechas para el evento
-                            evento.setInterval(
-                                    itemEvento.getFechaIncio()
-                            );
-                            evento.setLocation(itemEvento.getUbicacion());
-                            calendar.setStyle(Calendar.Style.getStyle(i));
-                        calendar.addEntry(evento);
-                        calendarSource.getCalendars().add(calendar);
+                Entry<String> evento = new Entry<>(itemEvento.getNombre());
+                //agregando intervalo de fechas para el evento
+                evento.setInterval(
+                        itemEvento.getFechaIncio()
+                );
+                evento.setLocation(itemEvento.getUbicacion());
+                calendar.setStyle(Calendar.Style.getStyle(i));
+                calendar.addEntry(evento);
+                calendarSource.getCalendars().add(calendar);
             }
             tipoEventos.add(calendarSource);
         }
 
         //evento para mostrar informacion del evento seleccionado
-        try{
+        try {
             calendarView.setEntryDetailsPopOverContentCallback(entry -> {
                 Label lblEvento = new Label();
 
@@ -70,10 +73,10 @@ public class CalendarioController {
                     String cadenaFechaFinal = fechaFinal.format(formato);
                     String ubicacion = entry.getEntry().getLocation();
 
-                    String f = "\t"+entry.getEntry().getCalendar().getName()+
-                            "\t\n\tUbicación : "+ubicacion+
-                            "\t\n\tFecha de inicio : "+cadenaFechaInicio+
-                            "\t\n\tFecha de finalización : "+cadenaFechaFinal+"\t";
+                    String f = "\t" + entry.getEntry().getCalendar().getName() +
+                            "\t\n\tUbicación : " + ubicacion +
+                            "\t\n\tFecha de inicio : " + cadenaFechaInicio +
+                            "\t\n\tFecha de finalización : " + cadenaFechaFinal + "\t";
                     lblEvento.setText(f);
                 } else {
                     lblEvento.setText("No hay calendario seleccionado");
