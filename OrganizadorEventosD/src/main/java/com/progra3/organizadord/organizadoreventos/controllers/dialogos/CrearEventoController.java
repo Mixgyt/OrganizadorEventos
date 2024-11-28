@@ -241,16 +241,32 @@ public class CrearEventoController
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         String completaFechaInicial = eventosModel.getFechaInicial();
+        System.out.println(completaFechaInicial);
         String completaFechaFinal = eventosModel.getFechaFinal();
 
         String fechaInicial = completaFechaInicial.split(" ")[0];
+        String horaInicial = completaFechaInicial.split(" ")[1].split(":")[0];
+        String minutoInicial = completaFechaInicial.split(" ")[1].split(":")[1];
+        String franjaInicial = completaFechaInicial.split(" ")[2];
+
         String fechaFinal = completaFechaFinal.split(" ")[0];
+        String horaFinal = completaFechaFinal.split(" ")[1].split(":")[0];
+        String minutoFinal = completaFechaFinal.split(" ")[1].split(":")[1];
+        String franjaFinal = completaFechaFinal.split(" ")[2];
 
         LocalDate setfechaInicial= LocalDate.parse(fechaInicial,formatter);
         LocalDate setfechaFinal= LocalDate.parse(fechaFinal,formatter);
 
         dtpFechaInicio.setValue(setfechaInicial);
         dtpFechaFinal.setValue(setfechaFinal);
+
+        cmbHoraInicio.setValue(horaInicial);
+        cmbMinutosInicio.setValue(minutoInicial);
+        cmbFranjaHorariaInicio.setValue(franjaInicial);
+
+        cmbHoraFinal.setValue(horaFinal);
+        cmbMinutosFinal.setValue(minutoFinal);
+        cmbFranjaHorariaFinal.setValue(franjaFinal);
 
         for (TipoEventoModel itemTipo: cmbTipoEvento.getItems()){
             if (itemTipo.toString().equals(eventosModel.getTipoEventoCadena())){
