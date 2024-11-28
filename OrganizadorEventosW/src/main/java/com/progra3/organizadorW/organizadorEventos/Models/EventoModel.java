@@ -6,6 +6,9 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -43,4 +46,15 @@ public class EventoModel {
     @JoinColumn(name = "id_tipo_evento")
     private com.progra3.organizadorW.organizadorEventos.Models.TipoEventoModel idTipoEvento;
 
+    public String getFechaInicioFormat() {
+        LocalDateTime fecha = LocalDateTime.ofInstant(this.getFechaInicio(), ZoneId.systemDefault());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a");
+        return fecha.format(formatter);
+    }
+
+    public String getFechaFinalFormat() {
+        LocalDateTime fecha = LocalDateTime.ofInstant(this.getFechaFinal(), ZoneId.systemDefault());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a");
+        return fecha.format(formatter);
+    }
 }

@@ -47,8 +47,8 @@
                         <tbody>
                         <tr th:each="evento : ${eventos}">
                             <td th:text="${evento.nombre}"></td>
-                            <td th:text="${evento.fechaInicio}"></td>
-                            <td th:text="${evento.fechaFinal}"></td>
+                            <td th:text="${evento.getFechaInicioFormat()}"></td>
+                            <td th:text="${evento.getFechaFinalFormat()}"></td>
                             <td th:text="${evento.idTipoEvento.descripcion}"></td>
                             <td>
                                 <a th:href="@{|/invitaciones/evento?id=${evento.getId()}&usuario=${usuario.idCorreo.id_correo}|}"

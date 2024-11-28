@@ -1,9 +1,11 @@
 package com.progra3.organizadorW.organizadorEventos.Controller;
 
+import com.progra3.organizadorW.organizadorEventos.Models.CorreoModel;
 import com.progra3.organizadorW.organizadorEventos.Models.CorreosEventoModel;
 import com.progra3.organizadorW.organizadorEventos.Models.EventoModel;
 import com.progra3.organizadorW.organizadorEventos.Models.UsuarioModel;
 import com.progra3.organizadorW.organizadorEventos.Repository.CorreosEventoRepository;
+import com.progra3.organizadorW.organizadorEventos.Repository.CorreosRepository;
 import com.progra3.organizadorW.organizadorEventos.Repository.EventoRepository;
 import com.progra3.organizadorW.organizadorEventos.Repository.UsuarioRepository;
 import com.progra3.organizadorW.organizadorEventos.Service.CookieService;
@@ -27,13 +29,15 @@ public class UsuarioController {
     private final CookieService cookieService;
     private final UsuarioRepository usuarioRepository;
     private final CorreosEventoRepository correosEventoRepository;
+    private final CorreosRepository correosRepository;
     private final EventoRepository eventoRepository;
 
-    public UsuarioController(CookieService cookieService, UsuarioRepository usuarioRepository, CorreosEventoRepository correosEventoRepository, EventoRepository eventoRepository) {
+    public UsuarioController(CookieService cookieService, UsuarioRepository usuarioRepository, CorreosEventoRepository correosEventoRepository, EventoRepository eventoRepository, CorreosRepository correosRepository) {
         this.cookieService = cookieService;
         this.usuarioRepository = usuarioRepository;
         this.correosEventoRepository = correosEventoRepository;
         this.eventoRepository = eventoRepository;
+        this.correosRepository = correosRepository;
     }
 
     @GetMapping("/home")
@@ -67,4 +71,12 @@ public class UsuarioController {
         return "eventos";
     }
 
+    @PostMapping("/cambiar")
+    public String cambiarPerfil(@RequestParam Integer id, @RequestParam String nombre, Model model ) {
+        UsuarioModel usuarioModel = usuarioRepository.findById(id).get();
+        usuarioModel.setNombre(nombre);
+        usuarioRepository.save(usuarioModel);
+
+        return "redirect:/logout";
+    }
 }

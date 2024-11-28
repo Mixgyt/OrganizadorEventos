@@ -60,9 +60,10 @@
           <form action="" method="post">
             <input type="hidden" name="id_evento" id="evento" th:value="${evento.id}">
             <input type="hidden" name="id_correo" id="correo" th:value="${correo.id_correo}">
-            <h5 th:if="estado!=1">Quieres ser parte de este evento!?</h5>
-            <h5 th:if="estado==2">Quieres rechazar la invitacion!?</h5>
-            <button th:if="${estado!=1}" type="submit" th:formaction="@{/invitaciones/accept}" class="btn btn-primary mx-3">Aceptar</button>
+            <h4 th:if="${estado!=2}">Quieres rechazar la invitacion!?</h4>
+            <h5 th:if="${estado==2||estado==0}">Quieres ser parte de este evento!?</h5>
+
+            <button th:if="${estado==2||estado==0}" type="submit" th:formaction="@{/invitaciones/accept}" class="btn btn-primary mx-3">Aceptar</button>
             <button th:if="${estado!=2}" type="submit" th:formaction="@{/invitaciones/cancel}" class="btn btn-danger mx-">Rechazar</button>
           </form>
         </div>

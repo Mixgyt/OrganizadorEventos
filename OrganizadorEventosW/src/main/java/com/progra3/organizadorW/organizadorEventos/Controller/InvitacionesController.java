@@ -103,7 +103,20 @@ public class InvitacionesController {
     }
 
     @PostMapping("/cancel")
-    public String cancelInvitation(@RequestParam Integer id_evento, @RequestParam Integer id_correo, Model model){
+    public String cancelInvitation(@RequestParam Integer id_evento, @RequestParam Integer id_correo, Model model, HttpServletResponse response){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth instanceof AnonymousAuthenticationToken){
+            CorreoModel correoModel = correosRepository.findById(id_correo).orElse(null);
+            if(correoModel != null) {
+                UsuarioModel usuarioModel = usuarioRepository.findByIdCorreo(correoModel);
+                if(usuarioModel == null) {
+                    cookieService.setCookie(response,"login",id_evento+"-"+id_correo,300);
+                    return "redirect:/auth/register?correo="+correoModel.getCorreo();
+                }
+            }
+            cookieService.setCookie(response,"login",id_evento+"-"+id_correo,300);
+            return "redirect:/auth/login";
+        }
         EventoModel eventoModel = eventoRepository.findById(id_evento).get();
         ArrayList<CorreosEventoModel> correosEventoModels = correosEventoRepository.findByIdEvento(eventoModel);
         if(correosEventoModels != null){
