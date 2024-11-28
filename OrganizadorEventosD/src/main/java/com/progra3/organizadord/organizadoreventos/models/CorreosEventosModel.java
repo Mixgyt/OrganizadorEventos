@@ -261,6 +261,8 @@ public class CorreosEventosModel {
         }
     }
 
+
+    //Obtiene los invitados de un evento
     public static ObservableList<CorreosEventosModel> mostrarInvitadosEvento(Integer idEvento) {
         try {
             ObservableList<CorreosEventosModel> invitados = FXCollections.observableArrayList();
