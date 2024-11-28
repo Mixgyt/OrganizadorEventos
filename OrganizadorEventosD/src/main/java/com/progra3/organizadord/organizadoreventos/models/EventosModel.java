@@ -388,13 +388,28 @@ public class EventosModel {
 
     public int eliminarEvento(int idEvento){
         Connection conecction = ConexionDB.getConnection();
+
+        int borrarRelacion = 0;
         try {
-            PreparedStatement statement = conecction.prepareStatement("DELETE FROM tbl_eventos" +
+            PreparedStatement statement = conecction.prepareStatement("DELETE FROM tbl_correos_evento" +
                     " WHERE id_evento = "+idEvento);
-            return statement.executeUpdate();
+            borrarRelacion = statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        if (borrarRelacion > 0){
+            try {
+                PreparedStatement statement = conecction.prepareStatement("DELETE FROM tbl_eventos" +
+                        " WHERE id_evento = "+idEvento);
+                return statement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            return 0;
+        }
+
     }
 
     @Override

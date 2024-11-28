@@ -15,11 +15,12 @@
       <TableView fx:id="tbEventos" layoutX="85.0" layoutY="327.0" prefHeight="246.0" prefWidth="924.0">
         <columns>
             <TableColumn fx:id="clEvento" prefWidth="184.0" text="Evento" />
-            <TableColumn fx:id="clFechaInicio" prefWidth="199.0" text="Fecha Inicio" />
-            <TableColumn fx:id="clFechaFinal" prefWidth="199.0" text="Fecha Final" />
-            <TableColumn fx:id="clTipoEvento" prefWidth="146.0" text="Tipo Evento" />
-            <TableColumn fx:id="clDetalles" prefWidth="87.0" text="Detalles" />
-            <TableColumn fx:id="clEditar" prefWidth="98.0" text="Editar" />
+            <TableColumn fx:id="clFechaInicio" prefWidth="174.0" text="Fecha Inicio" />
+            <TableColumn fx:id="clFechaFinal" prefWidth="178.0" text="Fecha Final" />
+            <TableColumn fx:id="clTipoEvento" prefWidth="138.0" text="Tipo Evento" />
+            <TableColumn fx:id="clDetalles" prefWidth="79.0" text="Detalles" />
+            <TableColumn fx:id="clEditar" prefWidth="89.0" text="Editar" />
+            <TableColumn fx:id="clEliminar" prefWidth="81.0" text="Eliminar" />
         </columns>
       </TableView>
       <Button fx:id="btnCrearEvento" layoutX="668.0" layoutY="151.0" mnemonicParsing="false" onAction="#crearEvento" prefHeight="38.0" prefWidth="158.0" styleClass="button-claro" text="Crear Nuevo Evento">
