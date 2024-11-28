@@ -9,11 +9,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        // Mapea la URL "/clientes/login" a la vista "login"
         registry.addViewController("/auth/login").setViewName("login");
-        // Mapea la URL "/clientes/register" a la vista "register"
         registry.addViewController("/auth/register").setViewName("register");
-        // Mapea la URL "/clientes/home" a la vista "home"
-        //registry.addViewController("/clientes/home").setViewName("home");
+        registry.addViewController("/usuario/home").setViewName("index");
     }
 }

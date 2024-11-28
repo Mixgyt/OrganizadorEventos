@@ -13,7 +13,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Iniciar Sesion</h2>
+					<h2 class="heading-section">Iniciar Sesión</h2>
 				</div>
 			</div>
 			<div class="row justify-content-center">
@@ -32,19 +32,21 @@
 					<label for="password">Contraseña</label>
 					<input type="password" name="password" id="password" class="form-control rounded-left" placeholder="Contraseña" required>
 	            </div>
-							<!--/*@thymesVar id="error" type="java.lang.Boolean"*/-->
-							<div th:if="${error}" class="error-message">"Error de usuario o contraseña"</div>
+							<div th:if="${error}" class="error-message">Error de usuario o contraseña</div>
 	            <div class="form-group">
 	            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Iniciar Sesión</button>
 	            </div>
-	            <!--<div class="form-group d-md-flex">
+	            <div class="form-group d-md-flex">
 	            	<div class="w-50">
-	            		<label class="checkbox-wrap checkbox-primary">Remember Me
+	            		<!--<label class="checkbox-wrap checkbox-primary">Remember Me
 									  <input type="checkbox" checked>
 									  <span class="checkmark"></span>
-									</label>
+									</label>-->
 								</div>
-	            </div>-->
+								<div class="w-50 text-md-right">
+									<a th:href="@{/auth/register}">Crear nuevo usuario</a>
+								</div>
+	            </div>
 	          </form>
 	        </div>
 				</div>

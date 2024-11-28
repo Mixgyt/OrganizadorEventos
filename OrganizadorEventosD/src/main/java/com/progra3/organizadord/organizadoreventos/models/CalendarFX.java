@@ -9,14 +9,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalendarFX {
     private String nombre;
-    private LocalDate fechaIncio;
-    private LocalDate fechaFinal;
+    private LocalDateTime fechaIncio;
+    private LocalDateTime fechaFinal;
     private String ubicacion;
+    private LocalTime inicio;
 
 
     private int idTipoEvento;
@@ -24,12 +27,13 @@ public class CalendarFX {
 
     public CalendarFX() {
     }
+    
+    public LocalTime getInicio() {
+        return inicio;
+    }
 
-    public CalendarFX(String nombre, LocalDate fechaIncio, LocalDate fechaFinal, String ubiacion) {
-        this.nombre = nombre;
-        this.fechaIncio = fechaIncio;
-        this.fechaFinal = fechaFinal;
-        this.ubicacion = ubiacion;
+    public void setInicio(LocalTime inicio) {
+        this.inicio = inicio;
     }
 
     public int getIdTipoEvento() {
@@ -56,19 +60,19 @@ public class CalendarFX {
         this.nombre = nombre;
     }
 
-    public LocalDate getFechaIncio() {
+    public LocalDateTime getFechaIncio() {
         return fechaIncio;
     }
 
-    public void setFechaIncio(LocalDate fechaIncio) {
+    public void setFechaIncio(LocalDateTime fechaIncio) {
         this.fechaIncio = fechaIncio;
     }
 
-    public LocalDate getFechaFinal() {
+    public LocalDateTime getFechaFinal() {
         return fechaFinal;
     }
 
-    public void setFechaFinal(LocalDate fechaFinal) {
+    public void setFechaFinal(LocalDateTime fechaFinal) {
         this.fechaFinal = fechaFinal;
     }
 
@@ -99,8 +103,9 @@ public class CalendarFX {
             while (resultSet.next()){
                 CalendarFX calendarFX = new CalendarFX();
                 calendarFX.setNombre(resultSet.getString("evento"));
-                calendarFX.setFechaIncio(resultSet.getTimestamp("fecha_inicio").toLocalDateTime().toLocalDate());
-                calendarFX.setFechaFinal(resultSet.getTimestamp("fecha_final").toLocalDateTime().toLocalDate());
+                calendarFX.setFechaIncio(resultSet.getTimestamp("fecha_inicio").toLocalDateTime());
+                calendarFX.setFechaFinal(resultSet.getTimestamp("fecha_final").toLocalDateTime());
+                calendarFX.setInicio(resultSet.getTimestamp("fecha_inicio").toLocalDateTime().toLocalTime());
                 calendarFX.setUbicacion(resultSet.getString("ubicacion"));
                 eventos.add(calendarFX);
             }

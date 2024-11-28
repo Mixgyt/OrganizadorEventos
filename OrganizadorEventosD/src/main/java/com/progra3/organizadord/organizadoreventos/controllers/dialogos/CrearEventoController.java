@@ -177,7 +177,7 @@ public class CrearEventoController
         fechaFinal+="T"+tiempoFinal;
         LocalDateTime inicio = LocalDateTime.parse(fechaInicio);
         LocalDateTime fin = LocalDateTime.parse(fechaFinal);
-        if(inicio.isAfter(fin)){
+        if(inicio.isAfter(fin) || inicio.equals(fin)){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Conflicto de fechas");
             alert.setContentText("No puedes ingresar una final menor que la de inicial");

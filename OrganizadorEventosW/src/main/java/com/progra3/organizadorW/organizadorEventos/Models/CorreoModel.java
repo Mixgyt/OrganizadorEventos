@@ -1,30 +1,22 @@
 package com.progra3.organizadorW.organizadorEventos.Models;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "tbl_correos")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class CorreoModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id_correo", nullable = false)
     private Integer id_correo;
 
+    @Column(name = "correo")
     private String correo;
-
-    public Integer getId_correo() {
-        return id_correo;
-    }
-
-    public void setId_correo(Integer id_correo) {
-        this.id_correo = id_correo;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
 
 }

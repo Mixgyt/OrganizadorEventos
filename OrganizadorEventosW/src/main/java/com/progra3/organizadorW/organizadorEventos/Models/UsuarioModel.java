@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
 @Entity
 @Table(name="tbl_usuarios")
 @AllArgsConstructor
@@ -26,36 +28,4 @@ public class UsuarioModel {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_correo")
     private CorreoModel idCorreo;
-
-    public CorreoModel getIdCorreo() {
-        return idCorreo;
-    }
-
-    public void setIdCorreo(CorreoModel idCorreo) {
-        this.idCorreo = idCorreo;
-    }
-
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }

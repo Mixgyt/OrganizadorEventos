@@ -71,21 +71,16 @@ public class InicioSesionController {
             alert.show();
         }
         else {
-            try {
-                UsuarioModel usuarioModel = new UsuarioModel(usuario,clave);
-                if (usuarioModel.iniciarSesion()){
-                    txtUsuario.clear();
-                    txtClave.clear();
-                    Main.setRoot("dashboard-view", "Organizador de Eventos", 1100, 720);
-                }
-                else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("El usuario o la contraseña es incorrecta");
-                    alert.show();
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                throw new RuntimeException(e);
+            UsuarioModel usuarioModel = new UsuarioModel(usuario,clave);
+            if (usuarioModel.iniciarSesion()){
+                txtUsuario.clear();
+                txtClave.clear();
+                Main.setRoot("dashboard-view", "Organizador de Eventos", 1100, 720);
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("El usuario o la contraseña es incorrecta");
+                alert.show();
             }
         }
     }
