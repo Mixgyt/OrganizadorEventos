@@ -50,7 +50,7 @@ public class SeguimientoInvitadoController {
     @FXML
     private ComboBox<EventosModel> cmbVerEventos;
 
-    private static String emailFrom = CorreoModel.buscarCorreo(UserSession.getUsuario().getIdCorreo());
+    private static String emailFrom = "arguetajairo93@gmail.com";
     private Properties mProperties = new Properties();
     private Session mSession;
     private MimeMessage mCorreo;

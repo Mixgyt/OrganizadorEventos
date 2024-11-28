@@ -23,6 +23,12 @@
                   <Font name="SansSerif Regular" size="14.0" />
                </font>
             </TextField>
+
+            <PasswordField fx:id="txtClave" layoutX="66.0" layoutY="241.0" onKeyTyped="#EscribirPWD" prefHeight="26.0" prefWidth="208.0" promptText="Ingrese su contraseña">
+               <font>
+                  <Font name="SansSerif Regular" size="14.0" />
+               </font>
+            </PasswordField>
             <Label layoutX="66.0" layoutY="160.0" prefHeight="20.0" prefWidth="77.0" text="Usuario" textFill="WHITE">
                <font>
                   <Font name="SansSerif Regular" size="17.0" />
@@ -45,12 +51,6 @@
                   <Font name="SansSerif Regular" size="14.0" />
                </font>
             </Hyperlink>
-
-            <PasswordField fx:id="txtClave" layoutX="66.0" layoutY="241.0" onKeyTyped="#EscribirPWD" prefHeight="26.0" prefWidth="208.0" promptText="Ingrese su contraseña">
-               <font>
-                  <Font name="SansSerif Regular" size="14.0" />
-               </font>
-            </PasswordField>
             <Button fx:id="btnShow" layoutX="285.0" layoutY="241.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="34.0" text="O" />
             <TextField fx:id="txtClaveText" layoutX="66.0" layoutY="241.0" onKeyTyped="#EscribirTXT" prefHeight="26.0" prefWidth="208.0" promptText="Ingrese su contraseña...">
                <font>

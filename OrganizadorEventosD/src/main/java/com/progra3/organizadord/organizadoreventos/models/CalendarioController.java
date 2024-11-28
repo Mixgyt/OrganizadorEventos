@@ -93,8 +93,8 @@ public class CalendarioController {
             //quitando controles por defecto de el CalendarFx
             calendarView.setShowPageToolBarControls(false);
             calendarView.setShowDetailsUponEntryCreation(false);
-            calendarView.setShowAddCalendarButton(true);
-            calendarView.setShowPrintButton(false);
+            calendarView.setShowAddCalendarButton(false);
+            calendarView.setShowPrintButton(true);
             calendarView.setDefaultCalendarProvider(param -> null);
 
         } catch (Exception e) {

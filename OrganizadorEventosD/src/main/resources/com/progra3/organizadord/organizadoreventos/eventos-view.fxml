@@ -12,18 +12,17 @@
 
 <AnchorPane prefHeight="605.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.EventosController">
    <children>
-      <TableView fx:id="tbEventos" layoutX="85.0" layoutY="327.0" prefHeight="231.0" prefWidth="924.0">
+      <TableView fx:id="tbEventos" layoutX="85.0" layoutY="327.0" prefHeight="246.0" prefWidth="924.0">
         <columns>
-            <TableColumn fx:id="clEvento" prefWidth="184.0" text="EVENTO" />
-            <TableColumn fx:id="clFechaInicio" prefWidth="168.0" text="FECHA INICIO" />
-            <TableColumn fx:id="clFechaFinal" prefWidth="162.0" text="FECHA FINAL" />
-            <TableColumn fx:id="clTipoEvento" prefWidth="134.0" text="TIPO EVENTO" />
-            <TableColumn fx:id="clDetalles" prefWidth="98.0" text="DETALLES" />
-            <TableColumn fx:id="clEditar" prefWidth="87.0" text="EDITAR" />
-            <TableColumn fx:id="clEliminar" prefWidth="89.0" text="ELIMINAR" />
+            <TableColumn fx:id="clEvento" prefWidth="184.0" text="Evento" />
+            <TableColumn fx:id="clFechaInicio" prefWidth="199.0" text="Fecha Inicio" />
+            <TableColumn fx:id="clFechaFinal" prefWidth="199.0" text="Fecha Final" />
+            <TableColumn fx:id="clTipoEvento" prefWidth="146.0" text="Tipo Evento" />
+            <TableColumn fx:id="clDetalles" prefWidth="87.0" text="Detalles" />
+            <TableColumn fx:id="clEditar" prefWidth="98.0" text="Editar" />
         </columns>
       </TableView>
-      <Button fx:id="btnCrearEvento" layoutX="668.0" layoutY="182.0" mnemonicParsing="false" onAction="#crearEvento" prefHeight="38.0" prefWidth="158.0" styleClass="button-claro" text="Crear Nuevo Evento">
+      <Button fx:id="btnCrearEvento" layoutX="668.0" layoutY="151.0" mnemonicParsing="false" onAction="#crearEvento" prefHeight="38.0" prefWidth="158.0" styleClass="button-claro" text="Crear Nuevo Evento">
          <font>
             <Font name="SansSerif Bold" size="13.0" />
          </font></Button>
@@ -38,13 +37,13 @@
          </font>
       </Label>
       <Separator layoutX="61.0" layoutY="299.0" prefHeight="7.0" prefWidth="979.0" />
-      <DatePicker fx:id="dpFechaInicial" editable="false" layoutX="227.0" layoutY="157.0" prefHeight="25.0" prefWidth="149.0" />
-      <DatePicker fx:id="dpFechaFinal" editable="false" layoutX="227.0" layoutY="226.0" prefHeight="25.0" prefWidth="149.0" />
-      <Label layoutX="227.0" layoutY="132.0" text="Fecha Inicial" textFill="WHITE">
+      <DatePicker fx:id="dpFechaInicial" editable="false" layoutX="169.0" layoutY="158.0" prefHeight="25.0" prefWidth="207.0" />
+      <DatePicker fx:id="dpFechaFinal" editable="false" layoutX="169.0" layoutY="226.0" prefHeight="25.0" prefWidth="207.0" />
+      <Label layoutX="176.0" layoutY="130.0" text="Fecha Inicial" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="18.0" />
          </font></Label>
-      <Label layoutX="227.0" layoutY="201.0" text="Fecha Final" textFill="WHITE">
+      <Label layoutX="180.0" layoutY="202.0" text="Fecha Final" textFill="WHITE">
          <font>
             <Font name="SansSerif Regular" size="18.0" />
          </font></Label>
