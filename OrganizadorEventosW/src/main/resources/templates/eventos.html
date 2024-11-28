@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Organizador de Eventos</title>
+        <title>Eventos tuyos</title>
         <!-- Favicon-->
         <link rel="icon" type="/image/x-icon" href="/assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -33,20 +33,30 @@
                 </nav>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="mt-4">Tu perfil</h1>
-                    <form th:action="@{/usuario/cambiar}">
-                        <div class="form-group">
-                        <h5 class="form-label">Tu nombre</h5>
-                        <input class="form-control" type="text" name="nombre" id="nombre" th:value="${usuario.getNombre()}" placeholder="Nombre de usuario" required/>
-                        </div>
-                            <div class="form-group">
-                        <h5 class="form-label" >Tu correo</h5>
-                        <input class="form-control" type="text" name="correo" id="correo" th:value="${usuario.getIdCorreo().correo}" placeholder="Correo usuario" required/>
-                        </div>
-                        <div class="form-group" style="padding-top: 20px">
-                            <input type="submit" class="btn btn-primary" value="Actualizar Perfil">
-                        </div>
-                    </form>
+                    <h1 class="mt-4">Eventos a los que te han invitado</h1>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Fecha Inicio</th>
+                            <th>Fecha Final</th>
+                            <th>Tipo de evento</th>
+                            <th>Detalles</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="evento : ${eventos}">
+                            <td th:text="${evento.nombre}"></td>
+                            <td th:text="${evento.fechaInicio}"></td>
+                            <td th:text="${evento.fechaFinal}"></td>
+                            <td th:text="${evento.idTipoEvento.descripcion}"></td>
+                            <td>
+                                <a th:href="@{|/invitaciones/evento?id=${evento.getId()}&usuario=${usuario.idCorreo.id_correo}|}"
+                                   th:text="'Ver detalles'"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

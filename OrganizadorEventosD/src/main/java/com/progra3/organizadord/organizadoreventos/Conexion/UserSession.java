@@ -3,7 +3,7 @@ package com.progra3.organizadord.organizadoreventos.Conexion;
 import com.progra3.organizadord.organizadoreventos.models.UsuarioModel;
 
 public class UserSession {
-    private static UsuarioModel usuario;
+    private static UsuarioModel usuario = new UsuarioModel("a","123");
 
     //Se utiliza para obtener el usuario que inicio sesion
     public static UsuarioModel getUsuario() {

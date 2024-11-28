@@ -2,6 +2,7 @@ package com.progra3.organizadorW.organizadorEventos.Models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
@@ -15,7 +16,7 @@ import java.io.Serializable;
 @Data
 public class UsuarioModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario", nullable = false)
     private Integer id;
 

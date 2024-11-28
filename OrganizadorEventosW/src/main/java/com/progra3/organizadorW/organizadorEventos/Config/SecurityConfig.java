@@ -4,6 +4,7 @@ import com.progra3.organizadorW.organizadorEventos.Service.UserDetailsServiceImp
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,7 +32,8 @@ public class SecurityConfig {
                 form.loginPage("/auth/login")
                 .defaultSuccessUrl("/usuario/home", true)
                 .failureUrl("/auth/login?error=true")
-                .loginProcessingUrl("/login"));
+                .loginProcessingUrl("/login"))
+                .logout(Customizer.withDefaults());
         return http.build();
     }
 
