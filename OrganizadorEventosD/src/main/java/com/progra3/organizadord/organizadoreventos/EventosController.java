@@ -1,8 +1,6 @@
 package com.progra3.organizadord.organizadoreventos;
 
 import com.progra3.organizadord.organizadoreventos.controllers.dialogos.DetalleEventoController;
-import com.progra3.organizadord.organizadoreventos.models.CorreoModel;
-import com.progra3.organizadord.organizadoreventos.models.CorreosEventosModel;
 import com.progra3.organizadord.organizadoreventos.models.EventosModel;
 import com.progra3.organizadord.organizadoreventos.models.TipoEventoModel;
 
@@ -24,24 +22,20 @@ public class EventosController {
 
     @FXML
     private TableColumn<EventosModel, String > clEvento;
+
     @FXML
     private TableColumn<EventosModel, String> clFechaFinal;
+
     @FXML
     private TableColumn<EventosModel, String> clFechaInicio;
-    @FXML
-    private TableColumn<EventosModel, Button> clEditar;
-    @FXML
-    private TableColumn<EventosModel, Button> clEliminar;
+
     @FXML
     private TableColumn<EventosModel, String> clTipoEvento;
+
     @FXML
     private TableView<EventosModel> tbEventos;
     @FXML
     private TableColumn<EventosModel, Button> clDetalles;
-    @FXML
-    private TextField txtBusqueda;
-    @FXML
-    private Button btnBuscar;
 
     public void initialize(){
         cargarTabla();
@@ -69,47 +63,6 @@ public class EventosController {
                 setText(null);
             }
         });
-        this.clEditar.setCellFactory(ts-> new TableCell<>(){
-            @Override
-            protected void updateItem(Button button, boolean b) {
-                super.updateItem(button, b);
-                Button btnDetalles = new Button("Detalles");
-                if(!b){
-                    btnDetalles.setOnAction(x->{
-                        //Abrir ventana de dialogo
-                        System.out.println("Ventana");
-                        Main.showDialogDetalle("dialogos/detalle-evento-view", "Detalles de Evento", tbEventos.getItems().get(getIndex()));
-                    });
-                    setGraphic(btnDetalles);
-                    return;
-                }
-                setText(null);
-            }
-        });
-        this.clEliminar.setCellFactory(tc -> new TableCell<>(){
-            @Override
-            protected void updateItem(Button button, boolean b) {
-                super.updateItem(button, b);
-                if (b){
-                    setGraphic(null);
-                }
-                else{
-                    Button btnEliminar = new Button("Eliminar");
-                    setGraphic(btnEliminar);
-                    btnEliminar.setOnAction(e ->{
-                        System.out.println("ELimina");
-                        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
-                        alerta.setContentText("Desea eliminar el evento");
-                        var respuesta = alerta.showAndWait();
-
-                        if (respuesta.get() == ButtonType.OK){
-                            EventosModel eventosModel = tbEventos.getItems().get(getIndex());
-                            eventosModel.eliminarEvento(eventosModel.getIdEvento());
-                        }
-                    });
-                }
-            }
-        });
         this.tbEventos.getItems().clear();
         this.tbEventos.setItems(EventosModel.getEventos());
     }
@@ -120,4 +73,7 @@ public class EventosController {
         Main.showDialog("dialogos/crear-evento-view","Crear evento");
         cargarTabla();
     }
+
+
+
 }

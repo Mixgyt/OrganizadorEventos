@@ -170,6 +170,8 @@ public class SeguimientoInvitadoController {
                             alert.setContentText("Se han enviado los recordatorios.");
                             alert.show();
                         }
+
+                        txtClaveApp.clear();
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                         throw new RuntimeException(ex);
