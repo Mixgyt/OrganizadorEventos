@@ -1,6 +1,7 @@
 package com.progra3.organizadord.organizadoreventos.models;
 
 import com.progra3.organizadord.organizadoreventos.Conexion.ConexionDB;
+import com.progra3.organizadord.organizadoreventos.Conexion.UserSession;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -111,10 +112,9 @@ public class CorreosEventosModel {
                     "INNER JOIN tbl_eventos AS e ON ce.id_evento = e.id_evento\n" +
                     "INNER JOIN tbl_correos AS c ON ce.id_correo = c.id_correo \n" +
                     "INNER JOIN tbl_tipo_invitado AS ti ON ce.id_tipo_invitado = ti.id_tipo_invitado " +
-                    "WHERE e.id_evento = ? AND e.id_usuario = ?");
+                    "WHERE e.id_evento = ?");
 
             statement.setInt(1, evento);
-            statement.setInt(2,this.idAnfitrion);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 datoCorreoEvento.add(new CorreosEventosModel(
@@ -146,10 +146,40 @@ public class CorreosEventosModel {
                     "INNER JOIN tbl_eventos AS e ON ce.id_evento = e.id_evento\n" +
                     "INNER JOIN tbl_correos AS c ON ce.id_correo = c.id_correo \n" +
                     "INNER JOIN tbl_tipo_invitado AS ti ON ce.id_tipo_invitado = ti.id_tipo_invitado " +
-                    "WHERE ce.id_evento = ? AND estado = ? AND e.id_usuario = ?");
+                    "WHERE ce.id_evento = ? AND estado = ?");
             statement.setInt(1, idEvento);
             statement.setInt(2, estado);
-            statement.setInt(3, this.idAnfitrion);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                datoCorreoEvento.add(new CorreosEventosModel(
+                        resultSet.getInt("id_correos_evento"),
+                        resultSet.getString("id_evento"),
+                        resultSet.getString("id_correo"),
+                        resultSet.getString("id_tipo_invitado"),
+                        resultSet.getInt("estado")
+                ));
+            }
+
+            return datoCorreoEvento;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //Retorna una observable con los invitados según el evento
+    public ObservableList<CorreosEventosModel> mostrarInvitadosPorEvento(int idEvento){
+        try {
+            ObservableList<CorreosEventosModel> datoCorreoEvento = FXCollections.observableArrayList();
+
+            Connection connection = ConexionDB.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.nombre AS id_evento, \n" +
+                    "c.correo AS id_correo, ti.descripcion AS id_tipo_invitado, estado FROM tbl_correos_evento AS ce \n" +
+                    "INNER JOIN tbl_eventos AS e ON ce.id_evento = e.id_evento\n" +
+                    "INNER JOIN tbl_correos AS c ON ce.id_correo = c.id_correo \n" +
+                    "INNER JOIN tbl_tipo_invitado AS ti ON ce.id_tipo_invitado = ti.id_tipo_invitado " +
+                    "WHERE ce.id_evento = ?");
+            statement.setInt(1, idEvento);
 
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
@@ -209,9 +239,8 @@ public class CorreosEventosModel {
                     "INNER JOIN tbl_eventos AS e ON ce.id_evento = e.id_evento\n" +
                     "INNER JOIN tbl_correos AS c ON ce.id_correo = c.id_correo \n" +
                     "INNER JOIN tbl_tipo_invitado AS ti ON ce.id_tipo_invitado = ti.id_tipo_invitado " +
-                    "WHERE ce.id_evento = ? AND e.id_usuario = ?");
+                    "WHERE ce.id_evento = ?");
             statement.setInt(1, idEvento);
-            statement.setInt(2,this.idAnfitrion);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 datoCorreoEvento.add(new CorreosEventosModel(
@@ -229,6 +258,8 @@ public class CorreosEventosModel {
         }
     }
 
+
+    //Obtiene los invitados de un evento
     public static ObservableList<CorreosEventosModel> mostrarInvitadosEvento(Integer idEvento) {
         try {
             ObservableList<CorreosEventosModel> invitados = FXCollections.observableArrayList();
@@ -265,7 +296,7 @@ public class CorreosEventosModel {
         try {
             Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("UPDATE tbl_correos_evento SET " +
-                    "id_evento = ?, id_correo = ?, id_tipo_invitado = ?, estado = ? WHERE id_correos_evento = ?");
+                    "id_evento = ?, id_correo = ?, id_tipo_invitado = ?, estado = ?, WHERE id_correos_evento = ?");
             statement.setInt(1, Integer.parseInt(this.getIdEvento()));
             statement.setInt(2, Integer.parseInt(this.getIdCorreo()));
             statement.setInt(3, Integer.parseInt(this.getIdTipoInvitado()));
@@ -273,7 +304,6 @@ public class CorreosEventosModel {
             statement.setInt(5, this.getIdCorreosEvento());
             System.out.println("Actualizaciones = " + statement.executeUpdate());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -283,9 +313,11 @@ public class CorreosEventosModel {
     public void eliminarCoreoEvento(){
         try {
             Connection connection = ConexionDB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM tbl_correos_evento WHERE id_correo = ?");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM tbl_correos_evento WHERE id_correos_evento = ?");
 
             statement.setInt(1, Integer.parseInt(this.idCorreo));
+
+            statement.setInt(1, this.idCorreosEvento);
             System.out.println("Eliminaciones = " + statement.executeUpdate());
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -324,6 +356,35 @@ public class CorreosEventosModel {
             throw new RuntimeException(e);
         }
     }
+    //Muestra los correos de un evento especifico y estado como pendiente
+    public ObservableList<CorreosEventosModel> invitadosPendientesPorEvento(Integer evento){
+        try {
+            ObservableList<CorreosEventosModel> datoCorreoEvento = FXCollections.observableArrayList();
 
+            Connection connection = ConexionDB.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT ce.id_correos_evento AS id_correos_evento, e.nombre AS id_evento, \n" +
+                    "c.correo AS id_correo, ti.descripcion AS id_tipo_invitado, estado FROM tbl_correos_evento AS ce \n" +
+                    "INNER JOIN tbl_eventos AS e ON ce.id_evento = e.id_evento\n" +
+                    "INNER JOIN tbl_correos AS c ON ce.id_correo = c.id_correo \n" +
+                    "INNER JOIN tbl_tipo_invitado AS ti ON ce.id_tipo_invitado = ti.id_tipo_invitado " +
+                    "WHERE e.id_evento = ? AND estado = 0");
 
+            statement.setInt(1, evento);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                datoCorreoEvento.add(new CorreosEventosModel(
+                        resultSet.getInt("id_correos_evento"),
+                        resultSet.getString("id_evento"),
+                        resultSet.getString("id_correo"),
+                        resultSet.getString("id_tipo_invitado"),
+                        resultSet.getInt("estado")
+                ));
+            }
+
+            return datoCorreoEvento;
+        } catch (Exception e) {
+
+            throw new RuntimeException(e);
+        }
+    }
 }

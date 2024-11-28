@@ -324,6 +324,21 @@ public class EventosModel {
             throw new RuntimeException(e);
         }
     }
+    public boolean existenciaEventoUsuario(){
+        Connection connection = ConexionDB.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_eventos WHERE id_usuario = ?");
+            statement.setInt(1, UserSession.getUsuario().getIdUsuario());
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                return true;
+            }
+            return  false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public int guardarEvento(){
         Connection connection = ConexionDB.getConnection();
