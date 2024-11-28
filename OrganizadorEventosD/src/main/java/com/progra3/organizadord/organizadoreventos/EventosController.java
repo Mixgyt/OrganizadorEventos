@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class EventosController {
     @FXML
@@ -41,6 +42,12 @@ public class EventosController {
 
     @FXML
     private TableColumn<EventosModel, String> clTipoEvento;
+
+    @FXML
+    private TableColumn<EventosModel, Button> clEditar;
+
+    @FXML
+    private TableColumn<EventosModel, Button> clEliminar;
 
     @FXML
     private TableView<EventosModel> tbEventos;
@@ -83,6 +90,52 @@ public class EventosController {
                 setText(null);
             }
         });
+        this.clEditar.setCellFactory(tc -> new TableCell<>(){
+            @Override
+            protected void updateItem(Button button, boolean b) {
+                super.updateItem(button, b);
+                Button btnEditar = new Button("Editar");
+                if (!b){
+                    btnEditar.setOnAction(e ->{
+                        //Abrir ventana de dialogo
+                        Main.showDialog("dialogos/crear-evento-view", "Editar Evento", tbEventos.getItems().get(getIndex()));
+
+                    });
+                    setGraphic(btnEditar);
+                    return;
+                }
+                setText(null);
+            }
+        });
+        this.clEliminar.setCellFactory(tc -> new TableCell<>(){
+            @Override
+            protected void updateItem(Button button, boolean b) {
+                super.updateItem(button, b);
+                Button btnEditar = new Button("Eliminar");
+                if (!b){
+                    btnEditar.setOnAction(e ->{
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Eliminar");
+                        alert.setContentText("Está seguro de eliminar registro?");
+
+                        //admite 2 posibles resultados, respuesta de un obj o null
+                        Optional<ButtonType> respuesta = alert.showAndWait();
+                        if (respuesta.get() == ButtonType.OK){
+
+                            //obtiene la fila que seleccionamos
+                            EventosModel eventosModel = getTableView().getItems().get(getIndex());
+                            eventosModel.eliminarEvento(eventosModel.getIdEvento());
+                            cargarTabla();
+                        }
+
+                    });
+                    setGraphic(btnEditar);
+                    return;
+                }
+                setText(null);
+            }
+        });
+
         this.tbEventos.getItems().clear();
         this.tbEventos.setItems(EventosModel.getEventos());
     }

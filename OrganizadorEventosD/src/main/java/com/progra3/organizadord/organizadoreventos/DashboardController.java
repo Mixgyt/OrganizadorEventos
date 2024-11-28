@@ -38,20 +38,9 @@ public class DashboardController {
 
     @FXML
     public void initialize(){
-        EventosModel eventosModel = new EventosModel();
-        if (eventosModel.existenciaEventoUsuario()){
-            Pane.setCenter(Main.getView("seguimiento-invitado-view"));
-        }
-        else {
-            Pane.setCenter(Main.getView("eventos-view"));
-        }
-
+        Pane.setCenter(Main.getView("dialogos/calendario"));
     }
 
-    @FXML
-    void onCorreo(){
-
-    }
 
     @FXML
     void onEvento(ActionEvent event) {
@@ -60,28 +49,18 @@ public class DashboardController {
 
     @FXML
     void onInicio(ActionEvent event) {
-        Pane.setCenter(Main.getView("seguimiento-invitado-view"));
-    }
-
-    @FXML
-    void onTipoEvento(ActionEvent event) {
-        Pane.setCenter(Main.getView("tipo-evento-view"));
-    }
-
-    @FXML
-    void onTipoUsuario(ActionEvent event) {
-        Pane.setCenter(Main.getView("tipo-invitado-view"));
-    }
-
-    @FXML
-    void onUsuario(ActionEvent event) {
-        Pane.setCenter(Main.getView("usuario-view"));
+        Pane.setCenter(Main.getView("dialogos/calendario"));
     }
 
 
     @FXML
     void onInvitado(ActionEvent event) {
         Pane.setCenter(Main.getView("gestion-invitado-view"));
+    }
+
+    @FXML
+    void onSeguimineto(ActionEvent event) {
+        Pane.setCenter(Main.getView("seguimiento-invitado-view"));
     }
 
 

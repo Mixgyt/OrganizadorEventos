@@ -4,14 +4,23 @@ import com.progra3.organizadord.organizadoreventos.Conexion.UserSession;
 import com.progra3.organizadord.organizadoreventos.Main;
 import com.progra3.organizadord.organizadoreventos.models.EventosModel;
 import com.progra3.organizadord.organizadoreventos.models.TipoEventoModel;
+import javafx.collections.ObservableList;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 
 public class CrearEventoController
 {
+    @FXML
+    private Label lblEditarEvento;
     @FXML
     private ComboBox<String> cmbHoraFinal;
     @FXML
@@ -43,6 +52,8 @@ public class CrearEventoController
     @FXML
     private ComboBox<String> cmbMinutosFinal;
 
+    private int estadoProceso = 0;
+    private int idEvento;
     @FXML
     public void initialize() {
         cargarHoras();
@@ -95,6 +106,7 @@ public class CrearEventoController
 
     @FXML
     private void crearEvento(){
+
         if(camposVacios()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Faltan datos");
@@ -117,7 +129,7 @@ public class CrearEventoController
         String fechaInicial = fechas[0];
         String fechaFinal = fechas[1];
 
-        EventosModel nuevoEvento = new EventosModel(
+        EventosModel procesarEvento = new EventosModel(
                 UserSession.getUsuario().getIdUsuario(),
                 nombreEvento,
                 fechaInicial,
@@ -127,8 +139,26 @@ public class CrearEventoController
                 detallesEvento,
                 idTipoEvento
         );
-        nuevoEvento.guardarEvento();
-        Main.close();
+
+        //si es 1/Edita si es 0/crea
+        if (estadoProceso == 1){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            if (procesarEvento.actualizarEvento(this.idEvento) > 0){
+                alert.setTitle("Evento actualizado");
+                alert.setContentText("El evento se ha actualizado correctamente");
+                alert.showAndWait();
+                estadoProceso = 0;
+                Main.close();
+            }else{
+                alert.setTitle("Error evento actualizado");
+                alert.setContentText("El evento no se ha actualizado correctamente");
+                alert.showAndWait();
+            }
+        }else{
+            procesarEvento.guardarEvento();
+            Main.close();
+        }
+
     }
 
     private String[] getFechas(){
@@ -180,7 +210,7 @@ public class CrearEventoController
         if(inicio.isAfter(fin) || inicio.equals(fin)){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Conflicto de fechas");
-            alert.setContentText("No puedes ingresar una final menor que la de inicial");
+            alert.setContentText("No puedes ingresar una fecha final menor que la fecha inicial");
             alert.showAndWait();
             return null;
         }
@@ -196,6 +226,46 @@ public class CrearEventoController
         return textFields || comboBox;
     }
 
+    public void setCampos(EventosModel eventosModel){
+        estadoProceso =1;
+        this.idEvento = eventosModel.getIdEvento();
+        btnCrearEvento.setText("Editar Evento");
+        lblEditarEvento.setText("Editar Evento");
+        txtNombreEvento.setText(eventosModel.getNombre());
+
+        String xd = eventosModel.getFechaInicial();
+        String xd2 = eventosModel.getFechaFinal();
+        System.out.println(xd);
+        System.out.println(xd2);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        String completaFechaInicial = eventosModel.getFechaInicial();
+        String completaFechaFinal = eventosModel.getFechaFinal();
+
+        String fechaInicial = completaFechaInicial.split(" ")[0];
+        String fechaFinal = completaFechaFinal.split(" ")[0];
+
+        LocalDate setfechaInicial= LocalDate.parse(fechaInicial,formatter);
+        LocalDate setfechaFinal= LocalDate.parse(fechaFinal,formatter);
+
+        dtpFechaInicio.setValue(setfechaInicial);
+        dtpFechaFinal.setValue(setfechaFinal);
+
+        for (TipoEventoModel itemTipo: cmbTipoEvento.getItems()){
+            if (itemTipo.toString().equals(eventosModel.getTipoEventoCadena())){
+                cmbTipoEvento.setValue(itemTipo);
+                break;
+            }
+        }
+
+
+
+
+        txtUbicacionEvento.setText(eventosModel.getUbicacion());
+        txtDescripcionEvento.setText(eventosModel.getDescripcion());
+        txtDetallesEvento.setText(eventosModel.getDetalles());
+    }
     @FXML
     private void onCancelar(){
         Main.close();

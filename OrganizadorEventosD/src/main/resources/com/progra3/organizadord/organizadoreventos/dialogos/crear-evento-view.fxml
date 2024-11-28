@@ -42,7 +42,7 @@
                               <Font name="SansSerif Regular" size="14.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="dtpFechaInicio" prefHeight="40.0" prefWidth="211.0" promptText="Fecha Inicio" />
+                        <DatePicker fx:id="dtpFechaInicio" editable="false" prefHeight="40.0" prefWidth="211.0" promptText="Fecha Inicio" />
                      </children>
                   </VBox>
                   <VBox prefHeight="100.0" prefWidth="423.0" spacing="5.0">
@@ -72,7 +72,7 @@
                               <Font name="SansSerif Regular" size="14.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="dtpFechaFinal" prefHeight="40.0" prefWidth="211.0" promptText="Fecha Inicio" />
+                        <DatePicker fx:id="dtpFechaFinal" editable="false" prefHeight="40.0" prefWidth="211.0" promptText="Fecha Inicio" />
                      </children>
                   </VBox>
                   <VBox prefHeight="100.0" prefWidth="423.0" spacing="5.0">
@@ -152,7 +152,7 @@
       </VBox>
    </center>
    <top>
-      <Label text="Crear Evento" textFill="WHITE" BorderPane.alignment="CENTER">
+      <Label fx:id="lblEditarEvento" text="Crear Evento" textFill="WHITE" BorderPane.alignment="CENTER">
          <padding>
             <Insets top="20.0" />
          </padding>

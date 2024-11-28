@@ -47,6 +47,7 @@ public class EventosModel {
         this.idTipoEvento = idTipoEvento;
     }
 
+
     public String getFechaInicial() {
         return fechaInicial;
     }
@@ -370,11 +371,14 @@ public class EventosModel {
                     " WHERE id_evento = " +idEvento);
             preparedStatement.setInt(1,this.idUsuario);
             preparedStatement.setString(2,this.nombre);
-            preparedStatement.setString(3,this.fechaInicial);
-            preparedStatement.setString(4,this.fechaFinal);
+            Timestamp fechaInicio = Timestamp.valueOf(this.fechaInicial.replace("T"," "));
+            preparedStatement.setTimestamp(3,fechaInicio);
+            Timestamp fechaFinal = Timestamp.valueOf(this.fechaFinal.replace("T"," "));
+            preparedStatement.setTimestamp(4,fechaFinal);
             preparedStatement.setString(5,this.ubicacion);
             preparedStatement.setString(6,this.descripcion);
-            preparedStatement.setInt(7,this.idTipoEvento);
+            preparedStatement.setString(7,this.detalles);
+            preparedStatement.setInt(8,this.idTipoEvento);
 
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {

@@ -62,4 +62,5 @@ public class DetalleEventoController {
         tbInvitados.setItems(CorreosEventosModel.mostrarInvitadosEvento(evento.getIdEvento()));
     }
 
+
 }
