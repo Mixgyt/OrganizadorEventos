@@ -11,10 +11,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import com.calendarfx.view.CalendarView;
-import javafx.scene.layout.VBox;
 
 import javax.swing.*;
 import java.text.DateFormat;
@@ -31,13 +29,20 @@ import java.util.List;
 
 public class CalendarioController {
 
+
     @FXML
     private VBox contenedor;
 
+
+
     @FXML
     public void initialize() {
+
         //bucle que agrega los eventos al CalendarFx
         CalendarView calendarView = new CalendarView();
+        calendarView.setPrefSize(900, 600);
+        calendarView.setMaxSize(900, 600);
+        calendarView.setMinSize(900, 600);
         ArrayList<CalendarSource> tipoEventos = new ArrayList<CalendarSource>();
 
         List<CalendarFX> tipos = CalendarFX.obtenerTipoEventos();
@@ -88,7 +93,7 @@ public class CalendarioController {
             //quitando controles por defecto de el CalendarFx
             calendarView.setShowPageToolBarControls(false);
             calendarView.setShowDetailsUponEntryCreation(false);
-            calendarView.setShowAddCalendarButton(false);
+            calendarView.setShowAddCalendarButton(true);
             calendarView.setShowPrintButton(false);
             calendarView.setDefaultCalendarProvider(param -> null);
 
