@@ -4,6 +4,7 @@ import com.progra3.organizadord.organizadoreventos.controllers.dialogos.DetalleE
 import com.progra3.organizadord.organizadoreventos.models.EventosModel;
 import com.progra3.organizadord.organizadoreventos.models.TipoEventoModel;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class EventosController {
@@ -57,6 +60,7 @@ public class EventosController {
         cargarTipoEvento();
     }
 
+    //carga todos los eventos de el usuario que ha iniciado sesion
     public void cargarTabla(){
         this.clEvento.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         this.clFechaInicio.setCellValueFactory(new PropertyValueFactory<>("fechaInicial"));
@@ -83,50 +87,85 @@ public class EventosController {
         this.tbEventos.setItems(EventosModel.getEventos());
     }
 
+    //carga los tipos de evento en el combobox
     private void cargarTipoEvento(){
         TipoEventoModel tipoEventoModel = new TipoEventoModel();
         this.cbTipoEvento.setItems(tipoEventoModel.getTiposEvento());
 
     }
 
-    private void cargarEventosRango(){
-        if((String.valueOf(dpFechaInicial.getValue())) != null){
-            this.tbEventos.getItems().clear();
-
-        }
-    }
+    //abre dialogo para crear un evento
     @FXML
     private void crearEvento(){
         Main.showDialog("dialogos/crear-evento-view","Crear evento");
         cargarTabla();
     }
 
-
+    //busca eventos segun un rango de fecha y un tipo si es seleccionado en combobox
     @FXML
     private void eventosBuscar(ActionEvent event) {
         int idTipoEvento;
         LocalDate fechaInicial;
         LocalDate fechaFinal;
 
-        if (this.dpFechaInicial.getValue() == null || this.dpFechaFinal.getValue() == null || this.cbTipoEvento.getValue() == null) {
-            System.out.println("HAY QUE VALIDAR");
+        //alerta de datos no existentes
+        Alert alertaDatos = new Alert(Alert.AlertType.WARNING);
+        alertaDatos.setTitle("No hay datos");
+        alertaDatos.setContentText("No existen eventos en ese rango de fecha");
+
+        ObservableList<EventosModel> eventosModels;
+        if (this.dpFechaInicial.getValue() == null || this.dpFechaFinal.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Conflicto de fechas");
+            alert.setContentText("Ingrese ambas fechas para buscar");
+            alert.showAndWait();
         }else {
-            this.tbEventos.getItems().clear();
-            this.tbEventos.refresh();
+
             if (this.dpFechaInicial.getValue() != null && this.dpFechaFinal.getValue() != null && this.cbTipoEvento.getValue() != null){
                 fechaInicial = this.dpFechaInicial.getValue();
                 fechaFinal = this.dpFechaFinal.getValue();
                 idTipoEvento = this.cbTipoEvento.getValue().getIdTipoEvento();
-                this.tbEventos.setItems(EventosModel.getEventosRangoTipo(fechaInicial,fechaFinal,idTipoEvento));
-
+                if (validacionFechas(fechaInicial,fechaFinal)){
+                    eventosModels = EventosModel.getEventosRangoTipo(fechaInicial,fechaFinal,idTipoEvento);
+                    if (eventosModels.size() > 0){
+                        this.tbEventos.getItems().clear();
+                        this.tbEventos.refresh();
+                        this.tbEventos.setItems(eventosModels);
+                    }else {
+                        alertaDatos.showAndWait();
+                    }
+                }
             }else if(this.dpFechaInicial.getValue() != null && this.dpFechaFinal.getValue() != null && this.cbTipoEvento.getValue() == null){
                 fechaInicial = this.dpFechaInicial.getValue();
                 fechaFinal = this.dpFechaFinal.getValue();
-                this.tbEventos.setItems(EventosModel.getEventosRango(fechaInicial,fechaFinal));
+                if (validacionFechas(fechaInicial,fechaFinal)){
+                    eventosModels = EventosModel.getEventosRango(fechaInicial,fechaFinal);
+                    if (eventosModels.size() > 0){
+                        this.tbEventos.getItems().clear();
+                        this.tbEventos.refresh();
+                        this.tbEventos.setItems(eventosModels);
+                    }else {
+                        alertaDatos.showAndWait();
+                    }
+                }
             }
         }
     }
 
+    //devuelve un booleano al comparar fechaInicial > fechaFinal
+    private boolean validacionFechas(LocalDate fechaInicial, LocalDate fechaFinal){
+        if (fechaInicial.isAfter(fechaFinal)) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Conflicto de fechas");
+            alert.setContentText("No puedes ingresar una fecha final menor que la de fecha inicial");
+            alert.showAndWait();
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    //Limpia inputs del usuario para buscar eventos
     @FXML
     void eventoLimpiar(ActionEvent event) {
         this.dpFechaInicial.setValue(null);
