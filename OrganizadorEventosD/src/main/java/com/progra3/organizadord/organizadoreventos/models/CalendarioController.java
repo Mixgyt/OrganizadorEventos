@@ -3,23 +3,12 @@ package com.progra3.organizadord.organizadoreventos.models;
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
-import com.calendarfx.view.CalendarFXControl;
-import com.calendarfx.view.DateControl;
-import javafx.collections.ObservableSet;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import com.calendarfx.view.CalendarView;
 
-import javax.swing.*;
-import java.text.DateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +44,10 @@ public class CalendarioController {
                 Entry<String> evento = new Entry<>(itemEvento.getNombre());
                 //agregando intervalo de fechas para el evento
                 evento.setInterval(
-                        itemEvento.getFechaIncio()
+                        itemEvento.getFechaInicio(),
+                        itemEvento.getTiempoInicio(),
+                        itemEvento.getFechaFinal(),
+                        itemEvento.getTiempoFinal()
                 );
                 evento.setLocation(itemEvento.getUbicacion());
                 calendar.setStyle(Calendar.Style.getStyle(i));
@@ -73,12 +65,16 @@ public class CalendarioController {
                 if (entry.getEntry().getCalendar() != null) {
                     DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a");
                     LocalDateTime fechaInicio = entry.getEntry().getStartAsLocalDateTime();
+                    LocalDateTime fechaFinal = entry.getEntry().getEndAsLocalDateTime();
+
                     String cadenaFechaInicio = fechaInicio.format(formato);
+                    String cadenaFechaFinal = fechaFinal.format(formato);
                     String ubicacion = entry.getEntry().getLocation();
 
                     String f = "\t" + entry.getEntry().getCalendar().getName() +
                             "\t\n\tUbicación : " + ubicacion +
-                            "\t\n\tFecha de inicio : " + cadenaFechaInicio ;
+                            "\t\n\tFecha de inicio : " + cadenaFechaInicio +
+                            "\t\n\tFecha final : " + cadenaFechaFinal ;
                     lblEvento.setText(f);
                 } else {
                     lblEvento.setText("No hay calendario seleccionado");

@@ -2,7 +2,6 @@ package com.progra3.organizadord.organizadoreventos.models;
 
 import com.progra3.organizadord.organizadoreventos.Conexion.ConexionDB;
 import com.progra3.organizadord.organizadoreventos.Conexion.UserSession;
-import jakarta.ejb.Local;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,10 +15,13 @@ import java.util.List;
 
 public class CalendarFX {
     private String nombre;
-    private LocalDateTime fechaIncio;
-    private LocalDateTime fechaFinal;
+    private LocalDateTime completoFechaIncio;
+    private LocalDateTime completoFechaFinal;
     private String ubicacion;
-    private LocalTime inicio;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFinal;
+    private LocalTime tiempoInicio;
+    private LocalTime tiempoFinal;
 
 
     private int idTipoEvento;
@@ -27,13 +29,37 @@ public class CalendarFX {
 
     public CalendarFX() {
     }
-    
-    public LocalTime getInicio() {
-        return inicio;
+
+    public LocalTime getTiempoFinal() {
+        return tiempoFinal;
     }
 
-    public void setInicio(LocalTime inicio) {
-        this.inicio = inicio;
+    public void setTiempoFinal(LocalTime tiempoFinal) {
+        this.tiempoFinal = tiempoFinal;
+    }
+
+    public LocalTime getTiempoInicio() {
+        return tiempoInicio;
+    }
+
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public LocalDate getFechaFinal() {
+        return fechaFinal;
+    }
+
+    public void setFechaFinal(LocalDate fechaFinal) {
+        this.fechaFinal = fechaFinal;
+    }
+
+    public void setTiempoInicio(LocalTime tiempoInicio) {
+        this.tiempoInicio = tiempoInicio;
     }
 
     public int getIdTipoEvento() {
@@ -60,20 +86,20 @@ public class CalendarFX {
         this.nombre = nombre;
     }
 
-    public LocalDateTime getFechaIncio() {
-        return fechaIncio;
+    public LocalDateTime getCompletoFechaIncio() {
+        return completoFechaIncio;
     }
 
-    public void setFechaIncio(LocalDateTime fechaIncio) {
-        this.fechaIncio = fechaIncio;
+    public void setCompletoFechaIncio(LocalDateTime completoFechaIncio) {
+        this.completoFechaIncio = completoFechaIncio;
     }
 
-    public LocalDateTime getFechaFinal() {
-        return fechaFinal;
+    public LocalDateTime getCompletoFechaFinal() {
+        return completoFechaFinal;
     }
 
-    public void setFechaFinal(LocalDateTime fechaFinal) {
-        this.fechaFinal = fechaFinal;
+    public void setCompletoFechaFinal(LocalDateTime completoFechaFinal) {
+        this.completoFechaFinal = completoFechaFinal;
     }
 
     public String getUbicacion() {
@@ -103,9 +129,12 @@ public class CalendarFX {
             while (resultSet.next()){
                 CalendarFX calendarFX = new CalendarFX();
                 calendarFX.setNombre(resultSet.getString("evento"));
-                calendarFX.setFechaIncio(resultSet.getTimestamp("fecha_inicio").toLocalDateTime());
-                calendarFX.setFechaFinal(resultSet.getTimestamp("fecha_final").toLocalDateTime());
-                calendarFX.setInicio(resultSet.getTimestamp("fecha_inicio").toLocalDateTime().toLocalTime());
+                calendarFX.setCompletoFechaIncio(resultSet.getTimestamp("fecha_inicio").toLocalDateTime());
+                calendarFX.setCompletoFechaFinal(resultSet.getTimestamp("fecha_final").toLocalDateTime());
+                calendarFX.setTiempoInicio(resultSet.getTimestamp("fecha_inicio").toLocalDateTime().toLocalTime());
+                calendarFX.setTiempoFinal(resultSet.getTimestamp("fecha_final").toLocalDateTime().toLocalTime());
+                calendarFX.setFechaInicio(resultSet.getTimestamp("fecha_inicio").toLocalDateTime().toLocalDate());
+                calendarFX.setFechaFinal(resultSet.getTimestamp("fecha_final").toLocalDateTime().toLocalDate());
                 calendarFX.setUbicacion(resultSet.getString("ubicacion"));
                 eventos.add(calendarFX);
             }
