@@ -1,7 +1,9 @@
 package com.progra3.organizadord.organizadoreventos;
 
+import com.progra3.organizadord.organizadoreventos.controllers.dialogos.CrearEventoController;
 import com.progra3.organizadord.organizadoreventos.controllers.dialogos.DetalleEventoController;
 import com.progra3.organizadord.organizadoreventos.models.EventosModel;
+import com.progra3.organizadord.organizadoreventos.models.TipoEventoModel;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -69,10 +71,6 @@ public class Main extends Application {
         }
     }
 
-    public static void showDialog(String fxml) {
-        showDialog(fxml, fxml);
-    }
-
     public static void showDialog(String fxml, String title) {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml+".fxml"));
@@ -92,6 +90,31 @@ public class Main extends Application {
             throw new RuntimeException(e);
         }
     }
+
+    public static void showDialog(String fxml, String title, EventosModel eventosModel) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
+
+            Scene scene = new Scene(fxmlLoader.load());
+
+            CrearEventoController dt = fxmlLoader.getController();
+            dt.setCampos(eventosModel);
+
+            Stage newStage = new Stage();
+            newStage.setTitle(title);
+            newStage.setScene(scene);
+            newStage.initModality(Modality.WINDOW_MODAL);
+            newStage.initOwner(windows.getLast());
+            windows.add(newStage);
+            mainStage = newStage;
+            mainStage.setOnCloseRequest(Main::onCloseAction);
+            mainStage.showAndWait();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public static void showDialogDetalle(String fxml, String title, EventosModel evento) {
         try{
