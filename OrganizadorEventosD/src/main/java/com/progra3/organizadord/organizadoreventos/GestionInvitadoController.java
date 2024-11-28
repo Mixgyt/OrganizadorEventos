@@ -202,13 +202,15 @@ public class GestionInvitadoController {
                             correosEventosModel.setIdCorreosEvento(idCorreoEvento);
                             correosEventosModel.actualizarCorreoEvento();
                             limpiar();
-                            cargarTablaTodo();
+                            cmbVerEvento.getSelectionModel().select(0);
+                            cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
                             idCorreoEvento = 0;
                         }
                         else {
                             correosEventosModel.insertarCorreoEvento();
                             limpiar();
-                            cargarTablaTodo();
+                            cmbVerEvento.getSelectionModel().select(0);
+                            cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
                         }
                     }
                 }
