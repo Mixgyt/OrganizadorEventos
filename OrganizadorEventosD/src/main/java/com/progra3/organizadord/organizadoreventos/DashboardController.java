@@ -1,5 +1,6 @@
 package com.progra3.organizadord.organizadoreventos;
 
+import com.progra3.organizadord.organizadoreventos.Conexion.UserSession;
 import com.progra3.organizadord.organizadoreventos.models.EventosModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,6 +46,11 @@ public class DashboardController {
     @FXML
     void onEvento(ActionEvent event) {
         Pane.setCenter(Main.getView("eventos-view"));
+    }
+    @FXML
+    void onCerrar(ActionEvent event) {
+        UserSession.setUsuario(null);
+        Main.setRoot("inicio-sesion-view","Inicio sesion", 707,665);
     }
 
     @FXML
