@@ -1,6 +1,8 @@
 package com.progra3.organizadord.organizadoreventos;
 
 import com.progra3.organizadord.organizadoreventos.controllers.dialogos.DetalleEventoController;
+import com.progra3.organizadord.organizadoreventos.models.CorreoModel;
+import com.progra3.organizadord.organizadoreventos.models.CorreosEventosModel;
 import com.progra3.organizadord.organizadoreventos.models.EventosModel;
 import com.progra3.organizadord.organizadoreventos.models.TipoEventoModel;
 
@@ -19,26 +21,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class EventosController {
-    @FXML
-    private DatePicker dpFechaFinal;
-    @FXML
-    private DatePicker dpFechaInicial;
-
-    @FXML
-    private ComboBox<TipoEventoModel> cbTipoEvento;
 
     @FXML
     private TableColumn<EventosModel, String > clEvento;
-
     @FXML
     private TableColumn<EventosModel, String> clFechaFinal;
-
     @FXML
     private TableColumn<EventosModel, String> clFechaInicio;
-
+    @FXML
+    private TableColumn<EventosModel, Button> clEditar;
+    @FXML
+    private TableColumn<EventosModel, Button> clEliminar;
     @FXML
     private TableColumn<EventosModel, String> clTipoEvento;
-
     @FXML
     private TableView<EventosModel> tbEventos;
     @FXML
@@ -47,14 +42,9 @@ public class EventosController {
     private TextField txtBusqueda;
     @FXML
     private Button btnBuscar;
-    @FXML
-    private Button btnCrearEvento;
-    @FXML
-    private Button btnLimpiar;
 
     public void initialize(){
         cargarTabla();
-        cargarTipoEvento();
     }
 
     public void cargarTabla(){
@@ -79,59 +69,55 @@ public class EventosController {
                 setText(null);
             }
         });
+        this.clEditar.setCellFactory(ts-> new TableCell<>(){
+            @Override
+            protected void updateItem(Button button, boolean b) {
+                super.updateItem(button, b);
+                Button btnDetalles = new Button("Detalles");
+                if(!b){
+                    btnDetalles.setOnAction(x->{
+                        //Abrir ventana de dialogo
+                        System.out.println("Ventana");
+                        Main.showDialogDetalle("dialogos/detalle-evento-view", "Detalles de Evento", tbEventos.getItems().get(getIndex()));
+                    });
+                    setGraphic(btnDetalles);
+                    return;
+                }
+                setText(null);
+            }
+        });
+        this.clEliminar.setCellFactory(tc -> new TableCell<>(){
+            @Override
+            protected void updateItem(Button button, boolean b) {
+                super.updateItem(button, b);
+                if (b){
+                    setGraphic(null);
+                }
+                else{
+                    Button btnEliminar = new Button("Eliminar");
+                    setGraphic(btnEliminar);
+                    btnEliminar.setOnAction(e ->{
+                        System.out.println("ELimina");
+                        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+                        alerta.setContentText("Desea eliminar el evento");
+                        var respuesta = alerta.showAndWait();
+
+                        if (respuesta.get() == ButtonType.OK){
+                            EventosModel eventosModel = tbEventos.getItems().get(getIndex());
+                            eventosModel.eliminarEvento(eventosModel.getIdEvento());
+                        }
+                    });
+                }
+            }
+        });
         this.tbEventos.getItems().clear();
         this.tbEventos.setItems(EventosModel.getEventos());
     }
 
-    private void cargarTipoEvento(){
-        TipoEventoModel tipoEventoModel = new TipoEventoModel();
-        this.cbTipoEvento.setItems(tipoEventoModel.getTiposEvento());
 
-    }
-
-    private void cargarEventosRango(){
-        if((String.valueOf(dpFechaInicial.getValue())) != null){
-            this.tbEventos.getItems().clear();
-
-        }
-    }
     @FXML
     private void crearEvento(){
         Main.showDialog("dialogos/crear-evento-view","Crear evento");
-        cargarTabla();
-    }
-
-
-    @FXML
-    private void eventosBuscar(ActionEvent event) {
-        int idTipoEvento;
-        LocalDate fechaInicial;
-        LocalDate fechaFinal;
-
-        if (this.dpFechaInicial.getValue() == null || this.dpFechaFinal.getValue() == null || this.cbTipoEvento.getValue() == null) {
-            System.out.println("HAY QUE VALIDAR");
-        }else {
-            this.tbEventos.getItems().clear();
-            this.tbEventos.refresh();
-            if (this.dpFechaInicial.getValue() != null && this.dpFechaFinal.getValue() != null && this.cbTipoEvento.getValue() != null){
-                fechaInicial = this.dpFechaInicial.getValue();
-                fechaFinal = this.dpFechaFinal.getValue();
-                idTipoEvento = this.cbTipoEvento.getValue().getIdTipoEvento();
-                this.tbEventos.setItems(EventosModel.getEventosRangoTipo(fechaInicial,fechaFinal,idTipoEvento));
-
-            }else if(this.dpFechaInicial.getValue() != null && this.dpFechaFinal.getValue() != null && this.cbTipoEvento.getValue() == null){
-                fechaInicial = this.dpFechaInicial.getValue();
-                fechaFinal = this.dpFechaFinal.getValue();
-                this.tbEventos.setItems(EventosModel.getEventosRango(fechaInicial,fechaFinal));
-            }
-        }
-    }
-
-    @FXML
-    void eventoLimpiar(ActionEvent event) {
-        this.dpFechaInicial.setValue(null);
-        this.dpFechaFinal.setValue(null);
-        cbTipoEvento.getSelectionModel().clearSelection();
         cargarTabla();
     }
 }

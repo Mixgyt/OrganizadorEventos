@@ -140,19 +140,15 @@ public class GestionInvitadoController {
             }
         });
 
-        cargarTablaTodo();
-
         cmbEvento.setItems(EventosModel.getEventos());
         cmbTipoInvitado.setItems(TipoInvitadoModel.getTiposInvitado());
-        EventosModel eventosModel = new EventosModel();
-        eventosModel.setNombre("Ver Todos");
-        cmbVerEvento.getItems().add(eventosModel);
 
         for (EventosModel item: EventosModel.getEventos()){
             cmbVerEvento.getItems().add(item);
         }
 
         cmbVerEvento.getSelectionModel().select(0);
+        cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
         cmbVerEvento.setOnAction(e->{
             if (cmbVerEvento.getSelectionModel().getSelectedIndex() == 0){
                 cargarTablaTodo();
@@ -202,10 +198,18 @@ public class GestionInvitadoController {
                                 String.valueOf(cmbTipoInvitado.getSelectionModel().getSelectedItem().getIdTipoInvitado()),
                                 EstadosModel.valueOfValor(0)
                         );
-
-                        correosEventosModel.insertarCorreoEvento();
-
-                        cargarTablaTodo();
+                        if (btnAgregarInvitado.getText().equals("Actualizar")){
+                            correosEventosModel.setIdCorreosEvento(idCorreoEvento);
+                            correosEventosModel.actualizarCorreoEvento();
+                            limpiar();
+                            cargarTablaTodo();
+                            idCorreoEvento = 0;
+                        }
+                        else {
+                            correosEventosModel.insertarCorreoEvento();
+                            limpiar();
+                            cargarTablaTodo();
+                        }
                     }
                 }
                 else {
@@ -288,12 +292,6 @@ public class GestionInvitadoController {
         correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
         tbInvitados.setItems(correosEventosModel.mostrarCorreosEvento());
     }
-
-    public void cargarTablaTodo(int evento){
-        CorreosEventosModel correosEventosModel = new CorreosEventosModel();
-        correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
-        tbInvitados.setItems(correosEventosModel.mostrarCorreosEventoEspecifico(evento));
-    }
     public void cargarTablaPorEvento(int evento){
         CorreosEventosModel correosEventosModel = new CorreosEventosModel();
         correosEventosModel.setIdAnfitrion(UserSession.getUsuario().getIdCorreo());
@@ -301,6 +299,7 @@ public class GestionInvitadoController {
     }
     public void importarNuevosInvitados(ObservableList<CorreosEventosModel> datos){
         try {
+            Integer invitadosImportados = 0;
             for (CorreosEventosModel item: datos){
 
                 TipoInvitadoModel tipoInvitadoTemp = new TipoInvitadoModel();
@@ -325,7 +324,7 @@ public class GestionInvitadoController {
                             CorreosEventosModel validarInvitado = new CorreosEventosModel();
                             validarInvitado.setIdCorreo(String.valueOf(idCorreo));
                             validarInvitado.setIdEvento(String.valueOf(idEvento));
-                            if (validarInvitado.invitadoExistente()){
+                            if (!validarInvitado.invitadoExistente()){
                                 CorreosEventosModel correosEventosModel = new CorreosEventosModel(
                                         String.valueOf(idEvento),
                                         String.valueOf(idCorreo),
@@ -334,10 +333,7 @@ public class GestionInvitadoController {
                                 );
                                 correosEventosModel.insertarCorreoEvento();
 
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("Información");
-                                alert.setContentText("Se han importado los invitados");
-                                alert.show();
+                                invitadosImportados++;
 
                                 cargarTablaTodo();
                             }
@@ -351,7 +347,7 @@ public class GestionInvitadoController {
                             CorreosEventosModel validarInvitado = new CorreosEventosModel();
                             validarInvitado.setIdCorreo(String.valueOf(idCorreo));
                             validarInvitado.setIdEvento(String.valueOf(idEvento));
-                            if (validarInvitado.invitadoExistente()){
+                            if (!validarInvitado.invitadoExistente()){
                                 CorreosEventosModel correosEventosModel = new CorreosEventosModel(
                                         String.valueOf(idEvento),
                                         String.valueOf(idCorreo),
@@ -360,33 +356,26 @@ public class GestionInvitadoController {
                                 );
                                 correosEventosModel.insertarCorreoEvento();
 
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("Información");
-                                alert.setContentText("Se han importado los invitados");
-                                alert.show();
+                                invitadosImportados++;
 
                                 cargarTablaTodo();
                             }
                         }
                     }
-                    else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error de foramto");
-                        alert.setContentText("No se ha encontrado el evento, el eveto esta mal ingresado o error en la estructura de la columna,la estructura de las columnas debe " +
-                                "ser Evento, Correo, Tipo Invitado");
-                        alert.show();
-                        break;
-                    }
                 }
-                else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error de foramto");
-                    alert.setContentText("No se ha encontrado el tipo de invitado, el tipo esta mal ingresado o error en la estructura de la columna,la estructura de las columnas debe " +
-                            "ser Evento, Correo, Tipo Invitado");
-                    alert.show();
-                    break;
-                }
+            }
 
+            if (invitadosImportados > 0){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Información");
+                alert.setContentText("Se han importado los invitados");
+                alert.show();
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Información");
+                alert.setContentText("No se ha importado invitados, es posible que ya esten invitados o el documento este mal hecho.");
+                alert.show();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -27,17 +27,17 @@
                         <Insets top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Hyperlink fx:id="lnkEventos" onAction="#onEvento" prefHeight="28.0" prefWidth="72.0" text="Eventos" textFill="#ededed">
+                  <Hyperlink fx:id="lnkEventos" onAction="#onEvento" prefHeight="36.0" prefWidth="102.0" text="Eventos" textFill="#ededed">
                      <font>
-                        <Font name="SansSerif Regular" size="16.0" />
+                        <Font name="SansSerif Bold" size="22.0" />
                      </font>
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin>
                   </Hyperlink>
-                  <Hyperlink fx:id="lnkInvitado" onAction="#onInvitado" prefHeight="28.0" prefWidth="67.0" text="Invitado" textFill="#ededed">
+                  <Hyperlink fx:id="lnkInvitado" onAction="#onInvitado" prefHeight="36.0" prefWidth="118.0" text="Invitados" textFill="#ededed">
                      <font>
-                        <Font name="SansSerif Regular" size="16.0" />
+                        <Font name="SansSerif Bold" size="22.0" />
                      </font>
                      <HBox.margin>
                         <Insets top="5.0" />
@@ -45,7 +45,7 @@
                   </Hyperlink>
                   <Hyperlink fx:id="lnkUsuario" onAction="#onUsuario" prefHeight="28.0" prefWidth="80.0" text="Usuarios" textFill="#ededed">
                      <font>
-                        <Font name="SansSerif Regular" size="16.0" />
+                        <Font name="SansSerif Bold" size="22.0" />
                      </font>
                      <HBox.margin>
                         <Insets top="5.0" />
@@ -53,7 +53,7 @@
                   </Hyperlink>
                   <Hyperlink fx:id="lnkTipoEvento" onAction="#onTipoEvento" prefHeight="28.0" prefWidth="95.0" text="Tipo evento" textFill="#ededed">
                      <font>
-                        <Font name="SansSerif Regular" size="16.0" />
+                        <Font name="SansSerif Bold" size="22.0" />
                      </font>
                      <HBox.margin>
                         <Insets top="5.0" />
@@ -61,7 +61,7 @@
                   </Hyperlink>
                   <Hyperlink fx:id="lnkTipoUsuario" onAction="#onTipoUsuario" prefHeight="28.0" prefWidth="102.0" text="Tipo Invitado" textFill="#ededed">
                      <font>
-                        <Font name="SansSerif Regular" size="16.0" />
+                        <Font name="SansSerif Bold" size="22.0" />
                      </font>
                      <HBox.margin>
                         <Insets top="5.0" />

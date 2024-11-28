@@ -24,30 +24,39 @@
       <ComboBox fx:id="cmbEvento" layoutX="34.0" layoutY="157.0" prefWidth="150.0" />
       <ComboBox fx:id="cmbTipoInvitado" layoutX="381.0" layoutY="157.0" prefWidth="150.0" />
       <TextField fx:id="txtCorreo" layoutX="210.0" layoutY="157.0" />
-      <Button fx:id="btnAgregarInvitado" layoutX="30.0" layoutY="215.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="158.0" styleClass="button-claro" text="Agregar Invitado" />
-      <Button fx:id="btnImportarInvitado" layoutX="832.0" layoutY="382.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="158.0" styleClass="button-claro" text="Importar Lista De Invitados" />
-      <Label layoutX="34.0" layoutY="139.0" text="Evento" textFill="#fcfcfc">
+      <Button fx:id="btnAgregarInvitado" layoutX="30.0" layoutY="215.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="158.0" styleClass="button-claro" text="Agregar Invitado">
          <font>
-            <Font name="SansSerif Regular" size="16.0" />
+            <Font name="SansSerif Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="btnImportarInvitado" layoutX="807.0" layoutY="382.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" styleClass="button-claro" text="Importar Lista De Invitados">
+         <font>
+            <Font name="SansSerif Bold" size="14.0" />
+         </font></Button>
+      <Label layoutX="82.0" layoutY="139.0" text="Evento" textFill="#fcfcfc">
+         <font>
+            <Font name="SansSerif Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="211.0" layoutY="139.0" text="Correo" textFill="#fcfcfc">
+      <Label layoutX="258.0" layoutY="139.0" text="Correo" textFill="#fcfcfc">
          <font>
-            <Font name="SansSerif Regular" size="16.0" />
+            <Font name="SansSerif Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="381.0" layoutY="139.0" text="Tipo de invitado" textFill="#fcfcfc">
+      <Label layoutX="395.0" layoutY="139.0" text="Tipo de invitado" textFill="#fcfcfc">
          <font>
-            <Font name="SansSerif Regular" size="16.0" />
+            <Font name="SansSerif Bold" size="16.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cmbVerEvento" layoutX="832.0" layoutY="305.0" prefWidth="150.0" />
-      <Label layoutX="832.0" layoutY="285.0" text="Ver evento" textFill="#fcfcfc">
+      <ComboBox fx:id="cmbVerEvento" layoutX="816.0" layoutY="303.0" prefHeight="25.0" prefWidth="182.0" />
+      <Label layoutX="866.0" layoutY="283.0" text="Ver evento" textFill="#fcfcfc">
          <font>
-            <Font name="SansSerif Regular" size="16.0" />
+            <Font name="SansSerif Bold" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="btnCancelar" layoutX="206.0" layoutY="215.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="158.0" styleClass="button-eliminar" text="Limpiar" />
+      <Button fx:id="btnCancelar" layoutX="206.0" layoutY="215.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="158.0" styleClass="button-eliminar" text="Limpiar">
+         <font>
+            <Font name="SansSerif Bold" size="14.0" />
+         </font></Button>
       <Label layoutX="261.0" layoutY="36.0" text="GESTIÓN DE INVITADOS" textFill="WHITE">
          <font>
             <Font name="Monospaced Bold" size="45.0" />

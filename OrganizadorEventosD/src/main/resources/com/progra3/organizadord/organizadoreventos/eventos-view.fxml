@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -24,41 +21,15 @@
             <TableColumn fx:id="clEliminar" prefWidth="79.0" text="ELIMINAR" />
         </columns>
       </TableView>
-      <Button fx:id="btnCrearEvento" layoutX="694.0" layoutY="200.0" mnemonicParsing="false" onAction="#crearEvento" prefHeight="38.0" prefWidth="158.0" styleClass="button-claro" text="Crear Nuevo Evento">
+      <Button fx:id="btnCrearEvento" layoutX="471.0" layoutY="251.0" mnemonicParsing="false" onAction="#crearEvento" prefHeight="38.0" prefWidth="158.0" styleClass="button-claro" text="Crear Nuevo Evento">
          <font>
             <Font name="SansSerif Bold" size="13.0" />
          </font></Button>
-      <TextField fx:id="txtBusqueda" layoutX="104.0" layoutY="151.0" prefHeight="38.0" prefWidth="319.0" promptText="Buscar por nombre del evento">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </TextField>
-      <Button fx:id="btnBuscar" layoutX="524.0" layoutY="151.0" mnemonicParsing="false" onAction="#eventosBuscar" prefHeight="38.0" prefWidth="87.0" styleClass="button-normal" text="Buscar">
-         <font>
-            <Font name="SansSerif Bold" size="13.0" />
-         </font>
-      </Button>
       <Label layoutX="324.0" layoutY="36.0" text="GESTIÓN DE EVENTOS" textFill="WHITE">
          <font>
             <Font name="Monospaced Bold" size="45.0" />
          </font>
       </Label>
       <Separator layoutX="7.0" layoutY="331.0" prefHeight="7.0" prefWidth="979.0" />
-      <DatePicker fx:id="dpFechaInicial" editable="false" layoutX="101.0" layoutY="244.0" prefHeight="25.0" prefWidth="149.0" />
-      <DatePicker fx:id="dpFechaFinal" editable="false" layoutX="273.0" layoutY="244.0" prefHeight="25.0" prefWidth="149.0" />
-      <Label layoutX="101.0" layoutY="219.0" text="Fecha Inicial" textFill="#ededed">
-         <font>
-            <Font name="SansSerif Regular" size="18.0" />
-         </font></Label>
-      <Label layoutX="273.0" layoutY="219.0" text="Fecha Final" textFill="#ededed">
-         <font>
-            <Font name="SansSerif Regular" size="18.0" />
-         </font></Label>
-      <ComboBox fx:id="cbTipoEvento" layoutX="493.0" layoutY="222.0" prefHeight="32.0" prefWidth="150.0" promptText="Tipo de Evento" />
-      <Button fx:id="btnLimpiar" layoutX="525.0" layoutY="269.0" mnemonicParsing="false" onAction="#eventoLimpiar" prefHeight="38.0" prefWidth="87.0" styleClass="button-normal" text="Limpiar">
-         <font>
-            <Font name="SansSerif Bold" size="13.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

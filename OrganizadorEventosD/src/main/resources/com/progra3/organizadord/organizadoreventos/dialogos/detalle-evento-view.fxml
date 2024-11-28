@@ -107,11 +107,16 @@
             </HBox>
          </children>
       </VBox>
-      <TableView fx:id="tbInvitados" layoutX="84.0" layoutY="376.0" prefHeight="252.0" prefWidth="379.0">
+      <TableView fx:id="tbInvitados" layoutX="23.0" layoutY="376.0" prefHeight="252.0" prefWidth="495.0">
         <columns>
             <TableColumn fx:id="clCorreos" prefWidth="266.0" text="Correos" />
-            <TableColumn fx:id="clEstado" prefWidth="112.0" text="Estado" />
+            <TableColumn fx:id="clEstado" prefWidth="228.0" text="Estado" />
         </columns>
       </TableView>
+      <Label layoutX="23.0" layoutY="357.0" text="Lista de invitados:" textFill="#ededed">
+         <font>
+            <Font name="SansSerif Regular" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
