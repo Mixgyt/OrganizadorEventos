@@ -1,5 +1,6 @@
 package com.progra3.organizadord.organizadoreventos;
 
+import com.progra3.organizadord.organizadoreventos.models.EventosModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,7 +38,14 @@ public class DashboardController {
 
     @FXML
     public void initialize(){
-        Pane.setCenter(Main.getView("seguimiento-invitado-view"));
+        EventosModel eventosModel = new EventosModel();
+        if (eventosModel.existenciaEventoUsuario()){
+            Pane.setCenter(Main.getView("seguimiento-invitado-view"));
+        }
+        else {
+            Pane.setCenter(Main.getView("eventos-view"));
+        }
+
     }
 
     @FXML

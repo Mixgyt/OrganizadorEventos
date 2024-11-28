@@ -22,8 +22,6 @@ public class SeguimientoInvitadoController {
 
     @FXML
     private Button btnEnviarRecordatorio;
-    @FXML
-    private TextField txtClaveApp;
 
     @FXML
     private TableColumn<CorreosEventosModel, EstadosModel> clE;
@@ -36,6 +34,9 @@ public class SeguimientoInvitadoController {
 
     @FXML
     private TableColumn<CorreosEventosModel, String> clidE;
+
+    @FXML
+    private TableColumn<CorreosEventosModel, Button> clR;
 
     @FXML
     private TableColumn<CorreosEventosModel, Integer> clidTI;
@@ -61,6 +62,83 @@ public class SeguimientoInvitadoController {
         clidC.setCellValueFactory(new PropertyValueFactory<>("idCorreo"));
         clidTI.setCellValueFactory(new PropertyValueFactory<>("idTipoInvitado"));
         clE.setCellValueFactory(new PropertyValueFactory<>("estado"));
+        clR.setCellFactory(tc -> new TableCell<>(){
+            @Override
+            protected void updateItem(Button button, boolean b) {
+                super.updateItem(button, b);
+                if (b){
+                    setGraphic(null);
+                }
+                else{
+                    Button btnRecordatorio = new Button("Enviar");
+                    setGraphic(btnRecordatorio);
+                    if (getTableRow().getItem().getEstado().valor == 0) {
+                        btnRecordatorio.setDisable(false);
+                    }
+                    else {
+                        btnRecordatorio.setDisable(true);
+                    }
+
+                    btnRecordatorio.setOnAction(e->{
+                        try {
+                            Integer idEvento = Integer.parseInt(String.valueOf(cmbVerEventos.getValue().getIdEvento()));
+                            CorreosEventosModel correosEventos = new CorreosEventosModel();
+                            CorreosEventosModel datoInvitado = tbInv.getItems().get(getIndex());
+
+                            mProperties.put("mail.smtp.host", "smtp.gmail.com");
+                            mProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+                            mProperties.setProperty("mail.smtp.starttls.enable", "true");
+                            mProperties.setProperty("mail.smtp.port", "587");
+                            mProperties.setProperty("mail.smtp.user", emailFrom);
+                            mProperties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+                            mProperties.setProperty("mail.smtp.auth", "true");
+
+                            Integer correosEnviados = 0;
+
+                            mSession = Session.getInstance(mProperties, new Authenticator() {
+                                @Override
+                                protected PasswordAuthentication getPasswordAuthentication() {
+                                    return new PasswordAuthentication(emailFrom, "xqrbxtdrtcdntemd");
+                                }
+                            });
+
+                            CorreoModel correoTemp = new CorreoModel();
+                            correoTemp.setCorreo(datoInvitado.getIdCorreo());
+
+
+                            String correoInvitado = datoInvitado.getIdCorreo();
+                            String asunto = "Recordatorio de evento: " + cmbVerEventos.getValue().getNombre();
+                            String contenido = "<div>Te recordamos que has sido invitado a " + cmbVerEventos.getValue().getNombre()
+                                    + " que se realizará el " + cmbVerEventos.getValue().getFechaInicial() + ".</div> <div>¡TE ESPERAMOS!</div> " +
+                                    "<div><a href=\"http://localhost:8080/invitaciones/evento?id="+ cmbVerEventos.getValue().getIdEvento() + "&usuario=" + correoTemp.buscarId() + "\">Haz clic aquí para más información</a></div>";
+                            try {
+                                mCorreo = new MimeMessage(mSession);
+                                mCorreo.setFrom(new InternetAddress(emailFrom));
+                                mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress(correoInvitado));
+                                mCorreo.setSubject(asunto);
+                                mCorreo.setContent(contenido, "text/html; charset=UTF-8");
+
+                                Transport.send(mCorreo);
+
+                                correosEnviados++;
+                            } catch (Exception ex) {
+                                System.err.println("Error al enviar a: " + correoInvitado + " - " + ex.getMessage());
+                            }
+
+                            if (correosEnviados > 0) {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Correo enviado");
+                                alert.setContentText("Se han enviado los recordatorios.");
+                                alert.show();
+                            }
+                        } catch (Exception ex) {
+                            System.out.println(ex.getMessage());
+                            throw new RuntimeException(ex);
+                        }
+                    });
+                }
+            }
+        });
 
         ObservableList<String> datoInvitadosMostrar = FXCollections.observableArrayList();
         datoInvitadosMostrar.add("Ver todos");
@@ -113,78 +191,74 @@ public class SeguimientoInvitadoController {
             });
 
             btnEnviarRecordatorio.setOnAction(e->{
-                if (!txtClaveApp.getText().replace(" ","").isEmpty()){
-                    try {
-                        Integer idEvento = Integer.parseInt(String.valueOf(cmbVerEventos.getValue().getIdEvento()));
-                        CorreosEventosModel correosEventos = new CorreosEventosModel();
-                        ObservableList<CorreosEventosModel> datoInvitados = correosEventos.invitadosPendientesPorEvento(idEvento);
+                try {
+                    Integer idEvento = Integer.parseInt(String.valueOf(cmbVerEventos.getValue().getIdEvento()));
+                    CorreosEventosModel correosEventos = new CorreosEventosModel();
+                    ObservableList<CorreosEventosModel> datoInvitados = correosEventos.invitadosPendientesPorEvento(idEvento);
 
-                        mProperties.put("mail.smtp.host", "smtp.gmail.com");
-                        mProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-                        mProperties.setProperty("mail.smtp.starttls.enable", "true");
-                        mProperties.setProperty("mail.smtp.port", "587");
-                        mProperties.setProperty("mail.smtp.user", emailFrom);
-                        mProperties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
-                        mProperties.setProperty("mail.smtp.auth", "true");
+                    mProperties.put("mail.smtp.host", "smtp.gmail.com");
+                    mProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+                    mProperties.setProperty("mail.smtp.starttls.enable", "true");
+                    mProperties.setProperty("mail.smtp.port", "587");
+                    mProperties.setProperty("mail.smtp.user", emailFrom);
+                    mProperties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+                    mProperties.setProperty("mail.smtp.auth", "true");
 
-                        Integer correosEnviados = 0;
+                    Integer correosEnviados = 0;
 
-                        mSession = Session.getInstance(mProperties, new Authenticator() {
-                            @Override
-                            protected PasswordAuthentication getPasswordAuthentication() {
-                                return new PasswordAuthentication(emailFrom, txtClaveApp.getText());
-                            }
-                        });
-
-                        for (CorreosEventosModel item : datoInvitados) {
-                            CorreoModel correoTemp = new CorreoModel();
-                            correoTemp.setCorreo(item.getIdCorreo());
-
-
-                            String correoInvitado = item.getIdCorreo();
-                            String asunto = "Recordatorio de evento: " + cmbVerEventos.getValue().getNombre();
-                            String contenido = "<div>Te recordamos que has sido invitado a " + cmbVerEventos.getValue().getNombre()
-                                    + " que se realizará el " + cmbVerEventos.getValue().getFechaInicial() + ".</div> <div>¡TE ESPERAMOS!</div> " +
-                                    "<div><a href=\"http://localhost:8080/invitaciones/evento?id="+ cmbVerEventos.getValue().getIdEvento() + "&usuario=" + correoTemp.buscarId() + "\">Haz clic aquí para más información</a></div>";
-
-                            if (correoInvitado == null || correoInvitado.isEmpty()) continue;
-
-                            try {
-                                mCorreo = new MimeMessage(mSession);
-                                mCorreo.setFrom(new InternetAddress(emailFrom));
-                                mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress(correoInvitado));
-                                mCorreo.setSubject(asunto);
-                                mCorreo.setContent(contenido, "text/html; charset=UTF-8");
-
-                                Transport.send(mCorreo);
-
-                                correosEnviados++;
-                            } catch (Exception ex) {
-                                System.err.println("Error al enviar a: " + correoInvitado + " - " + ex.getMessage());
-                            }
+                    mSession = Session.getInstance(mProperties, new Authenticator() {
+                        @Override
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(emailFrom, "xqrbxtdrtcdntemd");
                         }
+                    });
 
-                        if (correosEnviados > 0) {
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setTitle("Correo enviado");
-                            alert.setContentText("Se han enviado los recordatorios.");
-                            alert.show();
+                    for (CorreosEventosModel item : datoInvitados) {
+                        CorreoModel correoTemp = new CorreoModel();
+                        correoTemp.setCorreo(item.getIdCorreo());
+
+
+                        String correoInvitado = item.getIdCorreo();
+                        String asunto = "Recordatorio de evento: " + cmbVerEventos.getValue().getNombre();
+                        String contenido = "<div>Te recordamos que has sido invitado a " + cmbVerEventos.getValue().getNombre()
+                                + " que se realizará el " + cmbVerEventos.getValue().getFechaInicial() + ".</div> <div>¡TE ESPERAMOS!</div> " +
+                                "<div><a href=\"http://localhost:8080/invitaciones/evento?id="+ cmbVerEventos.getValue().getIdEvento() + "&usuario=" + correoTemp.buscarId() + "\">Haz clic aquí para más información</a></div>";
+
+                        if (correoInvitado == null || correoInvitado.isEmpty()) continue;
+
+                        try {
+                            mCorreo = new MimeMessage(mSession);
+                            mCorreo.setFrom(new InternetAddress(emailFrom));
+                            mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress(correoInvitado));
+                            mCorreo.setSubject(asunto);
+                            mCorreo.setContent(contenido, "text/html; charset=UTF-8");
+
+                            Transport.send(mCorreo);
+
+                            correosEnviados++;
+                        } catch (Exception ex) {
+                            System.err.println("Error al enviar a: " + correoInvitado + " - " + ex.getMessage());
                         }
-
-                        txtClaveApp.clear();
-                    } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
-                        throw new RuntimeException(ex);
                     }
-                }
-                else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setContentText("No se ha ingresado la contraseña de aplicación.");
-                    alert.show();
+
+                    if (correosEnviados > 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Correo enviado");
+                        alert.setContentText("Se han enviado los recordatorios.");
+                        alert.show();
+                    }
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                    throw new RuntimeException(ex);
                 }
             });
 
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aviso");
+            alert.setContentText("Al parecer no tienes eventos creados.");
+            alert.show();
         }
     }
 

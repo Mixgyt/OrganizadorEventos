@@ -140,145 +140,154 @@ public class GestionInvitadoController {
             }
         });
 
-        cmbEvento.setItems(EventosModel.getEventos());
-        cmbTipoInvitado.setItems(TipoInvitadoModel.getTiposInvitado());
+        EventosModel eventosModel = new EventosModel();
+        if (eventosModel.existenciaEventoUsuario()){
+            cmbEvento.setItems(EventosModel.getEventos());
+            cmbTipoInvitado.setItems(TipoInvitadoModel.getTiposInvitado());
 
-        for (EventosModel item: EventosModel.getEventos()){
-            cmbVerEvento.getItems().add(item);
-        }
-
-        cmbVerEvento.getSelectionModel().select(0);
-        cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
-        cmbVerEvento.setOnAction(e->{
-            if (cmbVerEvento.getSelectionModel().getSelectedIndex() == 0){
-                cargarTablaTodo();
+            for (EventosModel item: EventosModel.getEventos()){
+                cmbVerEvento.getItems().add(item);
             }
-            else {
-                cargarTablaPorEvento(cmbVerEvento.getSelectionModel().getSelectedItem().getIdEvento());
-            }
-        });
 
-        btnAgregarInvitado.setOnAction(e->{
-            String correo = txtCorreo.getText().toLowerCase().replace(" ","");
+            cmbVerEvento.getSelectionModel().select(0);
+            cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
+            cmbVerEvento.setOnAction(e->{
+                if (cmbVerEvento.getSelectionModel().getSelectedIndex() == 0){
+                    cargarTablaTodo();
+                }
+                else {
+                    cargarTablaPorEvento(cmbVerEvento.getSelectionModel().getSelectedItem().getIdEvento());
+                }
+            });
 
-            //valida si los combo box estan seleccionados
-            if (cmbEvento.getSelectionModel().getSelectedIndex() > -1 && cmbTipoInvitado.getSelectionModel().getSelectedIndex() > -1){
-                //Valida si el campo de correo esta vacio
-                if (!correo.isEmpty()){
-                    CorreoModel correoModel = new CorreoModel(correo);
-                    //Valida si el correo existe, en caso de que no exista la cree
-                    if (correoModel.existe()){
-                        CorreosEventosModel correosEventosModel = new CorreosEventosModel(
-                                String.valueOf(cmbEvento.getSelectionModel().getSelectedItem().getIdEvento()),
-                                String.valueOf(correoModel.buscarId()),
-                                String.valueOf(cmbTipoInvitado.getSelectionModel().getSelectedItem().getIdTipoInvitado()),
-                                EstadosModel.valueOfValor(0)
-                        );
+            btnAgregarInvitado.setOnAction(e->{
+                String correo = txtCorreo.getText().toLowerCase().replace(" ","");
 
-                        if (btnAgregarInvitado.getText().equals("Actualizar")){
-                            correosEventosModel.setIdCorreosEvento(idCorreoEvento);
-                            correosEventosModel.actualizarCorreoEvento();
-                            limpiar();
-                            cargarTablaTodo();
-                            idCorreoEvento = 0;
+                //valida si los combo box estan seleccionados
+                if (cmbEvento.getSelectionModel().getSelectedIndex() > -1 && cmbTipoInvitado.getSelectionModel().getSelectedIndex() > -1){
+                    //Valida si el campo de correo esta vacio
+                    if (!correo.isEmpty()){
+                        CorreoModel correoModel = new CorreoModel(correo);
+                        //Valida si el correo existe, en caso de que no exista la cree
+                        if (correoModel.existe()){
+                            CorreosEventosModel correosEventosModel = new CorreosEventosModel(
+                                    String.valueOf(cmbEvento.getSelectionModel().getSelectedItem().getIdEvento()),
+                                    String.valueOf(correoModel.buscarId()),
+                                    String.valueOf(cmbTipoInvitado.getSelectionModel().getSelectedItem().getIdTipoInvitado()),
+                                    EstadosModel.valueOfValor(0)
+                            );
+
+                            if (btnAgregarInvitado.getText().equals("Actualizar")){
+                                correosEventosModel.setIdCorreosEvento(idCorreoEvento);
+                                correosEventosModel.actualizarCorreoEvento();
+                                limpiar();
+                                cargarTablaTodo();
+                                idCorreoEvento = 0;
+                            }
+                            else {
+                                correosEventosModel.insertarCorreoEvento();
+                                limpiar();
+                                cargarTablaTodo();
+                            }
+
                         }
-                        else {
-                            correosEventosModel.insertarCorreoEvento();
-                            limpiar();
-                            cargarTablaTodo();
+                        else{
+                            correoModel.crearCorreo();
+                            correoModel.setCorreo(correo);
+                            CorreosEventosModel correosEventosModel = new CorreosEventosModel(
+                                    String.valueOf(cmbEvento.getSelectionModel().getSelectedItem().getIdEvento()),
+                                    String.valueOf(correoModel.buscarId()),
+                                    String.valueOf(cmbTipoInvitado.getSelectionModel().getSelectedItem().getIdTipoInvitado()),
+                                    EstadosModel.valueOfValor(0)
+                            );
+                            if (btnAgregarInvitado.getText().equals("Actualizar")){
+                                correosEventosModel.setIdCorreosEvento(idCorreoEvento);
+                                correosEventosModel.actualizarCorreoEvento();
+                                limpiar();
+                                cmbVerEvento.getSelectionModel().select(0);
+                                cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
+                                idCorreoEvento = 0;
+                            }
+                            else {
+                                correosEventosModel.insertarCorreoEvento();
+                                limpiar();
+                                cmbVerEvento.getSelectionModel().select(0);
+                                cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
+                            }
                         }
-
                     }
-                    else{
-                        correoModel.crearCorreo();
-                        correoModel.setCorreo(correo);
-                        CorreosEventosModel correosEventosModel = new CorreosEventosModel(
-                                String.valueOf(cmbEvento.getSelectionModel().getSelectedItem().getIdEvento()),
-                                String.valueOf(correoModel.buscarId()),
-                                String.valueOf(cmbTipoInvitado.getSelectionModel().getSelectedItem().getIdTipoInvitado()),
-                                EstadosModel.valueOfValor(0)
-                        );
-                        if (btnAgregarInvitado.getText().equals("Actualizar")){
-                            correosEventosModel.setIdCorreosEvento(idCorreoEvento);
-                            correosEventosModel.actualizarCorreoEvento();
-                            limpiar();
-                            cmbVerEvento.getSelectionModel().select(0);
-                            cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
-                            idCorreoEvento = 0;
-                        }
-                        else {
-                            correosEventosModel.insertarCorreoEvento();
-                            limpiar();
-                            cmbVerEvento.getSelectionModel().select(0);
-                            cargarTablaPorEvento(cmbVerEvento.getValue().getIdEvento());
-                        }
+                    else {
+                        txtCorreo.setText(correo);
+
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Campo vacio");
+                        alert.setContentText("El campo de correo se encuentra vacio, por favor ingrese el correo");
+                        alert.show();
                     }
                 }
                 else {
-                    txtCorreo.setText(correo);
-
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Campo vacio");
-                    alert.setContentText("El campo de correo se encuentra vacio, por favor ingrese el correo");
+                    alert.setTitle("Lista desplegable si seleccionar");
+                    alert.setContentText("Un o varias listas desplecables no están seleccionadas");
                     alert.show();
                 }
-            }
-            else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Lista desplegable si seleccionar");
-                alert.setContentText("Un o varias listas desplecables no están seleccionadas");
+            });
+
+            btnCancelar.setOnAction(e->{
+                limpiar();
+            });
+
+            btnImportarInvitado.setOnAction(e->{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Información");
+                alert.setContentText("Asegurate de que la estructura de las columnas debe ser Evento, Correo, Tipo Invitado");
                 alert.show();
-            }
-        });
 
-        btnCancelar.setOnAction(e->{
-            limpiar();
-        });
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Seleccionar archivo CSV");
 
-        btnImportarInvitado.setOnAction(e->{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Información");
-            alert.setContentText("Asegurate de que la estructura de las columnas debe ser Evento, Correo, Tipo Invitado");
-            alert.show();
+                // Filtro de extensión para archivos CSV
+                fileChooser.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("Archivos CSV", "*.csv")
+                );
 
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Seleccionar archivo CSV");
+                // Mostrar el diálogo de selección de archivo
+                File selectedFile = fileChooser.showOpenDialog(new Stage());
 
-            // Filtro de extensión para archivos CSV
-            fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Archivos CSV", "*.csv")
-            );
+                // Verificar si se seleccionó un archivo
+                if (selectedFile != null) {
+                    try {
+                        ObservableList<CorreosEventosModel> datosInvitados = FXCollections.observableArrayList();
+                        BufferedReader reader = new BufferedReader(new FileReader(selectedFile));
+                        String linea="";
+                        while ((linea= reader.readLine())!=null){
+                            CorreosEventosModel correosEventosTemp = new CorreosEventosModel();
 
-            // Mostrar el diálogo de selección de archivo
-            File selectedFile = fileChooser.showOpenDialog(new Stage());
+                            String[] row = linea.split(";");
+                            System.out.println(row[0] + "++++" + row[1] + "+++" + row[2]);
+                            correosEventosTemp.setIdEvento(row[0]);
+                            correosEventosTemp.setIdCorreo(row[1]);
+                            correosEventosTemp.setIdTipoInvitado(row[2]);
+                            datosInvitados.add(correosEventosTemp);
+                        }
 
-            // Verificar si se seleccionó un archivo
-            if (selectedFile != null) {
-                try {
-                    ObservableList<CorreosEventosModel> datosInvitados = FXCollections.observableArrayList();
-                    BufferedReader reader = new BufferedReader(new FileReader(selectedFile));
-                    String linea="";
-                    while ((linea= reader.readLine())!=null){
-                        CorreosEventosModel correosEventosTemp = new CorreosEventosModel();
-
-                        String[] row = linea.split(";");
-                        System.out.println(row[0] + "++++" + row[1] + "+++" + row[2]);
-                        correosEventosTemp.setIdEvento(row[0]);
-                        correosEventosTemp.setIdCorreo(row[1]);
-                        correosEventosTemp.setIdTipoInvitado(row[2]);
-                        datosInvitados.add(correosEventosTemp);
+                        importarNuevosInvitados(datosInvitados);
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
                     }
-
-                    importarNuevosInvitados(datosInvitados);
-                } catch (FileNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                } else {
+                    System.out.println("No se seleccionó ningún archivo.");
                 }
-            } else {
-                System.out.println("No se seleccionó ningún archivo.");
-            }
-        });
+            });
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aviso");
+            alert.setContentText("Al parecer no tienes eventos creados.");
+            alert.show();
+        }
 
     }
     public void limpiar(){
