@@ -73,15 +73,12 @@ public class CalendarioController {
                 if (entry.getEntry().getCalendar() != null) {
                     DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a");
                     LocalDateTime fechaInicio = entry.getEntry().getStartAsLocalDateTime();
-                    LocalDateTime fechaFinal = entry.getEntry().getEndAsLocalDateTime();
                     String cadenaFechaInicio = fechaInicio.format(formato);
-                    String cadenaFechaFinal = fechaFinal.format(formato);
                     String ubicacion = entry.getEntry().getLocation();
 
                     String f = "\t" + entry.getEntry().getCalendar().getName() +
                             "\t\n\tUbicación : " + ubicacion +
-                            "\t\n\tFecha de inicio : " + cadenaFechaInicio +
-                            "\t\n\tFecha de finalización : " + cadenaFechaFinal + "\t";
+                            "\t\n\tFecha de inicio : " + cadenaFechaInicio ;
                     lblEvento.setText(f);
                 } else {
                     lblEvento.setText("No hay calendario seleccionado");
