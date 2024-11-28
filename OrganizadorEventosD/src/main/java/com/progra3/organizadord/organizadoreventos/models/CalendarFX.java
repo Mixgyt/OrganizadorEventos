@@ -98,7 +98,7 @@ public class CalendarFX {
                     " FROM public.tbl_eventos AS eventos" +
                     " INNER JOIN tbl_usuarios AS usuarios ON eventos.id_usuario = usuarios.id_usuario" +
                     " INNER JOIN tbl_tipo_evento AS tipo_evento ON eventos.id_tipo_evento = tipo_evento.id_tipo_evento" +
-                    " WHERE eventos.id_usuario = "+ 1 +" AND eventos.id_tipo_evento = "+idTipoEvento);
+                    " WHERE eventos.id_usuario = "+ UserSession.getUsuario().getIdUsuario() +" AND eventos.id_tipo_evento = "+idTipoEvento);
 
             while (resultSet.next()){
                 CalendarFX calendarFX = new CalendarFX();
