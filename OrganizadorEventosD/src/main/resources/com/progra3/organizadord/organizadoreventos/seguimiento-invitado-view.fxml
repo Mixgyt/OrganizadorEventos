@@ -5,12 +5,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1074.0" style="-fx-background-color: #001F3F;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.SeguimientoInvitadoController">
+<AnchorPane prefHeight="605.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.progra3.organizadord.organizadoreventos.SeguimientoInvitadoController">
     <children>
-        <TableView fx:id="tbInv" layoutX="34.0" layoutY="209.0" prefHeight="509.0" prefWidth="691.0">
+        <TableView fx:id="tbInv" layoutX="14.0" layoutY="111.0" prefHeight="484.0" prefWidth="691.0">
             <columns>
                 <TableColumn fx:id="clidCE" prefWidth="62.0" style="-fx-font-size: 14px;" text="ID" />
                 <TableColumn fx:id="clidE" prefWidth="203.0" style="-fx-font-size: 14px;" text="Evento" />
@@ -19,27 +20,38 @@
                 <TableColumn fx:id="clE" prefWidth="117.0" style="-fx-font-size: 14px;" text="Estado" />
             </columns>
         </TableView>
-        <ComboBox fx:id="cmbInvitados" layoutX="747.0" layoutY="328.0" prefHeight="25.0" prefWidth="277.0" style="-fx-background-color: #ededed;" />
-        <Label layoutX="751.0" layoutY="292.0" text="Ver Estado De Invitados" textFill="WHITE">
+        <ComboBox fx:id="cmbInvitados" layoutX="754.0" layoutY="230.0" prefHeight="25.0" prefWidth="277.0" style="-fx-background-color: #ededed;" />
+        <Label layoutX="710.0" layoutY="200.0" text="VER INVITADOS POR ESTADO" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Bold" size="25.0" />
+         </font>
+        </Label>
+        <Label layoutX="226.0" layoutY="36.0" text="SEGUIMIENTO DE INVITADOS" textFill="WHITE">
             <font>
-                <Font name="SansSerif Regular" size="25.0" />
+                <Font name="Monospaced Bold" size="45.0" />
             </font>
         </Label>
-        <Label layoutX="349.0" layoutY="35.0" text="Seguimiento De Invitados" textFill="WHITE">
+        <Button fx:id="btnEnviarRecordatorio" layoutX="799.0" layoutY="359.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="188.0" styleClass="button-claro" text="Enviar">
             <font>
-                <Font name="SansSerif Bold" size="35.0" />
-            </font>
-        </Label>
-        <Button fx:id="btnEnviarRecordatorio" layoutX="792.0" layoutY="457.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="188.0" styleClass="button-claro" text="Enviar Recordatorio">
-            <font>
-                <Font name="SansSerif Regular" size="18.0" />
+                <Font name="SansSerif Bold" size="14.0" />
             </font>
         </Button>
-        <ComboBox fx:id="cmbVerEventos" layoutX="748.0" layoutY="247.0" prefHeight="25.0" prefWidth="277.0" style="-fx-background-color: #ededed;" />
-        <Label layoutX="786.0" layoutY="209.0" text="Ver por eventos" textFill="WHITE">
+        <ComboBox fx:id="cmbVerEventos" layoutX="755.0" layoutY="149.0" prefHeight="25.0" prefWidth="277.0" style="-fx-background-color: #ededed;" />
+        <Label layoutX="774.0" layoutY="111.0" text="VER POR EVENTOS" textFill="WHITE">
             <font>
-                <Font name="SansSerif Regular" size="25.0" />
+                <Font name="SansSerif Bold" size="25.0" />
             </font>
         </Label>
+      <Label layoutX="728.0" layoutY="298.0" text="ENVIO DE RECORDATORIO" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Bold" size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtClaveApp" layoutX="726.0" layoutY="328.0" prefHeight="25.0" prefWidth="335.0" promptText="Ingrese su contraseña de aplicación..." />
+      <Button fx:id="btnActualizarTabla" layoutX="800.0" layoutY="472.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="188.0" styleClass="button-claro" text="Actualizar Tabla">
+         <font>
+            <Font name="SansSerif Bold" size="14.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

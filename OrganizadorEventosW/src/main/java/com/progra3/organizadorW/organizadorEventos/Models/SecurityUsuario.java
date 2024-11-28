@@ -17,7 +17,7 @@ public class SecurityUsuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("USER"));
+        return null;
     }
 
     @Override

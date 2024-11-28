@@ -72,6 +72,7 @@ public class UsuarioModel {
             Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("INSERT INTO tbl_usuarios(nombre,pass, id_correo) " +
                     "VALUES (?,?,?)");
+            this.pass = Encripter.hash(pass);
             statement.setString(1, this.nombre);
             statement.setString(2, this.pass);
             statement.setInt(3, this.idCorreo);
@@ -85,6 +86,7 @@ public class UsuarioModel {
         try {
             Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("UPDATE tbl_usuarios SET nombre=?, pass=? WHERE id_usuario = ?;");
+            this.pass = Encripter.hash(pass);
             statement.setString(1, this.nombre);
             statement.setString(2, this.pass);
             statement.setInt(3, id);
@@ -147,23 +149,26 @@ public class UsuarioModel {
         try {
             Connection connection = ConexionDB.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_usuarios WHERE " +
-                    "nombre = ? AND pass = ?");
+                    "nombre = ?");
             statement.setString(1, this.nombre);
-            statement.setString(2, this.pass);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
-                //Usuario obtenido para guardar su sesion
-                UsuarioModel usuarioModel = new UsuarioModel();
-                usuarioModel.setIdUsuario(resultSet.getInt(1));
-                usuarioModel.setNombre(resultSet.getString(2));
-                usuarioModel.setIdCorreo(resultSet.getInt(4));
-                UserSession.setUsuario(usuarioModel);
-                return true;
+                if(Encripter.verify(this.pass, resultSet.getString(3))){
+                    //Usuario obtenido para guardar su sesion
+                    UsuarioModel usuarioModel = new UsuarioModel();
+                    usuarioModel.setIdUsuario(resultSet.getInt(1));
+                    usuarioModel.setNombre(resultSet.getString(2));
+                    usuarioModel.setIdCorreo(resultSet.getInt(4));
+                    UserSession.setUsuario(usuarioModel);
+                    return true;
+                }
+                return false;
             }
             else {
                 return false;
             }
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
     }

@@ -254,7 +254,7 @@ public class EventosModel {
         }
     }
 
-    public boolean EventoExistente(){
+    public boolean eventoExistente(){
         Connection connection = ConexionDB.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_eventos WHERE nombre = ? AND id_usuario = ?");
@@ -319,6 +319,21 @@ public class EventosModel {
                 eventos.add(eventosModel);
             }
             return eventos;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public boolean existenciaEventoUsuario(){
+        Connection connection = ConexionDB.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_eventos WHERE id_usuario = ?");
+            statement.setInt(1, UserSession.getUsuario().getIdUsuario());
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                return true;
+            }
+            return  false;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
