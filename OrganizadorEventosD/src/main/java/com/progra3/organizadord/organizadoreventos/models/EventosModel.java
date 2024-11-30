@@ -47,6 +47,7 @@ public class EventosModel {
         this.idTipoEvento = idTipoEvento;
     }
 
+
     public String getFechaInicial() {
         return fechaInicial;
     }
@@ -323,6 +324,21 @@ public class EventosModel {
             throw new RuntimeException(e);
         }
     }
+    public boolean existenciaEventoUsuario(){
+        Connection connection = ConexionDB.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT*FROM tbl_eventos WHERE id_usuario = ?");
+            statement.setInt(1, UserSession.getUsuario().getIdUsuario());
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                return true;
+            }
+            return  false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public int guardarEvento(){
         Connection connection = ConexionDB.getConnection();
@@ -355,11 +371,14 @@ public class EventosModel {
                     " WHERE id_evento = " +idEvento);
             preparedStatement.setInt(1,this.idUsuario);
             preparedStatement.setString(2,this.nombre);
-            preparedStatement.setString(3,this.fechaInicial);
-            preparedStatement.setString(4,this.fechaFinal);
+            Timestamp fechaInicio = Timestamp.valueOf(this.fechaInicial.replace("T"," "));
+            preparedStatement.setTimestamp(3,fechaInicio);
+            Timestamp fechaFinal = Timestamp.valueOf(this.fechaFinal.replace("T"," "));
+            preparedStatement.setTimestamp(4,fechaFinal);
             preparedStatement.setString(5,this.ubicacion);
             preparedStatement.setString(6,this.descripcion);
-            preparedStatement.setInt(7,this.idTipoEvento);
+            preparedStatement.setString(7,this.detalles);
+            preparedStatement.setInt(8,this.idTipoEvento);
 
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -369,13 +388,28 @@ public class EventosModel {
 
     public int eliminarEvento(int idEvento){
         Connection conecction = ConexionDB.getConnection();
+
+        int borrarRelacion = 0;
         try {
-            PreparedStatement statement = conecction.prepareStatement("DELETE FROM tbl_eventos" +
+            PreparedStatement statement = conecction.prepareStatement("DELETE FROM tbl_correos_evento" +
                     " WHERE id_evento = "+idEvento);
-            return statement.executeUpdate();
+            borrarRelacion = statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        if (borrarRelacion > 0){
+            try {
+                PreparedStatement statement = conecction.prepareStatement("DELETE FROM tbl_eventos" +
+                        " WHERE id_evento = "+idEvento);
+                return statement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            return 0;
+        }
+
     }
 
     @Override

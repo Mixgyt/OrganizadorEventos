@@ -168,6 +168,7 @@ public class UsuarioModel {
                 return false;
             }
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
     }

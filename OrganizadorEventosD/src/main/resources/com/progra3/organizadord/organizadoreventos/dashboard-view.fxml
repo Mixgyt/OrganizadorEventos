@@ -16,7 +16,7 @@
          </opaqueInsets>
          <items>
 
-            <HBox prefHeight="53.0" prefWidth="820.0" spacing="15.0" style="-fx-padding: 5px;">
+            <HBox prefHeight="53.0" prefWidth="815.0" spacing="15.0" style="-fx-padding: 5px;">
 
                <children>
                   <Button fx:id="btnInicio" mnemonicParsing="false" onAction="#onInicio" prefHeight="41.0" prefWidth="115.0" styleClass="button-oscuro" text="Inicio" textFill="#ededed">
@@ -43,23 +43,7 @@
                         <Insets top="5.0" />
                      </HBox.margin>
                   </Hyperlink>
-                  <Hyperlink fx:id="lnkUsuario" onAction="#onUsuario" prefHeight="28.0" prefWidth="80.0" text="Usuarios" textFill="#ededed">
-                     <font>
-                        <Font name="SansSerif Regular" size="16.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets top="5.0" />
-                     </HBox.margin>
-                  </Hyperlink>
-                  <Hyperlink fx:id="lnkTipoEvento" onAction="#onTipoEvento" prefHeight="28.0" prefWidth="95.0" text="Tipo evento" textFill="#ededed">
-                     <font>
-                        <Font name="SansSerif Regular" size="16.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets top="5.0" />
-                     </HBox.margin>
-                  </Hyperlink>
-                  <Hyperlink fx:id="lnkTipoUsuario" onAction="#onTipoUsuario" prefHeight="28.0" prefWidth="102.0" text="Tipo Invitado" textFill="#ededed">
+                  <Hyperlink fx:id="lnkISeguimineto" onAction="#onSeguimineto" prefHeight="28.0" prefWidth="198.0" text="Seguimiento de eventos" textFill="#ededed">
                      <font>
                         <Font name="SansSerif Regular" size="16.0" />
                      </font>
@@ -72,6 +56,11 @@
                   <Insets left="10.0" top="10.0" />
                </padding>
             </HBox>
+            <Button fx:id="btnCerrarSesion" mnemonicParsing="false" onAction="#onCerrar" prefHeight="41.0" prefWidth="146.0" styleClass="button-eliminar" text="Cerrar sesión" textFill="#ededed">
+               <font>
+                  <Font name="SansSerif Regular" size="18.0" />
+               </font>
+            </Button>
          </items>
       </ToolBar>
    </top>
